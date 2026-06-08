@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Notes</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <h2>MediCare</h2>
+    </div>
+
+    <nav class="menu">
+
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="search.html">Search</a></li>
+            <li><a href="patients.html">Patients</a></li>
+            <li><a href="patient-details.html">Patient Details</a></li>
+            <li><a href="medical-history.html">Medical History</a></li>
+            <li><a href="appointments.html">Appointments</a></li>
+            <li class="active"><a href="doctor-notes.html">Doctor Notes</a></li>
+            <li><a href="settings.html">Settings</a></li>
+        </ul>
+
+    </nav>
+
+    <div class="logout">
+        <a href="index.html">Logout</a>
+    </div>
+
+</aside>
+
+<main class="main-content">
+
+    <header class="topbar">
+        <div>
+            <h1>Doctor Notes</h1>
+            <p>Clinical observations and treatment records</p>
+        </div>
+    </header>
+
+    <!-- Patient Card -->
+
+    <section class="patient-card">
+
+        <div>
+            <span>Patient ID</span>
+            <h3>P001</h3>
+        </div>
+
+        <div>
+            <span>Patient Name</span>
+            <h3>John Doe</h3>
+        </div>
+
+        <div>
+            <span>Age</span>
+            <h3>32 Years</h3>
+        </div>
+
+        <div>
+            <span>Gender</span>
+            <h3>Male</h3>
+        </div>
+
+    </section>
+
+    <!-- Notes Form -->
+
+    <section class="form-card">
+
+        <h2>Add Clinical Notes</h2>
+
+        <form>
+
+            <div class="full-width">
+                <label>Diagnosis</label>
+                <textarea rows="4"></textarea>
+            </div>
+
+            <div class="full-width">
+                <label>Prescription</label>
+                <textarea rows="4"></textarea>
+            </div>
+
+            <div class="full-width">
+                <label>Treatment Plan</label>
+                <textarea rows="4"></textarea>
+            </div>
+
+            <div class="full-width">
+                <label>Follow-up Recommendations</label>
+                <textarea rows="4"></textarea>
+            </div>
+
+            <button class="primary-btn">
+                Save Notes
+            </button>
+
+        </form>
+
+    </section>
+
+    <!-- Notes History -->
+
+    <section class="notes-history">
+
+        <h2>Clinical History</h2>
+
+        <div class="note-item">
+
+            <div class="note-header">
+                <h4>Routine Consultation</h4>
+                <span>June 10, 2026</span>
+            </div>
+
+            <p>
+                Patient presented with mild hypertension.
+                Recommended dietary modifications and regular monitoring.
+            </p>
+
+        </div>
+
+        <div class="note-item">
+
+            <div class="note-header">
+                <h4>Follow-up Visit</h4>
+                <span>May 28, 2026</span>
+            </div>
+
+            <p>
+                Blood pressure improved. Continue medication
+                and return for review after 30 days.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+</html>

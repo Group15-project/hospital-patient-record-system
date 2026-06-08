@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <h2>MediCare</h2>
+    </div>
+
+    <nav class="menu">
+
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li></li><a href="search.html">Search</a></li>
+            <li><a href="patients.html">Patients</a></li>
+            <li><a href="patient-details.html">Patient Details</a></li>
+            <li><a href="medical-history.html">Medical History</a></li>
+            <li class="active"><a href="appointments.html">Appointments</a></li>
+            <li><a href="doctor-notes.html">Doctor Notes</a></li>
+            <li><a href="settings.html">Settings</a></li>
+        </ul>
+
+    </nav>
+
+    <div class="logout">
+        <a href="index.html">Logout</a>
+    </div>
+
+</aside>
+
+<main class="main-content">
+
+    <header class="topbar">
+        <div>
+            <h1>Appointments</h1>
+            <p>Manage patient appointments and schedules</p>
+        </div>
+    </header>
+
+    <!-- Schedule Appointment -->
+
+    <section class="form-card">
+
+        <h2>Schedule Appointment</h2>
+
+        <form>
+
+            <div class="grid">
+
+                <div>
+                    <label>Patient Name</label>
+                    <input type="text" placeholder="John Doe">
+                </div>
+
+                <div>
+                    <label>Doctor</label>
+                    <select>
+                        <option>Dr. Williams</option>
+                        <option>Dr. Johnson</option>
+                        <option>Dr. Michael</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Date</label>
+                    <input type="date">
+                </div>
+
+                <div>
+                    <label>Time</label>
+                    <input type="time">
+                </div>
+
+            </div>
+
+            <button class="primary-btn">
+                Schedule Appointment
+            </button>
+
+        </form>
+
+    </section>
+
+    <!-- Upcoming Appointments -->
+
+    <section class="table-section">
+
+        <div class="table-header">
+            <h2>Upcoming Appointments</h2>
+        </div>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Doctor</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>John Doe</td>
+                    <td>Dr. Williams</td>
+                    <td>12 Jun 2026</td>
+                    <td>09:00 AM</td>
+                    <td>
+                        <span class="appointment scheduled">
+                            Scheduled
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>Dr. Johnson</td>
+                    <td>12 Jun 2026</td>
+                    <td>11:00 AM</td>
+                    <td>
+                        <span class="appointment completed">
+                            Completed
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Michael Johnson</td>
+                    <td>Dr. Michael</td>
+                    <td>13 Jun 2026</td>
+                    <td>02:00 PM</td>
+                    <td>
+                        <span class="appointment cancelled">
+                            Cancelled
+                        </span>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+</main>
+
+</body>
+</html>

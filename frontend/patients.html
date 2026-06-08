@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patients Management</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <h2>MediCare</h2>
+    </div>
+
+    <nav class="menu">
+
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="search.html">Search</a></li>
+            <li class="active"><a href="patients.html">Patients</a></li>
+            <li><a href="patient-details.html">Patient Details</a></li>
+            <li><a href="medical-history.html">Medical History</a></li>
+            <li><a href="appointments.html">Appointments</a></li>
+            <li><a href="doctor-notes.html">Doctor Notes</a></li>
+            <li><a href="settings.html">Settings</a></li>
+        </ul>
+
+    </nav>
+
+    <div class="logout">
+        <a href="index.html">Logout</a>
+    </div>
+
+</aside>
+
+<main class="main-content">
+
+    <header class="topbar">
+        <div>
+            <h1>Patients Management</h1>
+            <p>Register and manage patient records</p>
+        </div>
+    </header>
+
+    <!-- Registration Form -->
+    <section class="form-card">
+
+        <h2>Register New Patient</h2>
+
+        <form class="patient-form">
+
+            <div class="grid">
+
+                <div>
+                    <label>Patient ID</label>
+                    <input type="text" placeholder="P001">
+                </div>
+
+                <div>
+                    <label>Full Name</label>
+                    <input type="text" placeholder="John Doe">
+                </div>
+
+                <div>
+                    <label>Date of Birth</label>
+                    <input type="date">
+                </div>
+
+                <div>
+                    <label>Gender</label>
+                    <select>
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Phone Number</label>
+                    <input type="tel">
+                </div>
+
+                <div>
+                    <label>Emergency Contact</label>
+                    <input type="tel">
+                </div>
+
+            </div>
+
+            <div class="full-width">
+                <label>Address</label>
+                <textarea rows="4"></textarea>
+            </div>
+
+            <button type="submit" class="primary-btn">
+                Save Patient
+            </button>
+
+        </form>
+
+    </section>
+
+    <!-- Patient List -->
+
+    <section class="table-section">
+
+        <div class="table-header">
+            <h2>Patient Records</h2>
+
+            <input
+                type="search"
+                class="search-input"
+                placeholder="Search patient..."
+            >
+        </div>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Gender</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>P001</td>
+                    <td>John Doe</td>
+                    <td>Male</td>
+                    <td>08012345678</td>
+                    <td>
+                        <a href="patient-details.html" class="view-btn">
+                            View
+                        </a>                        
+                        <button class="edit-btn">Edit</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>P002</td>
+                    <td>Jane Smith</td>
+                    <td>Female</td>
+                    <td>08087654321</td>
+                    <td>
+                        <a href="patient-details.html" class="view-btn">
+                            View
+                        </a>                        
+                        <button class="edit-btn">Edit</button>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+</main>
+
+</body>
+</html>
