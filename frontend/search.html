@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Records</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <h2>MediCare</h2>
+    </div>
+
+    <nav class="menu">
+
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li class="active"><a href="search.html">Search</a></li>
+            <li><a href="patients.html">Patients</a></li>
+            <li><a href="patient-details.html">Patient Details</a></li>
+            <li><a href="medical-history.html">Medical History</a></li>
+            <li><a href="appointments.html">Appointments</a></li>
+            <li><a href="doctor-notes.html">Doctor Notes</a></li>
+            <li><a href="settings.html">Settings</a></li>
+        </ul>
+
+    </nav>
+
+    <div class="logout">
+        <a href="index.html">Logout</a>
+    </div>
+
+</aside>
+
+<main class="main-content">
+
+    <header class="topbar">
+        <div>
+            <h1>Search Records</h1>
+            <p>Find patients quickly across the system</p>
+        </div>
+    </header>
+
+    <!-- Search Box -->
+
+    <section class="search-card">
+
+        <h2>Search Patients</h2>
+
+        <div class="search-wrapper">
+
+            <input
+                type="text"
+                placeholder="Search by Patient ID, Name or Phone Number"
+                class="global-search"
+            >
+
+            <button class="primary-btn">
+                Search
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- Search Results -->
+
+    <section class="table-section">
+
+        <div class="table-header">
+            <h2>Search Results</h2>
+            <span class="result-count">3 Records Found</span>
+        </div>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>P001</td>
+                    <td>John Doe</td>
+                    <td>Male</td>
+                    <td>08012345678</td>
+                    <td>
+                        <span class="status active">
+                            Active
+                        </span>
+                    </td>
+                    <td>
+                        <a href="patient-details.html" class="view-btn">
+                             View Record
+                        </a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>P002</td>
+                    <td>Jane Smith</td>
+                    <td>Female</td>
+                    <td>08087654321</td>
+                    <td>
+                        <span class="status active">
+                            Active
+                        </span>
+                    </td>
+                    <td>
+                        <a href="patient-details.html" class="view-btn">
+                             View Record
+                        </a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>P003</td>
+                    <td>Michael Johnson</td>
+                    <td>Male</td>
+                    <td>08011223344</td>
+                    <td>
+                        <span class="status pending">
+                            Pending
+                        </span>
+                    </td>
+                    <td>
+                        <a href="patient-details.html" class="view-btn">
+                             View Record
+                        </a>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+    <!-- Quick Search Filters -->
+
+    <section class="history-section">
+
+        <h2>Quick Filters</h2>
+
+        <div class="filter-container">
+
+            <button class="filter-btn">
+                Active Patients
+            </button>
+
+            <button class="filter-btn">
+                New Registrations
+            </button>
+
+            <button class="filter-btn">
+                Upcoming Appointments
+            </button>
+
+            <button class="filter-btn">
+                Emergency Cases
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+</html>
