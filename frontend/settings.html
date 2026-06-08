@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <h2>MediCare</h2>
+    </div>
+
+    <nav class="menu">
+
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="search.html">Search</a></li>
+            <li><a href="patients.html">Patients</a></li>
+            <li><a href="patient-details.html">Patient Details</a></li>
+            <li><a href="medical-history.html">Medical History</a></li>
+            <li><a href="appointments.html">Appointments</a></li>
+            <li><a href="doctor-notes.html">Doctor Notes</a></li>
+            <li class="active"><a href="settings.html">Settings</a></li>
+        </ul>
+
+    </nav>
+
+    <div class="logout">
+        <a href="index.html">Logout</a>
+    </div>
+
+</aside>
+
+<main class="main-content">
+
+<header class="topbar">
+    <div>
+        <h1>Settings</h1>
+        <p>Manage your account and preferences</p>
+    </div>
+</header>
+
+<!-- PROFILE SETTINGS -->
+
+<section class="form-card">
+
+    <h2>Profile Information</h2>
+
+    <form>
+
+        <div class="grid">
+
+            <div>
+                <label>Full Name</label>
+                <input type="text" value="Admin User">
+            </div>
+
+            <div>
+                <label>Email Address</label>
+                <input type="email" value="admin@medicare.com">
+            </div>
+
+            <div>
+                <label>Phone Number</label>
+                <input type="tel" value="08012345678">
+            </div>
+
+            <div>
+                <label>Role</label>
+                <input type="text" value="Administrator" readonly>
+            </div>
+
+        </div>
+
+    </form>
+
+</section>
+
+<!-- PASSWORD -->
+
+<section class="form-card">
+
+    <h2>Security</h2>
+
+    <form>
+
+        <div class="grid">
+
+            <div>
+                <label>Current Password</label>
+                <input type="password">
+            </div>
+
+            <div>
+                <label>New Password</label>
+                <input type="password">
+            </div>
+
+        </div>
+
+    </form>
+
+</section>
+
+<!-- NOTIFICATIONS -->
+
+<section class="form-card">
+
+    <h2>Notifications</h2>
+
+    <div class="setting-option">
+
+        <div>
+            <h4>Appointment Alerts</h4>
+            <p>Receive notifications for upcoming appointments</p>
+        </div>
+
+        <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+        </label>
+
+    </div>
+
+    <div class="setting-option">
+
+        <div>
+            <h4>New Patient Registrations</h4>
+            <p>Receive notifications when patients are added</p>
+        </div>
+
+        <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+        </label>
+
+    </div>
+
+    <div class="setting-option">
+
+        <div>
+            <h4>System Notifications</h4>
+            <p>Receive updates and system alerts</p>
+        </div>
+
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label>
+
+    </div>
+
+</section>
+
+<!-- APPEARANCE -->
+
+<section class="form-card">
+
+    <h2>Appearance</h2>
+
+    <div class="theme-card">
+
+        <button class="theme-btn active-theme">
+            Light Mode
+        </button>
+
+        <button class="theme-btn">
+            Dark Mode
+        </button>
+
+    </div>
+
+</section>
+
+<!-- SAVE -->
+
+<section class="save-section">
+
+    <button class="save-btn">
+        Save Changes
+    </button>
+
+</section>
+
+</main>
+
+</body>
+</html>
