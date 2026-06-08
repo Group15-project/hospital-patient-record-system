@@ -49,7 +49,7 @@ jobs:
 
   deploy:
     needs: [test-backend, test-frontend]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest        
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     
     steps:
@@ -57,3 +57,24 @@ jobs:
     
     - name: Deploy notification
       run: echo "Ready to deploy to production"
+
+  deploy-frontend:
+    needs: test-frontend
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v3
+  
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./frontend        # ← path to your index.html
+
+
+
+
+
+
+
+      
