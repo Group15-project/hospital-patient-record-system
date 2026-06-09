@@ -17,6 +17,10 @@ func RegisterRoutes(
 	labHandler *handler.LabHandler,
 	prescriptionHandler *handler.PrescriptionHandler,
 	medicationHandler *handler.MedicationHandler,
+	appointmentHandler *handler.AppointmentHandler,
+	medicalDocumentHandler *handler.MedicalDocumentHandler,
+	billingRoutes *handler.BillingHandler,
+	dashboardHandler *handler.DashboardHandler,
 ) {
 	api := router.Group("/api/v1")
 

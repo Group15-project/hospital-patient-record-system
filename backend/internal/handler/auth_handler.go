@@ -39,8 +39,6 @@ func NewAuthHandler(
 //	@Router			/api/v1/auth/login [post]
 func (h *AuthHandler) Login(c *gin.Context) {
 
-
-
 	var req dto.LoginRequest
 
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -63,9 +61,12 @@ func (h *AuthHandler) Login(c *gin.Context) {
 		return
 	}
 
+	auditCtx := utils.NewAuditContext(c)
+
 	response, err := h.authService.Login(
 		req.Email,
 		req.Password,
+		auditCtx,
 	)
 
 	if err != nil {
@@ -83,5 +84,62 @@ func (h *AuthHandler) Login(c *gin.Context) {
 		http.StatusOK,
 		"login successful",
 		response,
+	)
+}
+
+func (h *AuthHandler) RegisterUser(
+	c *gin.Context,
+) {
+
+	var req dto.RegisterUserRequest
+
+	if err := c.ShouldBindJSON(&req); err != nil {
+
+		utils.ErrorResponse(
+			c,
+			http.StatusBadRequest,
+			"invalid request body",
+			err.Error(),
+		)
+
+		return
+	}
+
+	if err := h.validate.Struct(req); err != nil {
+
+		utils.ErrorResponse(
+			c,
+			http.StatusBadRequest,
+			"validation failed",
+			err.Error(),
+		)
+
+		return
+	}
+
+	auditCtx := utils.NewAuditContext(c)
+
+	err := h.authService.RegisterUser(
+		req,
+		auditCtx,
+	)
+
+	if err != nil {
+
+		utils.ErrorResponse(
+			c,
+			http.StatusBadRequest,
+			err.Error(),
+			nil,
+		)
+
+		return
+	}
+
+	utils.SuccessResponse(
+		c,
+		http.StatusCreated,
+		"user created successfully",
+		nil,
 	)
 }

@@ -13,6 +13,7 @@ import (
 	"hospital-backend/internal/service"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -35,6 +36,8 @@ func main() {
 		log.Fatalf("failed to connect database: %v", err)
 	}
 
+	validate := validator.New()
+
 	// Repositories
 	userRepo := repository.NewUserRepository(db)
 	patientRepo := repository.NewPatientRepository(db)
@@ -42,15 +45,29 @@ func main() {
 	labRepo := repository.NewLabRepository(db)
 	prescriptionRepo := repository.NewPrescriptionRepository(db)
 	medicationRepo := repository.NewMedicationRepository(db)
-
+	appointmentRepo := repository.NewAppointmentRepository(db)
+	medicalDocumentRepo := repository.NewMedicalDocumentRepository(db)
+	billingRepo := repository.NewBillingRepository(db)
+	dashboardRepo := repository.NewDashboardRepository(db)
+	auditRepo := repository.NewAuditRepository(db)
+	
+	
+	
 	// Services
+	auditService := service.NewAuditService(
+
+	auditRepo,
+
+)
+
 	authService := service.NewAuthService(
 		userRepo,
+		auditService,
 		cfg.JWTSecretKey,
+
 	)
 	patientService := service.NewPatientService(
 		patientRepo,
-		
 	)
 	vitalService := service.NewVitalService(
 		vitalRepo,
@@ -63,9 +80,25 @@ func main() {
 	)
 	medicationService := service.NewMedicationService(
 
-	medicationRepo,
+		medicationRepo,
+	)
+
+	appointmentService := service.NewAppointmentService(
+		appointmentRepo,
+	)
+	medicalDocumentService := service.NewMedicalDocumentService(
+		medicalDocumentRepo,
+	)
+	billingService := service.NewBillingService(
+		billingRepo,
+	)
+	dashboardService := service.NewDashboardService(
+
+	dashboardRepo,
 
 )
+
+
 	// Handlers
 	authHandler := handler.NewAuthHandler(
 		authService,
@@ -84,9 +117,25 @@ func main() {
 	)
 	medicationHandler := handler.NewMedicationHandler(
 
-	medicationService,
+		medicationService,
+	)
+	appointmentHandler := handler.NewAppointmentHandler(
+		appointmentService,
+	)
+
+	medicalDocumentHandler := handler.NewMedicalDocumentHandler(
+		medicalDocumentService,
+	)
+	billingHandler := handler.NewBillingHandler(
+		billingService,
+		validate,
+	)
+	dashboardHandler := handler.NewDashboardHandler(
+
+	dashboardService,
 
 )
+
 	// Router
 	router := gin.Default()
 
@@ -106,6 +155,10 @@ func main() {
 		labHandler,
 		prescriptionHandler,
 		medicationHandler,
+		appointmentHandler,
+		medicalDocumentHandler,
+		billingHandler,
+		dashboardHandler,
 	)
 
 	port := cfg.Port

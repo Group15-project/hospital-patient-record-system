@@ -12,6 +12,7 @@ type UserRepository interface {
 	GetByEmail(email string) (*models.User, error)
 	Update(user *models.User) error
 	Delete(id uint) error
+	ExistsByEmail(email string) (bool, error)
 }
 
 type userRepository struct {
@@ -67,4 +68,19 @@ func (r *userRepository) Update(user *models.User) error {
 
 func (r *userRepository) Delete(id uint) error {
 	return r.db.Delete(&models.User{}, id).Error
+}
+
+func (r *userRepository) ExistsByEmail(
+	email string,
+) (bool, error) {
+
+	var count int64
+
+	err := r.db.
+		Model(&models.User{}).
+		Where("email = ?", email).
+		Count(&count).
+		Error
+
+	return count > 0, err
 }

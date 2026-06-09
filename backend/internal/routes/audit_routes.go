@@ -8,23 +8,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterAuthRoutes(
+func RegisterAuditRoutes(
 	router *gin.RouterGroup,
-	authHandler *handler.AuthHandler,
+	auditHandler *handler.AuditHandler,
 ) {
-	authGroup := router.Group("/auth")
+	auditGroup := router.Group("/audit")
 
-	authGroup.POST(
-		"/login",
-		authHandler.Login,
-	)
-	authGroup.POST(
-
-		"/users",
+	auditGroup.GET(
+		"",
 		middleware.RequireRole(
-			models.RoleReceptionist,
 			models.RoleAdmin,
+			models.RoleSuperAdmin,
 		),
-		authHandler.RegisterUser,
+		auditHandler.List,
 	)
 }

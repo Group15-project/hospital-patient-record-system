@@ -45,6 +45,11 @@ func ConnectMySQL(cfg *config.Config) (*gorm.DB, error) {
 
 		&models.Prescription{},
 		&models.PrescriptionItem{},
+		&models.Appointment{},
+		&models.MedicalDocument{},
+		&models.Invoice{},
+		&models.InvoiceItem{},
+		&models.Payment{},
 	)
 	if err != nil {
 		return nil, err
