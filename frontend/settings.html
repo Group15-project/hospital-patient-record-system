@@ -1,177 +1,189 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Settings</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-</head>
-<body>
-<button class="menu-toggle">☰</button>
-<aside class="sidebar">
-
-    <div class="logo">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <button class="menu-toggle">☰</button>
+    <aside class="sidebar">
+      <div class="logo">
         <h2>MediCare</h2>
-    </div>
+      </div>
 
-    <nav class="menu">
-
+      <nav class="menu">
         <ul>
-            <li><a href="dashboard.html"><i class="fa-solid fa-house"></i>   Dashboard</a></li>
-            <li><a href="search.html"><i class="fa-solid fa-search"></i>   Search</a></li>
-            <li><a href="patients.html"><i class="fa-solid fa-user-injured"></i>   Patients</a></li>
-            <!--<li><a href="patient-details.html"><i class="fa-solid fa-user"></i>   Patient Details</a></li>-->
-            <li><a href="medical-history.html"><i class="fa-solid fa-file-medical"></i>   Medical History</a></li>
-            <li><a href="appointments.html"><i class="fa-solid fa-calendar-check"></i>   Appointments</a></li>
-            <li><a href="doctor-notes.html"><i class="fa-solid fa-stethoscope"></i>   Doctor Notes</a></li>
-            <li><a href="profile.html"><i class="fa-solid fa-user"></i>   Profile</a></li>
-            <li class="active"><a href="settings.html"><i class="fa-solid fa-gear"></i>   Settings</a></li>
+          <li class="dashboard-menu">
+            <a href="dashboard.html">
+              <i class="fa-solid fa-house"></i> Dashboard
+            </a>
+          </li>
+
+          <li>
+            <a href="search.html">
+              <i class="fa-solid fa-search"></i> Search
+            </a>
+          </li>
+
+          <li>
+            <a href="patients.html">
+              <i class="fa-solid fa-user-injured"></i> Patients
+            </a>
+          </li>
+
+          <li>
+            <a href="medical-history.html">
+              <i class="fa-solid fa-file-medical"></i> Medical History
+            </a>
+          </li>
+
+          <li>
+            <a href="appointments.html">
+              <i class="fa-solid fa-calendar-check"></i> Appointments
+            </a>
+          </li>
+
+          <li class="active">
+            <a href="settings.html">
+              <i class="fa-solid fa-gear"></i> Settings
+            </a>
+          </li>
+          <li>
+    <a href="profile.html">
+        <i class="fa-solid fa-user"></i> Profile
+    </a>
+</li>
         </ul>
+      </nav>
 
-    </nav>
-
-    <div class="logout">
+      <div class="logout">
         <a href="index.html">Logout</a>
-    </div>
+      </div>
+    </aside>
 
-</aside>
-
-<main class="main-content">
-
-<header class="topbar">
-    <div>
-        <h1>Settings</h1>
-        <p>Manage your account and preferences</p>
-    </div>
-</header>
-
-<!-- PROFILE SETTINGS -->
-
-<section class="form-card">
-
-    <h2>Profile Information</h2>
-
-    <form>
-
-        <div class="grid">
-
-            <div>
-                <label>Full Name</label>
-                <input type="text" value="Admin User">
-            </div>
-
-            <div>
-                <label>Email Address</label>
-                <input type="email" value="admin@medicare.com">
-            </div>
-
-            <div>
-                <label>Phone Number</label>
-                <input type="tel" value="08012345678">
-            </div>
-
-            <div>
-                <label>Role</label>
-                <input type="text" value="Administrator" readonly>
-            </div>
-
-        </div>
-
-    </form>
-
-</section>
-
-<!-- PASSWORD -->
-
-<section class="form-card">
-
-    <h2>Security</h2>
-
-    <form>
-
-        <div class="grid">
-
-            <div>
-                <label>Current Password</label>
-                <input type="password">
-            </div>
-
-            <div>
-                <label>New Password</label>
-                <input type="password">
-            </div>
-
-        </div>
-
-    </form>
-
-</section>
-
-<!-- NOTIFICATIONS -->
-
-<section class="form-card">
-
-    <h2>Notifications</h2>
-
-    <div class="setting-option">
-
+    <main class="main-content">
+      <header class="topbar">
         <div>
+          <h1>Settings</h1>
+          <p>Manage your account and preferences</p>
+        </div>
+      </header>
+
+      <!-- PROFILE SETTINGS -->
+
+      <section class="form-card">
+        <h2>Profile Information</h2>
+
+        <form>
+          <div class="grid">
+            <div>
+              <label>Full Name</label>
+              <input type="text" id="fullName" />
+            </div>
+
+            <div>
+              <label>Email Address</label>
+              <input type="email" id="email" />
+            </div>
+
+            <div>
+              <label>Phone Number</label>
+              <input type="tel" id="phone" />
+            </div>
+
+            <div>
+              <label>Role</label>
+              <input type="text" id="role" readonly />
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- PASSWORD -->
+
+      <section class="form-card">
+        <h2>Security</h2>
+
+        <form>
+          <div class="grid">
+            <div>
+              <label>Current Password</label>
+              <input type="password" />
+            </div>
+
+            <div>
+              <label>New Password</label>
+              <input type="password" />
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- NOTIFICATIONS -->
+
+      <section class="form-card">
+        <h2>Notifications</h2>
+
+        <div class="setting-option">
+          <div>
             <h4>Appointment Alerts</h4>
             <p>Receive notifications for upcoming appointments</p>
+          </div>
+
+          <label class="switch">
+            <input type="checkbox" checked />
+            <span class="slider"></span>
+          </label>
         </div>
 
-        <label class="switch">
-            <input type="checkbox" checked>
-            <span class="slider"></span>
-        </label>
-
-    </div>
-
-    <div class="setting-option">
-
-        <div>
+        <div class="setting-option">
+          <div>
             <h4>New Patient Registrations</h4>
             <p>Receive notifications when patients are added</p>
+          </div>
+
+          <label class="switch">
+            <input type="checkbox" checked />
+            <span class="slider"></span>
+          </label>
         </div>
 
-        <label class="switch">
-            <input type="checkbox" checked>
-            <span class="slider"></span>
-        </label>
-
-    </div>
-
-    <div class="setting-option">
-
-        <div>
+        <div class="setting-option">
+          <div>
             <h4>System Notifications</h4>
             <p>Receive updates and system alerts</p>
-        </div>
+          </div>
 
-        <label class="switch">
-            <input type="checkbox">
+          <label class="switch">
+            <input type="checkbox" />
             <span class="slider"></span>
-        </label>
+          </label>
+        </div>
+      </section>
 
-    </div>
+      <!-- SAVE -->
 
-</section>
+      <section class="save-section">
+        <button class="save-btn">Save Changes</button>
+      </section>
+    </main>
+   
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
 
+    <script src="js/settings.js"></script>
+   
 
-<!-- SAVE -->
-
-<section class="save-section">
-
-    <button class="save-btn">
-        Save Changes
-    </button>
-
-</section>
-
-</main>
-<script src="main.js"></script>
-
-</body>
+    <script>
+      requireAuth();
+        applyRolePermissions();
+    </script>
+  </body>
 </html>
