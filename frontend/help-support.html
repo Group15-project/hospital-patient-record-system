@@ -5,54 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MediCare - Help & Support</title>
     <link rel="icon" type="image/png" href="assets/favicon.png" />
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; background: #f8faff; color: #1a1a2e; }
-
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 40px; background: #1a56db; }
-        .logo { color: white; font-size: 1.4rem; font-weight: 700; }
-        .logo span { color: #93c5fd; }
-        .nav-links { display: flex; gap: 20px; list-style: none; align-items: center; }
-        .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.9rem; }
-        .nav-links .btn { background: white; color: #1a56db; padding: 8px 18px; border-radius: 20px; font-weight: 600; }
-
-        .hero { background: linear-gradient(135deg, #1a56db, #0891b2); color: white; text-align: center; padding: 60px 40px; }
-        .hero h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 12px; }
-        .hero p { font-size: 1rem; opacity: 0.9; max-width: 500px; margin: 0 auto; }
-
-        .search-box { display: flex; justify-content: center; margin: 30px 0 0; }
-        .search-box input { width: 400px; padding: 14px 20px; border: none; border-radius: 30px 0 0 30px; font-size: 0.95rem; outline: none; }
-        .search-box button { padding: 14px 24px; background: #1e3a5f; color: white; border: none; border-radius: 0 30px 30px 0; cursor: pointer; font-size: 0.95rem; }
-
-        .section { padding: 60px 40px; }
-        .section h2 { text-align: center; font-size: 1.5rem; font-weight: 700; color: #1e3a5f; margin-bottom: 8px; }
-        .section .sub { text-align: center; color: #64748b; margin-bottom: 40px; }
-
-        .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .card { background: white; border: 1px solid #e2e8f0; border-radius: 14px; padding: 28px; text-align: center; transition: transform 0.2s; }
-        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-        .card .icon { font-size: 2.2rem; margin-bottom: 14px; }
-        .card h3 { font-size: 1rem; font-weight: 600; color: #1e3a5f; margin-bottom: 8px; }
-        .card p { font-size: 0.85rem; color: #64748b; line-height: 1.6; margin-bottom: 16px; }
-        .card a { color: #1a56db; text-decoration: none; font-size: 0.85rem; font-weight: 600; }
-
-        .faq { padding: 0 40px 60px; max-width: 700px; margin: 0 auto; }
-        .faq h2 { font-size: 1.5rem; font-weight: 700; color: #1e3a5f; margin-bottom: 24px; text-align: center; }
-        .faq-item { background: white; border: 1px solid #e2e8f0; border-radius: 10px; padding: 20px 24px; margin-bottom: 12px; }
-        .faq-item h4 { font-size: 0.95rem; font-weight: 600; color: #1e3a5f; margin-bottom: 8px; }
-        .faq-item p { font-size: 0.875rem; color: #64748b; line-height: 1.6; }
-
-        .contact { background: #1a56db; color: white; text-align: center; padding: 50px 40px; }
-        .contact h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; }
-        .contact p { opacity: 0.9; margin-bottom: 24px; }
-        .contact a { background: white; color: #1a56db; padding: 12px 28px; border-radius: 25px; text-decoration: none; font-weight: 700; }
-
-        footer { text-align: center; padding: 24px; background: #1e3a5f; color: rgba(255,255,255,0.6); font-size: 0.85rem; }
-    </style>
+    <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body class="help-body">
 
-    <nav>
+    <nav class="main-nav">
         <div class="logo">Medi<span>Care</span></div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
