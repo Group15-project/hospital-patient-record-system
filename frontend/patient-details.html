@@ -5,59 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Patient Details</title>
     <link rel="stylesheet" href="css/style.css" />
-   
-<link rel="icon" type="image/png" href="public/favicon.svg" />
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <link rel="icon" type="image/png" href="public/favicon.svg" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
   </head>
 
   <body>
-   <button class="menu-toggle">☰</button>
+    <button class="menu-toggle">☰</button>
 
-<aside class="sidebar">
-    <div class="logo">
+    <aside class="sidebar">
+      <div class="logo">
         <h2>MediCare</h2>
-    </div>
+      </div>
 
       <nav class="menu">
-        
         <ul>
-    <li class="dashboard-menu">
-        <a href="dashboard.html">
-            <i class="fa-solid fa-house"></i> Dashboard
-        </a>
-    </li>
+          <li class="dashboard-menu">
+            <a href="dashboard.html">
+              <i class="fa-solid fa-house"></i> Dashboard
+            </a>
+          </li>
 
-    <li>
-        <a href="search.html">
-            <i class="fa-solid fa-search"></i> Search
-        </a>
-    </li>
+          <li>
+            <a href="search.html">
+              <i class="fa-solid fa-search"></i> Search
+            </a>
+          </li>
 
-    <li>
-        <a href="patients.html">
-            <i class="fa-solid fa-user-injured"></i> Patients
-        </a>
-    </li>
+          <li class="active">
+            <a href="patients.html">
+              <i class="fa-solid fa-user-injured"></i> Patients
+            </a>
+          </li>
 
-    <li>
-        <a href="medical-history.html">
-            <i class="fa-solid fa-file-medical"></i> Medical History
-        </a>
-    </li>
+          <li>
+            <a href="medical-history.html">
+              <i class="fa-solid fa-file-medical"></i> Medical History
+            </a>
+          </li>
 
-    <li>
-        <a href="appointments.html">
-            <i class="fa-solid fa-calendar-check"></i> Appointments
-        </a>
-    </li>
+          <li>
+            <a href="appointments.html">
+              <i class="fa-solid fa-calendar-check"></i> Appointments
+            </a>
+          </li>
 
-    <li>
-        <a href="settings.html">
-            <i class="fa-solid fa-gear"></i> Settings
-        </a>
-    </li>
-</ul>
+          <li>
+            <a href="settings.html">
+              <i class="fa-solid fa-gear"></i> Settings
+            </a>
+          </li>
+          <li>
+    <a href="profile.html">
+        <i class="fa-solid fa-user"></i> Profile
+    </a>
+</li>
+        </ul>
       </nav>
 
       <div class="logout">
@@ -108,7 +114,6 @@
           <h3 id="patientStatus">--</h3>
         </div>
       </section>
-
       <!-- CONTACT -->
 
       <section class="info-card">
@@ -143,54 +148,61 @@
         <div class="section-header">
           <h2>Medical History</h2>
 
-          <a
-            href="medical-history.html"
-            id="medicalHistoryLink"
-            class="primary-btn"
-          >
-            View Full History
-          </a>
-        </div>
-      </section>
-
-      <!-- APPOINTMENTS -->
-
-      <section class="info-card">
-    <h2>Upcoming Appointments</h2>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Doctor</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-
-        <tbody id="appointmentsTableBody">
-        </tbody>
-    </table>
-</section>
-
-      <!-- NOTES -->
-
-   <a
-    id="doctorNotesLink"
+         <a
+    id="medicalHistoryLink"
     href="#"
     class="primary-btn"
 >
-    Doctor Notes
+    Medical History
 </a>
+        </div>
+
+        <div id="medicalTags" class="tag-container">
+          <span class="medical-tag"> No medical history available </span>
+        </div>
+      </section>
+      <!-- APPOINTMENTS -->
+
+      <section class="info-card">
+        <h2>Upcoming Appointments</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Doctor</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody id="appointmentsTableBody"></tbody>
+        </table>
+      </section>
+
+      <!-- NOTES -->
+
+      <section class="info-card">
+        <div class="section-header">
+          <h2>Latest Doctor Notes</h2>
+
+          <a id="doctorNotesLink" href="#" class="primary-btn">
+            Doctor Notes
+          </a>
+        </div>
+
+        <div id="latestDoctorNotes">
+          <p>No notes available.</p>
+        </div>
+      </section>
     </main>
     <script src="js/api.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/patient-details.js"></script>
 
-
     <script>
       requireAuth();
-        applyRolePermissions();
+      applyRolePermissions();
     </script>
   </body>
 </html>

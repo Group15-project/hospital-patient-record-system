@@ -58,7 +58,9 @@ type UserResponse struct {
 	FirstName string `json:"first_name"`
 	LastName  string `json:"last_name"`
 	Email     string `json:"email"`
+	Phone     string `json:"phone"`
 	Role      string `json:"role"`
+	IsActive  bool   `json:"is_active"`
 }
 
 func (s *authService) Login(
@@ -69,18 +71,7 @@ func (s *authService) Login(
 
 	user, err := s.authRepo.GetByEmail(email)
 
-	if err != nil {
-
-		s.auditService.Log(
-			auditCtx,
-			"LOGIN_FAILED",
-			"AUTH",
-			"",
-			"user not found",
-		)
-
-		return nil, errors.New("invalid credentials")
-	}
+	
 
 	if err != nil {
 
@@ -140,7 +131,9 @@ func (s *authService) Login(
 			FirstName: user.FirstName,
 			LastName:  user.LastName,
 			Email:     user.Email,
+			Phone:     user.Phone,
 			Role:      user.Role.Name,
+			IsActive:  user.IsActive,
 		},
 	}, nil
 }
@@ -206,5 +199,5 @@ func (s *authService) GetProfile(
 	userID uint,
 ) (*models.User, error) {
 
-	return s.authRepo.FindByID(userID)
+	return s.authRepo.GetByID(userID)
 }

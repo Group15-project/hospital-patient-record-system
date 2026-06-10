@@ -5,6 +5,7 @@ const API_BASE_URL = "http://localhost:8080/api/v1";
     method = "GET",
     body = null
 ) {
+    
     const token =
         localStorage.getItem("access_token");
 

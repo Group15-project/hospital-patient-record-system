@@ -34,13 +34,13 @@ async function login(
 
     return data;
 }
-   document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-        requireAuth();
-        applyRolePermissions();
-    }
-);
+//    document.addEventListener(
+//     "DOMContentLoaded",
+//     () => {
+//         requireAuth();
+//         applyRolePermissions();
+//     }
+// );
 
 function logout() {
     localStorage.clear();

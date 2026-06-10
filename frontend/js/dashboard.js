@@ -46,5 +46,21 @@ function renderPatients(patients = []) {
         `;
   });
 }
+const user = JSON.parse(
+    localStorage.getItem("user")
+);
+
+if (user) {
+    document.getElementById(
+        "loggedInUser"
+    ).textContent =
+        `${user.first_name} ${user.last_name}`;
+}
+if (user) {
+    document.getElementById(
+        "welcomeText"
+    ).textContent =
+        `Welcome back, ${user.first_name}`;
+}
 
 loadDashboard();
