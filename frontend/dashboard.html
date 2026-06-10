@@ -1,147 +1,114 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hospital Patient Record System</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/png" href="assets/favicon.png">    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-</head>
-<body>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
     <button class="menu-toggle">☰</button>
     <!-- Sidebar -->
-   <aside class="sidebar">
+    <aside class="sidebar">
+      <div class="logo">
+        <h2>MediCare</h2>
+      </div>
 
-        <div class="logo">
-            <h2>MediCare</h2>
-        </div>
+      <nav class="menu">
+        <ul>
+          <li class="dashboard-menu"><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="search.html">Search</a></li>
+          <li><a href="patients.html">Patients</a></li>
+          <!--<li><a href="patient-details.html">Patient Details</a></li>-->
+          <li><a href="medical-history.html">Medical History</a></li>
+          <li><a href="appointments.html">Appointments</a></li>
+          <!-- <li><a href="doctor-notes.html">Doctor Notes</a></li> -->
+          <li><a href="settings.html">Settings</a></li>
+          <li>
+            <a href="profile.html">
+              <i class="fa-solid fa-user"></i> Profile
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-        <nav class="menu">
-
-            <ul>
-                <li class="active"><a href="dashboard.html"><i class="fa-solid fa-house"></i>   Dashboard</a></li>
-                <li><a href="search.html"><i class="fa-solid fa-search"></i>   Search</a></li>
-                <li><a href="patients.html"><i class="fa-solid fa-user-injured"></i>   Patients</a></li>
-                <!--<li><a href="patient-details.html">Patient Details</a></li>-->
-                <li><a href="medical-history.html"><i class="fa-solid fa-file-medical"></i>   Medical History</a></li>
-                <li><a href="appointments.html"><i class="fa-solid fa-calendar-check"></i>   Appointments</a></li>
-                <li><a href="doctor-notes.html"><i class="fa-solid fa-stethoscope"></i>   Doctor Notes</a></li>
-                <li><a href="profile.html"><i class="fa-solid fa-user"></i>   Profile</a></li>
-                <li><a href="settings.html"><i class="fa-solid fa-gear"></i>   Settings</a></li>
-            </ul>
-
-        </nav>
-
-        <div class="logout">
-            <a href="index.html">Logout</a>
-        </div>
-
+      <div class="logout">
+        <a href="#" onclick="logout()"> Logout </a>
+      </div>
     </aside>
 
     <!-- Main Content -->
     <main class="main-content">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div>
+          <h1>Dashboard</h1>
+          <p id="welcomeText">Welcome back</p>
+        </div>
 
-        <!-- Top Bar -->
-        <header class="topbar">
-            <div>
-                <h1>Dashboard</h1>
-                <p>Welcome back, Administrator</p>
-            </div>
+        <div class="user-profile">
+          <span id="loggedInUser">Loading...</span>
+        </div>
+      </header>
 
-            <div class="user-profile">
-                <span>Admin User</span>
-            </div>
-        </header>
+      <!-- KPI Cards -->
+      <section class="cards">
+        <div class="card">
+          <h3>Total Patients</h3>
+          <p id="totalPatients">0</p>
+        </div>
 
-        <!-- KPI Cards -->
-        <section class="cards">
-            
-            <div class="card">
-                <div class="kpi-icon">
-                    <i class="fa-solid fa-users"></i>
-                </div>
-                <h3>Total Patients</h3>
-                <p>1,250</p>
-            </div>
+        <div class="card">
+          <h3>Appointments Scheduled</h3>
+          <p id="appointmentsToday">0</p>
+        </div>
 
-            <div class="card">
-                <div class="kpi-icon">
-                    <i class="fa-solid fa-calendar-check"></i>
-                </div>
-                <h3>Appointments Today</h3>
-                <p>85</p>
-            </div>
+        <div class="card">
+          <h3>Doctors Available</h3>
+          <p id="doctorsAvailable">0</p>
+        </div>
 
-            <div class="card">
-                <div class="kpi-icon">
-                    <i class="fa-solid fa-stethoscope"></i>
-                </div>
-                <h3>Doctors Available</h3>
-                <p>42</p>
-            </div>
+        <div class="card">
+          <h3>Emergency Cases</h3>
+          <p id="emergencyCases">0</p>
+        </div>
+      </section>
 
-            <div class="card">
-                <div class="kpi-icon">
-                    <i class="fa-solid fa-ambulance"></i>
-                </div>
-                <h3>Emergency Cases</h3>
-                <p>12</p>
-            </div>
+      <!-- Patient Table -->
+      <section class="table-section">
+        <div class="table-header">
+          <h2>Recent Patients</h2>
+          <button class="btn" onclick="window.location.href = 'patients.html'">
+            Add Patient
+          </button>
+        </div>
 
-        </section>
+        <table>
+          <thead>
+            <tr>
+              <th>Patient ID</th>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Phone</th>
+              <th>Status</th>
+            </tr>
+          </thead>
 
-        <!-- Patient Table -->
-        <section class="table-section">
-
-            <div class="table-header">
-                <h2>Recent Patients</h2>
-
-            </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Patient ID</th>
-                        <th>Name</th>
-                        <th>Gender</th>
-                        <th>Phone</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>P001</td>
-                        <td>John Doe</td>
-                        <td>Male</td>
-                        <td>08012345678</td>
-                        <td><span class="status active">Active</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>P002</td>
-                        <td>Jane Smith</td>
-                        <td>Female</td>
-                        <td>08087654321</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>P003</td>
-                        <td>Michael Johnson</td>
-                        <td>Male</td>
-                        <td>08011223344</td>
-                        <td><span class="status active">Active</span></td>
-                    </tr>
-
-                </tbody>
-            </table>
-
-        </section>
-
+          <tbody id="recentPatientsBody"></tbody>
+        </table>
+      </section>
     </main>
-<script src="main.js"></script>
-</body>
+  </body>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script>
+    requireAuth();
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user || (user.role !== "ADMIN" && user.role !== "SUPER_ADMIN")) {
+      window.location.href = "patients.html";
+    }
+  </script>
 </html>

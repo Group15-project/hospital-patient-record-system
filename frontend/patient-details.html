@@ -1,206 +1,208 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Patient Details</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/png" href="assets/favicon.png">    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css" />
 
-</head>
+    <link rel="icon" type="image/png" href="public/favicon.svg" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
 
-<body>
+  <body>
     <button class="menu-toggle">☰</button>
+
     <aside class="sidebar">
+      <div class="logo">
+        <h2>MediCare</h2>
+      </div>
 
-        <div class="logo">
-            <h2>MediCare</h2>
-        </div>
+      <nav class="menu">
+        <ul>
+          <li class="dashboard-menu">
+            <a href="dashboard.html">
+              <i class="fa-solid fa-house"></i> Dashboard
+            </a>
+          </li>
 
-        <nav class="menu">
+          <li>
+            <a href="search.html">
+              <i class="fa-solid fa-search"></i> Search
+            </a>
+          </li>
 
-            <ul>
-                <li><a href="dashboard.html"><i class="fa-solid fa-house"></i>   Dashboard</a></li>
-                <li><a href="search.html"><i class="fa-solid fa-search"></i>   Search</a></li>
-                <li><a href="patients.html"><i class="fa-solid fa-user-injured"></i>   Patients</a></li>
-                <!--<li><a href="patient-details.html"><i class="fa-solid fa-user"></i>   Patient Details</a></li>-->
-                <li><a href="medical-history.html"><i class="fa-solid fa-file-medical"></i>   Medical History</a></li>
-                <li><a href="appointments.html"><i class="fa-solid fa-calendar-check"></i>   Appointments</a></li>
-                <li><a href="doctor-notes.html"><i class="fa-solid fa-stethoscope"></i>   Doctor Notes</a></li>
-                <li><a href="profile.html"><i class="fa-solid fa-user"></i>   Profile</a></li>
-                <li><a href="settings.html"><i class="fa-solid fa-gear"></i>   Settings</a></li>
-            </ul>
+          <li class="active">
+            <a href="patients.html">
+              <i class="fa-solid fa-user-injured"></i> Patients
+            </a>
+          </li>
 
-        </nav>
+          <li>
+            <a href="medical-history.html">
+              <i class="fa-solid fa-file-medical"></i> Medical History
+            </a>
+          </li>
 
-        <div class="logout">
-            <a href="index.html">Logout</a>
-        </div>
+          <li>
+            <a href="appointments.html">
+              <i class="fa-solid fa-calendar-check"></i> Appointments
+            </a>
+          </li>
 
+          <li>
+            <a href="settings.html">
+              <i class="fa-solid fa-gear"></i> Settings
+            </a>
+          </li>
+          <li>
+    <a href="profile.html">
+        <i class="fa-solid fa-user"></i> Profile
+    </a>
+</li>
+        </ul>
+      </nav>
+
+      <div class="logout">
+        <a href="#" onclick="logout()">Logout</a>
+      </div>
     </aside>
 
     <main class="main-content">
+      <header class="topbar">
+        <div>
+          <h1>Patient Details</h1>
+          <p>Complete patient profile and records</p>
+        </div>
+        <a href="patients.html" class="back-btn">← Back</a>
+      </header>
 
-        <header class="topbar">
-            <div>
-                <h1>Patient Details</h1>
-                <p>Complete patient profile and records</p>
-            </div>
-            <a href="patients.html" class="back-btn">
-                <<< Back
-            </a> 
-        </header>
+      <!-- PROFILE -->
 
-        <!-- PROFILE -->
+      <section class="profile-card">
+        <div class="avatar" id="avatar">--</div>
 
-        <section class="profile-card">
+        <div class="profile-info">
+          <h2 id="patientName">Loading...</h2>
+          <p id="patientNumber">Patient ID</p>
+        </div>
+      </section>
 
-            <div class="avatar">
-                JD
-            </div>
+      <!-- OVERVIEW -->
 
-            <div class="profile-info">
-                <h2>John Doe</h2>
-                <p>Patient ID: P001</p>
-            </div>
+      <section class="stats-grid">
+        <div class="mini-card">
+          <span>Age</span>
+          <h3 id="patientAge">--</h3>
+        </div>
 
-        </section>
+        <div class="mini-card">
+          <span>Gender</span>
+          <h3 id="patientGender">--</h3>
+        </div>
 
-        <!-- OVERVIEW -->
+        <div class="mini-card">
+          <span>Blood Group</span>
+          <h3 id="patientBloodGroup">--</h3>
+        </div>
 
-        <section class="stats-grid">
+        <div class="mini-card">
+          <span>Status</span>
+          <h3 id="patientStatus">--</h3>
+        </div>
+      </section>
+      <!-- CONTACT -->
 
-            <div class="mini-card">
-                <span>Age</span>
-                <h3>32</h3>
-            </div>
+      <section class="info-card">
+        <h2>Contact Information</h2>
 
-            <div class="mini-card">
-                <span>Gender</span>
-                <h3>Male</h3>
-            </div>
+        <div class="info-grid">
+          <div>
+            <span>Phone</span>
+            <h4 id="patientPhone">--</h4>
+          </div>
 
-            <div class="mini-card">
-                <span>Blood Group</span>
-                <h3>O+</h3>
-            </div>
+          <div>
+            <span>Email</span>
+            <h4 id="patientEmail">--</h4>
+          </div>
 
-            <div class="mini-card">
-                <span>Status</span>
-                <h3>Active</h3>
-            </div>
+          <div>
+            <span>Address</span>
+            <h4 id="patientAddress">--</h4>
+          </div>
 
-        </section>
+          <div>
+            <span>Emergency Contact</span>
+            <h4 id="patientEmergencyPhone">--</h4>
+          </div>
+        </div>
+      </section>
 
-        <!-- CONTACT -->
+      <!-- MEDICAL HISTORY -->
 
-        <section class="info-card">
+      <section class="info-card">
+        <div class="section-header">
+          <h2>Medical History</h2>
 
-            <h2>Contact Information</h2>
+         <a
+    id="medicalHistoryLink"
+    href="#"
+    class="primary-btn"
+>
+    Medical History
+</a>
+        </div>
 
-            <div class="info-grid">
+        <div id="medicalTags" class="tag-container">
+          <span class="medical-tag"> No medical history available </span>
+        </div>
+      </section>
+      <!-- APPOINTMENTS -->
 
-                <div>
-                    <span>Phone</span>
-                    <h4>08012345678</h4>
-                </div>
+      <section class="info-card">
+        <h2>Upcoming Appointments</h2>
 
-                <div>
-                    <span>Email</span>
-                    <h4>john@email.com</h4>
-                </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Doctor</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Status</th>
+            </tr>
+          </thead>
 
-                <div>
-                    <span>Address</span>
-                    <h4>Lagos, Nigeria</h4>
-                </div>
+          <tbody id="appointmentsTableBody"></tbody>
+        </table>
+      </section>
 
-                <div>
-                    <span>Emergency Contact</span>
-                    <h4>08099887766</h4>
-                </div>
+      <!-- NOTES -->
 
-            </div>
+      <section class="info-card">
+        <div class="section-header">
+          <h2>Latest Doctor Notes</h2>
 
-        </section>
+          <a id="doctorNotesLink" href="#" class="primary-btn">
+            Doctor Notes
+          </a>
+        </div>
 
-        <!-- MEDICAL HISTORY -->
-
-        <section class="info-card">
-
-            <h2>Medical History</h2>
-
-            <div class="tag-container">
-
-                <span class="medical-tag">Hypertension</span>
-                <span class="medical-tag">Penicillin Allergy</span>
-                <span class="medical-tag">Appendectomy</span>
-
-            </div>
-
-        </section>
-
-        <!-- APPOINTMENTS -->
-
-        <section class="info-card">
-
-            <h2>Upcoming Appointments</h2>
-
-            <table>
-
-                <thead>
-                    <tr>
-                        <th>Doctor</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    <tr>
-                        <td>Dr. Williams</td>
-                        <td>12 Jun 2026</td>
-                        <td>09:00 AM</td>
-                        <td>
-                            <span class="appointment scheduled">
-                                Scheduled
-                            </span>
-                        </td>
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </section>
-
-        <!-- NOTES -->
-
-        <section class="info-card">
-
-            <h2>Latest Doctor Notes</h2>
-
-            <div class="note-item">
-
-                <div class="note-header">
-                    <h4>Routine Consultation</h4>
-                    <span>10 Jun 2026</span>
-                </div>
-
-                <p>
-                    Patient showing improvement.
-                    Continue medication and review in 30 days.
-                </p>
-
-            </div>
-
-        </section>
-
+        <div id="latestDoctorNotes">
+          <p>No notes available.</p>
+        </div>
+      </section>
     </main>
-    <script src="main.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/patient-details.js"></script>
 
-</body>
+    <script>
+      requireAuth();
+      applyRolePermissions();
+    </script>
+  </body>
 </html>
