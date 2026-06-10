@@ -18,7 +18,7 @@
 
         <ul>
             <li><a href="dashboard.html">Dashboard</a></li>
-            <li></li><a href="search.html">Search</a></li>
+            <li><a href="search.html">Search</a></li>
             <li><a href="patients.html">Patients</a></li>
             <!--<li><a href="patient-details.html">Patient Details</a></li>-->
             <li><a href="medical-history.html">Medical History</a></li>
@@ -105,6 +105,8 @@
                     <th>Date</th>
                     <th>Time</th>
                     <th>Status</th>
+                    <th>Reschedule</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
 
@@ -120,6 +122,16 @@
                             Scheduled
                         </span>
                     </td>
+                    <td>
+                        <a href="reschedule-appointment.html" class="save-btn">
+                            Reschedule
+                        </a>
+                    </td>
+                    <td>
+                        <button class="delete-btn">
+                            Cancel Appointment
+                        </button>
+                    </td>
                 </tr>
 
                 <tr>
@@ -132,6 +144,16 @@
                             Completed
                         </span>
                     </td>
+                    <td>
+                        <a href="reschedule-appointment.html" class="save-btn">
+                            Reschedule
+                        </a>
+                    </td>
+                    <td>
+                        <button class="delete-btn">
+                            Cancel Appointment
+                        </button>
+                    </td>
                 </tr>
 
                 <tr>
@@ -143,6 +165,38 @@
                         <span class="appointment cancelled">
                             Cancelled
                         </span>
+                    </td>
+                    <td>
+                        <a href="reschedule-appointment.html" class="save-btn">
+                            Reschedule
+                        </a>
+                    </td>
+                    <td>
+                        <button class="delete-btn">
+                            Cancel Appointment
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Ethan Ford</td>
+                    <td>Dr. Michael</td>
+                    <td>10 Jul 2026</td>
+                    <td>03:00 PM</td>
+                    <td>
+                        <span class="appointment rescheduled">
+                            Rescheduled
+                        </span>
+                    </td>
+                    <td>
+                        <a href="reschedule-appointment.html" class="save-btn">
+                            Reschedule
+                        </a>
+                    </td>
+                    <td>
+                        <button class="delete-btn">
+                            Cancel Appointment
+                        </button>
                     </td>
                 </tr>
 
