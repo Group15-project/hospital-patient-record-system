@@ -41,5 +41,9 @@ func RegisterAppointmentRoutes(
 		),
 		appointmentHandler.UpdateStatus,
 	)
+	appointmentGroup.GET(
+	"",
+	appointmentHandler.List,
+)
 
 }

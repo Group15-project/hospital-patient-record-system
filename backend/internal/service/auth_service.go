@@ -23,22 +23,24 @@ type AuthService interface {
 		req dto.RegisterUserRequest,
 		auditCtx utils.AuditContext,
 	) error
+	GetDoctors() ([]models.User, error)
+	GetProfile(userID uint) (*models.User, error)
 }
 
 type authService struct {
-	userRepo     repository.UserRepository
+	authRepo     repository.AuthRepository
 	auditService AuditService
 	jwtSecret    string
 }
 
 func NewAuthService(
-	userRepo repository.UserRepository,
+	authRepo repository.AuthRepository,
 	auditService AuditService,
 	jwtSecret string,
 ) AuthService {
 
 	return &authService{
-		userRepo:     userRepo,
+		authRepo:     authRepo,
 		auditService: auditService,
 		jwtSecret:    jwtSecret,
 	}
@@ -65,7 +67,7 @@ func (s *authService) Login(
 	auditCtx utils.AuditContext,
 ) (*LoginResponse, error) {
 
-	user, err := s.userRepo.GetByEmail(email)
+	user, err := s.authRepo.GetByEmail(email)
 
 	if err != nil {
 
@@ -147,7 +149,7 @@ func (s *authService) RegisterUser(
 	req dto.RegisterUserRequest,
 	auditCtx utils.AuditContext,
 ) error {
-	exists, err := s.userRepo.ExistsByEmail(
+	exists, err := s.authRepo.ExistsByEmail(
 		req.Email,
 	)
 
@@ -178,7 +180,7 @@ func (s *authService) RegisterUser(
 
 		IsActive: true,
 	}
-	if err := s.userRepo.Create(
+	if err := s.authRepo.Create(
 		&user,
 	); err != nil {
 		return err
@@ -191,4 +193,18 @@ func (s *authService) RegisterUser(
 		"staff account created",
 	)
 	return nil
+}
+
+func (s *authService) GetDoctors() (
+	[]models.User,
+	error,
+) {
+	return s.authRepo.GetDoctors()
+}
+
+func (s *authService) GetProfile(
+	userID uint,
+) (*models.User, error) {
+
+	return s.authRepo.FindByID(userID)
 }

@@ -62,7 +62,7 @@ func (r *patientRepository) List(offset, limit int) ([]models.Patient, error) {
 	err := r.db.
 		Offset(offset).
 		Limit(limit).
-		Order("id DESC").
+		Order("created_at DESC").
 		Find(&patients).
 		Error
 

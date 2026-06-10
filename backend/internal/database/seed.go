@@ -56,6 +56,7 @@ func SeedRolesAndPermissions(db *gorm.DB) {
 
 	seedRoles(db)
 seedSuperAdmin(db)
+seedDoctor(db)
 
 log.Println("roles, permissions and admin seeded")
 
@@ -195,4 +196,47 @@ func seedSuperAdmin(db *gorm.DB) {
 	}
 
 	log.Println("super admin seeded")
+}
+
+func seedDoctor(db *gorm.DB) {
+	var existing models.User
+
+	if err := db.
+		Where("email = ?", "doctor@hospital.com").
+		First(&existing).
+		Error; err == nil {
+		return
+	}
+
+	var doctorRole models.Role
+
+	if err := db.
+		Where("name = ?", models.RoleDoctor).
+		First(&doctorRole).
+		Error; err != nil {
+		log.Printf("failed to find doctor role: %v", err)
+		return
+	}
+
+	password, err := utils.HashPassword("Doctor@123")
+	if err != nil {
+		log.Printf("failed to hash doctor password: %v", err)
+		return
+	}
+
+	doctor := models.User{
+		FirstName:      "John",
+		LastName:       "Doctor",
+		Email:          "doctor@hospital.com",
+		HashedPassword: password,
+		IsActive:       true,
+		RoleID:         doctorRole.ID,
+	}
+
+	if err := db.Create(&doctor).Error; err != nil {
+		log.Printf("failed to create doctor: %v", err)
+		return
+	}
+
+	log.Println("doctor seeded")
 }

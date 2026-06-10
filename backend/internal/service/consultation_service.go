@@ -16,6 +16,18 @@ type ConsultationService interface {
 		req dto.AddDiagnosisRequest,
 		doctorID uint,
 	) error
+	GetByID(
+	id uint,
+) (*models.Consultation, error)
+
+GetByPatient(
+
+		patientID uint,
+	) ([]models.Consultation, error)
+
+GetDiagnoses(
+	consultationID uint,
+) ([]models.Diagnosis, error)
 }
 
 type consultationService struct {
@@ -70,5 +82,30 @@ func (s *consultationService) AddDiagnosis(
 
 	return s.repo.CreateDiagnosis(
 		&diagnosis,
+	)
+}
+
+func (s *consultationService) GetByID(
+	id uint,
+) (*models.Consultation, error) {
+
+	return s.repo.GetByID(id)
+}
+
+func (s *consultationService) GetDiagnoses(
+	consultationID uint,
+) ([]models.Diagnosis, error) {
+
+	return s.repo.GetDiagnoses(
+		consultationID,
+	)
+}
+
+func (s *consultationService) GetByPatient(
+	patientID uint,
+) ([]models.Consultation, error) {
+
+	return s.repo.GetByPatient(
+		patientID,
 	)
 }

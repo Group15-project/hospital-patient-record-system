@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"time"
 
 	_ "hospital-backend/docs"
 
@@ -12,6 +13,7 @@ import (
 	"hospital-backend/internal/routes"
 	"hospital-backend/internal/service"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	swaggerFiles "github.com/swaggo/files"
@@ -39,7 +41,7 @@ func main() {
 	validate := validator.New()
 
 	// Repositories
-	userRepo := repository.NewUserRepository(db)
+	authRepo := repository.NewAuthRepository(db)
 	patientRepo := repository.NewPatientRepository(db)
 	vitalRepo := repository.NewVitalRepository(db)
 	labRepo := repository.NewLabRepository(db)
@@ -50,21 +52,22 @@ func main() {
 	billingRepo := repository.NewBillingRepository(db)
 	dashboardRepo := repository.NewDashboardRepository(db)
 	auditRepo := repository.NewAuditRepository(db)
-	
-	
-	
+	medicalRecordRepo :=
+		repository.NewMedicalRecordRepository(
+			db,
+		)
+	consultationRepo := repository.NewConsultationRepository(db)
+
 	// Services
 	auditService := service.NewAuditService(
 
-	auditRepo,
-
-)
+		auditRepo,
+	)
 
 	authService := service.NewAuthService(
-		userRepo,
+		authRepo,
 		auditService,
 		cfg.JWTSecretKey,
-
 	)
 	patientService := service.NewPatientService(
 		patientRepo,
@@ -94,10 +97,16 @@ func main() {
 	)
 	dashboardService := service.NewDashboardService(
 
-	dashboardRepo,
+		dashboardRepo,
+	)
 
-)
-
+	medicalRecordService :=
+		service.NewMedicalRecordService(
+			medicalRecordRepo,
+		)
+	consultationService := service.NewConsultationService(
+		consultationRepo,
+	)
 
 	// Handlers
 	authHandler := handler.NewAuthHandler(
@@ -132,12 +141,45 @@ func main() {
 	)
 	dashboardHandler := handler.NewDashboardHandler(
 
-	dashboardService,
+		dashboardService,
+	)
+	auditHandler := handler.NewAuditHandler(
+		auditService,
+	)
 
-)
+	medicalRecordHandler :=
+		handler.NewMedicalRecordHandler(
+			medicalRecordService,
+		)
+	consultationHandler := handler.NewConsultationHandler(
+		consultationService,
+	)
 
 	// Router
 	router := gin.Default()
+
+	router.Use(cors.New(cors.Config{
+		AllowOrigins: []string{
+			"http://127.0.0.1:5500",
+			"http://localhost:5500",
+			"http://localhost:5173",
+		},
+		AllowMethods: []string{
+			"GET",
+			"POST",
+			"PUT",
+			"PATCH",
+			"DELETE",
+			"OPTIONS",
+		},
+		AllowHeaders: []string{
+			"Origin",
+			"Content-Type",
+			"Authorization",
+		},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
 
 	// Swagger
 	router.GET(
@@ -159,6 +201,9 @@ func main() {
 		medicalDocumentHandler,
 		billingHandler,
 		dashboardHandler,
+		auditHandler,
+		medicalRecordHandler,
+		consultationHandler,
 	)
 
 	port := cfg.Port

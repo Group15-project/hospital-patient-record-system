@@ -17,13 +17,13 @@
     <nav class="menu">
 
         <ul>
-            <li><a href="dashboard.html">Dashboard</a></li>
+            <li class="dashboard-menu"><a href="dashboard.html">Dashboard</a></li>
             <li><a href="search.html">Search</a></li>
             <li><a href="patients.html">Patients</a></li>
-            <li><a href="patient-details.html">Patient Details</a></li>
+            <!--<li><a href="patient-details.html">Patient Details</a></li>-->
             <li><a href="medical-history.html">Medical History</a></li>
             <li><a href="appointments.html">Appointments</a></li>
-            <li class="active"><a href="doctor-notes.html">Doctor Notes</a></li>
+            <!-- <li class="active"><a href="doctor-notes.html">Doctor Notes</a></li> -->
             <li><a href="settings.html">Settings</a></li>
         </ul>
 
@@ -46,29 +46,29 @@
 
     <!-- Patient Card -->
 
-    <section class="patient-card">
+  <section class="patient-card">
 
-        <div>
-            <span>Patient ID</span>
-            <h3>P001</h3>
-        </div>
+    <div>
+        <span>Patient ID</span>
+        <h3 id="patientNumber">--</h3>
+    </div>
 
-        <div>
-            <span>Patient Name</span>
-            <h3>John Doe</h3>
-        </div>
+    <div>
+        <span>Patient Name</span>
+        <h3 id="patientName">--</h3>
+    </div>
 
-        <div>
-            <span>Age</span>
-            <h3>32 Years</h3>
-        </div>
+    <div>
+        <span>Age</span>
+        <h3 id="patientAge">--</h3>
+    </div>
 
-        <div>
-            <span>Gender</span>
-            <h3>Male</h3>
-        </div>
+    <div>
+        <span>Gender</span>
+        <h3 id="patientGender">--</h3>
+    </div>
 
-    </section>
+</section>
 
     <!-- Notes Form -->
 
@@ -76,73 +76,77 @@
 
         <h2>Add Clinical Notes</h2>
 
-        <form>
+     <form id="doctorNotesForm">
 
-            <div class="full-width">
-                <label>Diagnosis</label>
-                <textarea rows="4"></textarea>
-            </div>
+    <div class="full-width">
+        <label>Chief Complaint</label>
+        <textarea
+            id="chiefComplaint"
+            rows="3"
+        ></textarea>
+    </div>
 
-            <div class="full-width">
-                <label>Prescription</label>
-                <textarea rows="4"></textarea>
-            </div>
+    <div class="full-width">
+        <label>Diagnosis</label>
+        <textarea
+            id="diagnosis"
+            rows="4"
+        ></textarea>
+    </div>
 
-            <div class="full-width">
-                <label>Treatment Plan</label>
-                <textarea rows="4"></textarea>
-            </div>
+    <div class="full-width">
+        <label>Prescription</label>
+        <textarea
+            id="prescription"
+            rows="4"
+        ></textarea>
+    </div>
 
-            <div class="full-width">
-                <label>Follow-up Recommendations</label>
-                <textarea rows="4"></textarea>
-            </div>
+    <div class="full-width">
+        <label>Treatment Plan</label>
+        <textarea
+            id="treatmentPlan"
+            rows="4"
+        ></textarea>
+    </div>
 
-            <button class="primary-btn">
-                Save Notes
-            </button>
+    <div class="full-width">
+        <label>Follow-up Recommendations</label>
+        <textarea
+            id="notes"
+            rows="4"
+        ></textarea>
+    </div>
 
-        </form>
+    <button
+        type="submit"
+        class="primary-btn"
+    >
+        Save Notes
+    </button>
+
+</form>
 
     </section>
 
     <!-- Notes History -->
 
-    <section class="notes-history">
+   <section class="notes-history">
 
-        <h2>Clinical History</h2>
+    <h2>Clinical History</h2>
 
-        <div class="note-item">
+    <div id="notesHistory">
+    </div>
 
-            <div class="note-header">
-                <h4>Routine Consultation</h4>
-                <span>June 10, 2026</span>
-            </div>
-
-            <p>
-                Patient presented with mild hypertension.
-                Recommended dietary modifications and regular monitoring.
-            </p>
-
-        </div>
-
-        <div class="note-item">
-
-            <div class="note-header">
-                <h4>Follow-up Visit</h4>
-                <span>May 28, 2026</span>
-            </div>
-
-            <p>
-                Blood pressure improved. Continue medication
-                and return for review after 30 days.
-            </p>
-
-        </div>
-
-    </section>
+</section>
 
 </main>
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/doctor-notes.js"></script>
 
+<script>
+    requireAuth();
+</script>
 </body>
 </html>

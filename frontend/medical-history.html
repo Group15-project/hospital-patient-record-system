@@ -1,186 +1,263 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
     <title>Medical History</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
 
-<aside class="sidebar">
+    <aside class="sidebar">
 
-    <div class="logo">
-        <h2>MediCare</h2>
-    </div>
-
-    <nav class="menu">
-
-        <ul>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="search.html">Search</a></li>
-            <li><a href="patients.html">Patients</a></li>
-            <li><a href="patient-details.html">Patient Details</a></li>
-            <li class="active"><a href="medical-history.html">Medical History</a></li>
-            <li><a href="appointments.html">Appointments</a></li>
-            <li><a href="doctor-notes.html">Doctor Notes</a></li>
-            <li><a href="settings.html">Settings</a></li>
-        </ul>
-
-    </nav>
-
-    <div class="logout">
-        <a href="index.html">Logout</a>
-    </div>
-
-</aside>
-
-<main class="main-content">
-
-    <header class="topbar">
-        <div>
-            <h1>Medical History</h1>
-            <p>Patient clinical records and history</p>
-        </div>
-    </header>
-
-    <!-- Patient Summary -->
-
-    <section class="patient-summary">
-
-        <div class="summary-card">
-            <h3>Patient Information</h3>
-
-            <div class="summary-grid">
-
-                <div>
-                    <span>Patient ID</span>
-                    <h4>P001</h4>
-                </div>
-
-                <div>
-                    <span>Full Name</span>
-                    <h4>John Doe</h4>
-                </div>
-
-                <div>
-                    <span>Age</span>
-                    <h4>32 Years</h4>
-                </div>
-
-                <div>
-                    <span>Gender</span>
-                    <h4>Male</h4>
-                </div>
-
-            </div>
-
+        <div class="logo">
+            <h2>MediCare</h2>
         </div>
 
-    </section>
+        <nav class="menu">
 
-    <!-- Medical History Form -->
+            <ul>
+                <li class="dashboard-menu">
+                    <a href="dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
 
-    <section class="form-card">
+                <li>
+                    <a href="search.html">
+                        Search
+                    </a>
+                </li>
 
-        <h2>Add Medical Record</h2>
+                <li>
+                    <a href="patients.html">
+                        Patients
+                    </a>
+                </li>
 
-        <form>
+                <li class="active">
+                    <a href="medical-history.html">
+                        Medical History
+                    </a>
+                </li>
 
-            <div class="grid">
+                <li>
+                    <a href="appointments.html">
+                        Appointments
+                    </a>
+                </li>
 
-                <div>
-                    <label>Previous Illnesses</label>
-                    <textarea rows="4"></textarea>
-                </div>
+                <!-- <li>
+                    <a href="doctor-notes.html">
+                        Doctor Notes
+                    </a>
+                </li> -->
 
-                <div>
-                    <label>Surgeries</label>
-                    <textarea rows="4"></textarea>
-                </div>
+                <li>
+                    <a href="settings.html">
+                        Settings
+                    </a>
+                </li>
+            </ul>
 
-                <div>
-                    <label>Allergies</label>
-                    <textarea rows="4"></textarea>
-                </div>
+        </nav>
 
-                <div>
-                    <label>Chronic Conditions</label>
-                    <textarea rows="4"></textarea>
-                </div>
-
-            </div>
-
-            <button class="primary-btn">
-                Save Record
-            </button>
-
-        </form>
-
-    </section>
-
-    <!-- Allergy Tags -->
-
-    <section class="history-section">
-
-        <h2>Known Allergies</h2>
-
-        <div class="tag-container">
-
-            <span class="medical-tag">Penicillin</span>
-            <span class="medical-tag">Peanuts</span>
-            <span class="medical-tag">Seafood</span>
-
+        <div class="logout">
+            <a href="#" onclick="logout()">
+                Logout
+            </a>
         </div>
 
-    </section>
+    </aside>
 
-    <!-- Timeline -->
+    <main class="main-content">
 
-    <section class="history-section">
+        <header class="topbar">
 
-        <h2>Medical Timeline</h2>
-
-        <div class="timeline">
-
-            <div class="timeline-item">
-                <div class="timeline-date">
-                    Jan 2026
-                </div>
-
-                <div class="timeline-content">
-                    <h4>Hypertension Diagnosis</h4>
-                    <p>Patient diagnosed with mild hypertension.</p>
-                </div>
+            <div>
+                <h1>Medical History</h1>
+                <p>
+                    Patient clinical records and history
+                </p>
             </div>
 
-            <div class="timeline-item">
-                <div class="timeline-date">
-                    Oct 2025
-                </div>
+        </header>
 
-                <div class="timeline-content">
-                    <h4>Appendectomy Surgery</h4>
-                    <p>Successful surgery completed.</p>
-                </div>
+        <!-- Patient Selector -->
+
+        <section class="table-section">
+
+            <div class="table-header">
+
+                <h2>Select Patient</h2>
+
+                <select
+                    id="patientSelect"
+                    class="search-input"
+                >
+                    <option value="">
+                        Select Patient
+                    </option>
+                </select>
+
             </div>
 
-            <div class="timeline-item">
-                <div class="timeline-date">
-                    May 2024
+        </section>
+
+        <!-- Patient Summary -->
+
+        <section class="patient-summary">
+
+            <div class="summary-card">
+
+                <h3>Patient Information</h3>
+
+                <div class="summary-grid">
+
+                    <div>
+                        <span>Patient ID</span>
+                        <h4 id="patientNumber">
+                            --
+                        </h4>
+                    </div>
+
+                    <div>
+                        <span>Full Name</span>
+                        <h4 id="patientName">
+                            --
+                        </h4>
+                    </div>
+
+                    <div>
+                        <span>Age</span>
+                        <h4 id="patientAge">
+                            --
+                        </h4>
+                    </div>
+
+                    <div>
+                        <span>Gender</span>
+                        <h4 id="patientGender">
+                            --
+                        </h4>
+                    </div>
+
                 </div>
 
-                <div class="timeline-content">
-                    <h4>Routine Checkup</h4>
-                    <p>No major issues identified.</p>
-                </div>
             </div>
 
-        </div>
+        </section>
 
-    </section>
+        <!-- Medical History Form -->
 
-</main>
+        <section class="form-card">
+
+            <h2>Add Medical Record</h2>
+
+            <form id="medicalHistoryForm">
+
+                <div class="grid">
+
+                    <div>
+                        <label>
+                            Previous Illnesses
+                        </label>
+
+                        <textarea
+                            id="previousIllnesses"
+                            rows="4"
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label>
+                            Surgeries
+                        </label>
+
+                        <textarea
+                            id="surgeries"
+                            rows="4"
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label>
+                            Allergies
+                        </label>
+
+                        <textarea
+                            id="allergies"
+                            rows="4"
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label>
+                            Chronic Conditions
+                        </label>
+
+                        <textarea
+                            id="chronicConditions"
+                            rows="4"
+                        ></textarea>
+                    </div>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="primary-btn"
+                >
+                    Save Record
+                </button>
+
+            </form>
+
+        </section>
+
+        <!-- Allergy Tags -->
+
+        <section class="history-section">
+
+            <h2>
+                Known Allergies
+            </h2>
+
+            <div
+                id="allergyTags"
+                class="tag-container"
+            ></div>
+
+        </section>
+
+        <!-- Timeline -->
+
+        <section class="history-section">
+
+            <h2>
+                Medical Timeline
+            </h2>
+
+            <div
+                id="timeline"
+                class="timeline"
+            ></div>
+
+        </section>
+
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/medical-history.js"></script>
+
+    <script>
+        requireAuth();
+    </script>
 
 </body>
 </html>

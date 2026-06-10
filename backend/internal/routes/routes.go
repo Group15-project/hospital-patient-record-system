@@ -19,21 +19,24 @@ func RegisterRoutes(
 	medicationHandler *handler.MedicationHandler,
 	appointmentHandler *handler.AppointmentHandler,
 	medicalDocumentHandler *handler.MedicalDocumentHandler,
-	billingRoutes *handler.BillingHandler,
+	billingHandler *handler.BillingHandler,
 	dashboardHandler *handler.DashboardHandler,
+	auditHandler *handler.AuditHandler,
+	medicalRecordHandler *handler.MedicalRecordHandler,
+	consultationHandler *handler.ConsultationHandler,
+
 ) {
 	api := router.Group("/api/v1")
 
-	RegisterAuthRoutes(api, authHandler)
+	RegisterAuthRoutes(api, authHandler, cfg)
 
 	protected := api.Group("/")
 	protected.Use(middleware.AuthMiddleware(cfg))
 
-	protected.GET("/profile", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "authenticated",
-		})
-	})
+	protected.GET(
+	"/profile",
+	authHandler.Profile,
+)
 
 	RegisterPatientRoutes(
 		protected,
@@ -41,4 +44,21 @@ func RegisterRoutes(
 	)
 
 	RegisterVitalRoutes(protected, vitalHandler)
+	RegisterDashboardRoutes(
+		protected,
+		dashboardHandler,
+	)
+	RegisterAppointmentRoutes(protected, appointmentHandler)
+	RegisterAuditRoutes(protected, auditHandler)
+	RegisterBIllingRoutes(protected, billingHandler)
+	RegisterLabRoutes(protected, labHandler)
+	RegisterMedicalDocumentRoutes(protected, medicalDocumentHandler)
+	RegisterMedicationRoutes(protected, medicationHandler)
+
+	RegisterPrescriptionRoutes(protected, prescriptionHandler)
+	RegisterMedicalRecordRoutes(
+		protected,
+		medicalRecordHandler,
+	)
+	RegisterConsultationRoutes(protected, consultationHandler)
 }

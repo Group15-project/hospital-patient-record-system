@@ -9,17 +9,15 @@ import (
 )
 
 type DashboardRepository interface {
-
 	GetSummary() (*dto.DashboardSummary, error)
 	GetLowStockMedications() (
 		[]dto.InventoryAlert,
 		error,
 	)
 	GetTodaySummary() (
-	*dto.TodayDashboard,
-	error,
-)
-
+		*dto.TodayDashboard,
+		error,
+	)
 }
 
 type dashboardRepository struct {
@@ -55,6 +53,16 @@ func (r *dashboardRepository) GetSummary() (
 
 	r.db.Model(&models.Appointment{}).
 		Count(&summary.TotalAppointments)
+	r.db.Model(&models.Appointment{}).
+		Where(
+			"priority = ?",
+			models.AppointmentEmergency,
+		).
+		Where(
+			"status = ?",
+			models.AppointmentScheduled,
+		).
+		Count(&summary.EmergencyCases)
 
 	r.db.Model(&models.Prescription{}).
 		Count(&summary.TotalPrescriptions)
@@ -69,6 +77,29 @@ func (r *dashboardRepository) GetSummary() (
 	r.db.Model(&models.Invoice{}).
 		Select("COALESCE(SUM(balance),0)").
 		Scan(&summary.OutstandingBalance)
+
+	var recentPatients []dto.PatientDashboardItem
+
+	err := r.db.
+		Model(&models.Patient{}).
+		Select(`
+		patient_number,
+		first_name,
+		last_name,
+		gender,
+		phone,
+		is_active
+	`).
+		Order("created_at DESC").
+		Limit(10).
+		Scan(&recentPatients).
+		Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	summary.RecentPatients = recentPatients
 
 	return summary, nil
 }

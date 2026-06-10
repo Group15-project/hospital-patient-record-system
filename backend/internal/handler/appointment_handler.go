@@ -214,3 +214,32 @@ func (h *AppointmentHandler) UpdateStatus(
 		},
 	)
 }
+
+func (h *AppointmentHandler) List(
+	c *gin.Context,
+) {
+
+	appointments, err :=
+		h.service.List()
+
+	if err != nil {
+
+		c.JSON(
+			http.StatusInternalServerError,
+			gin.H{
+				"success": false,
+				"message": err.Error(),
+			},
+		)
+
+		return
+	}
+
+	c.JSON(
+		http.StatusOK,
+		gin.H{
+			"success": true,
+			"data": appointments,
+		},
+	)
+}

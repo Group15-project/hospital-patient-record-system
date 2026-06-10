@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"hospital-backend/internal/config"
 	"hospital-backend/internal/handler"
 	"hospital-backend/internal/middleware"
 	"hospital-backend/internal/models"
@@ -11,6 +12,7 @@ import (
 func RegisterAuthRoutes(
 	router *gin.RouterGroup,
 	authHandler *handler.AuthHandler,
+	cfg *config.Config,
 ) {
 	authGroup := router.Group("/auth")
 
@@ -27,4 +29,13 @@ func RegisterAuthRoutes(
 		),
 		authHandler.RegisterUser,
 	)
+	authGroup.GET(
+	"/doctors",
+	authHandler.GetDoctors,
+)
+authGroup.GET(
+	"/profile",
+
+	authHandler.Profile,
+)
 }

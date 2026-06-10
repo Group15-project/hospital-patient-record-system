@@ -143,3 +143,69 @@ func (h *AuthHandler) RegisterUser(
 		nil,
 	)
 }
+func (h *AuthHandler) GetDoctors(
+	c *gin.Context,
+) {
+
+	doctors, err :=
+		h.authService.GetDoctors()
+
+	if err != nil {
+
+		c.JSON(
+			http.StatusInternalServerError,
+			gin.H{
+				"success": false,
+				"message": err.Error(),
+			},
+		)
+
+		return
+	}
+
+	c.JSON(
+		http.StatusOK,
+		gin.H{
+			"success": true,
+			"data": doctors,
+		},
+	)
+}
+
+func (h *AuthHandler) Profile(
+	c *gin.Context,
+) {
+
+	userID := c.GetUint("user_id")
+
+	user, err := h.authService.GetProfile(
+		userID,
+	)
+
+	if err != nil {
+
+		utils.ErrorResponse(
+			c,
+			http.StatusNotFound,
+			"user not found",
+			nil,
+		)
+
+		return
+	}
+
+	profile := dto.ProfileResponse{
+	ID:        user.ID,
+	FirstName: user.FirstName,
+	LastName:  user.LastName,
+	Email:     user.Email,
+	Phone:     user.Phone,
+	Role:      user.Role.Name,
+}
+utils.SuccessResponse(
+	c,
+	http.StatusOK,
+	"profile retrieved successfully",
+	profile,
+)
+}

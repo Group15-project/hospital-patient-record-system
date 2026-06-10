@@ -1,8 +1,6 @@
 package service
 
 import (
-	"time"
-
 	"hospital-backend/internal/dto"
 	"hospital-backend/internal/models"
 	"hospital-backend/internal/repository"
@@ -26,6 +24,7 @@ type AppointmentService interface {
 		id uint,
 		status models.AppointmentStatus,
 	) error
+	List() ([]models.Appointment, error)
 }
 
 type appointmentService struct {
@@ -45,27 +44,28 @@ func (s *appointmentService) Create(
 	userID uint,
 ) (*models.Appointment, error) {
 
-	appointmentDate, err := time.Parse(
-		time.RFC3339,
-		req.AppointmentDate,
-	)
+	priority := models.AppointmentNormal
 
-	if err != nil {
-		return nil, err
+	if req.Priority != "" {
+		priority = models.AppointmentPriority(
+			req.Priority,
+		)
 	}
 
 	appointment := models.Appointment{
 		PatientID: req.PatientID,
-		DoctorID: req.DoctorID,
+		DoctorID:  req.DoctorID,
 
-		AppointmentDate: appointmentDate,
+		AppointmentDate: req.AppointmentDate,
 
 		Reason: req.Reason,
+
+		Priority: priority,
 
 		CreatedBy: userID,
 	}
 
-	err = s.repo.Create(&appointment)
+	err := s.repo.Create(&appointment)
 
 	if err != nil {
 		return nil, err
@@ -108,4 +108,8 @@ func (s *appointmentService) UpdateStatus(
 	return s.repo.Update(
 		appointment,
 	)
+}
+
+func (s *appointmentService) List() ([]models.Appointment, error) {
+	return s.repo.List()
 }

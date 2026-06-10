@@ -7,12 +7,19 @@ import (
 )
 
 type AppointmentStatus string
+type AppointmentPriority string
 
 const (
 	AppointmentScheduled AppointmentStatus = "SCHEDULED"
 	AppointmentCompleted AppointmentStatus = "COMPLETED"
 	AppointmentCancelled AppointmentStatus = "CANCELLED"
 	AppointmentNoShow    AppointmentStatus = "NO_SHOW"
+	AppointmentNormal    AppointmentPriority = "NORMAL"
+
+	AppointmentUrgent    AppointmentPriority = "URGENT"
+	AppointmentEmergency AppointmentPriority = "EMERGENCY"
+
+
 )
 
 type Appointment struct {
@@ -27,6 +34,7 @@ type Appointment struct {
 	AppointmentDate time.Time `gorm:"not null"`
 
 	Reason string `gorm:"type:text"`
+	Priority AppointmentPriority `gorm:"default:NORMAL"`
 
 	Status AppointmentStatus `gorm:"default:SCHEDULED"`
 

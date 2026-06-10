@@ -20,3 +20,12 @@ type RegisterUserRequest struct {
 
 	RoleID uint `json:"role_id" validate:"required"`
 }
+
+type ProfileResponse struct {
+	ID        uint   `json:"id"`
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	Email     string `json:"email"`
+	Phone     string `json:"phone"`
+	Role      string `json:"role"`
+}

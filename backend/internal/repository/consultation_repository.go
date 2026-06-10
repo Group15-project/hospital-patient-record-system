@@ -13,7 +13,11 @@ type ConsultationRepository interface {
 	CreateDiagnosis(
 		diagnosis *models.Diagnosis,
 	) error
-
+	
+		GetByPatient(
+		patientID uint,
+	) ([]models.Consultation, error)
+	
 	GetDiagnoses(
 		consultationID uint,
 	) ([]models.Diagnosis, error)
@@ -78,4 +82,23 @@ func (r *consultationRepository) GetDiagnoses(
 		Error
 
 	return diagnoses, err
+}
+
+func (r *consultationRepository) GetByPatient(
+	patientID uint,
+) ([]models.Consultation, error) {
+
+	var consultations []models.Consultation
+
+	err := r.db.
+		Preload("Doctor").
+		Where(
+			"patient_id = ?",
+			patientID,
+		).
+		Order("created_at DESC").
+		Find(&consultations).
+		Error
+
+	return consultations, err
 }

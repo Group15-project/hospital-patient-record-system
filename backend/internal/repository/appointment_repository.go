@@ -15,7 +15,11 @@ type AppointmentRepository interface {
 	GetByPatient(uint) ([]models.Appointment, error)
 	GetByDoctor(uint) ([]models.Appointment, error)
 	Update(*models.Appointment) error
-
+	List() ([]models.Appointment, error)
+	CountEmergencyAppointments() (
+	int64,
+	error,
+)
 }
 
 type appointmentRepository struct {
@@ -97,4 +101,41 @@ func (r *appointmentRepository) Update(
 	appointment *models.Appointment,
 ) error {
 	return r.db.Save(appointment).Error
+}
+
+func (r *appointmentRepository) List() ([]models.Appointment, error) {
+
+	var appointments []models.Appointment
+
+	err := r.db.
+		Preload("Patient").
+		Preload("Doctor").
+		Order("appointment_date DESC").
+		Find(&appointments).
+		Error
+
+	return appointments, err
+}
+
+func (r *appointmentRepository) CountEmergencyAppointments() (
+	int64,
+	error,
+) {
+
+	var count int64
+
+	err := r.db.
+		Model(&models.Appointment{}).
+		Where(
+			"priority = ?",
+			models.AppointmentEmergency,
+		).
+		Where(
+			"status = ?",
+			models.AppointmentScheduled,
+		).
+		Count(&count).
+		Error
+
+	return count, err
 }

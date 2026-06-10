@@ -17,13 +17,13 @@
     <nav class="menu">
 
         <ul>
-            <li><a href="dashboard.html">Dashboard</a></li>
+           <li class="dashboard-menu"><a href="dashboard.html">Dashboard</a></li>
             <li><a href="search.html">Search</a></li>
             <li><a href="patients.html">Patients</a></li>
-            <li><a href="patient-details.html">Patient Details</a></li>
+            <!--<li><a href="patient-details.html">Patient Details</a></li>-->
             <li><a href="medical-history.html">Medical History</a></li>
             <li><a href="appointments.html">Appointments</a></li>
-            <li><a href="doctor-notes.html">Doctor Notes</a></li>
+            <!-- <li><a href="doctor-notes.html">Doctor Notes</a></li> -->
             <li class="active"><a href="settings.html">Settings</a></li>
         </ul>
 
@@ -56,22 +56,22 @@
 
             <div>
                 <label>Full Name</label>
-                <input type="text" value="Admin User">
+                <input type="text" id="fullName">
             </div>
 
             <div>
                 <label>Email Address</label>
-                <input type="email" value="admin@medicare.com">
+               <input type="email" id="email">
             </div>
 
             <div>
                 <label>Phone Number</label>
-                <input type="tel" value="08012345678">
+               <input type="tel" id="phone">
             </div>
 
             <div>
                 <label>Role</label>
-                <input type="text" value="Administrator" readonly>
+               <input type="text" id="role" readonly>
             </div>
 
         </div>
@@ -156,25 +156,6 @@
 
 </section>
 
-<!-- APPEARANCE -->
-
-<section class="form-card">
-
-    <h2>Appearance</h2>
-
-    <div class="theme-card">
-
-        <button class="theme-btn active-theme">
-            Light Mode
-        </button>
-
-        <button class="theme-btn">
-            Dark Mode
-        </button>
-
-    </div>
-
-</section>
 
 <!-- SAVE -->
 
@@ -187,6 +168,14 @@
 </section>
 
 </main>
+ <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+   
+    <script src="js/settings.js"></script>
 
+
+    <script>
+      requireAuth();
+    </script>
 </body>
 </html>

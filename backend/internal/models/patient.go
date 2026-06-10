@@ -21,11 +21,14 @@ type Patient struct {
 	Phone string `gorm:"size:20"`
 
 	Email string `gorm:"size:150"`
+	
 
 	Address string `gorm:"type:text"`
 
 	EmergencyContactName  string `gorm:"size:150"`
 	EmergencyContactPhone string `gorm:"size:20"`
+
+	MedicalRecords []MedicalRecord `gorm:"foreignKey:PatientID"`
 
 	BloodGroup string `gorm:"size:10"`
 

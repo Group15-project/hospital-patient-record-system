@@ -37,14 +37,31 @@ func (s *patientService) Create(
 		time.Now().UnixNano(),
 	)
 
+	var dob *time.Time
+
+	if req.DateOfBirth != "" {
+
+		parsedDOB, err := time.Parse(
+			"2006-01-02",
+			req.DateOfBirth,
+		)
+
+		if err != nil {
+			return nil, err
+		}
+
+		dob = &parsedDOB
+	}
+
 	patient := models.Patient{
 		PatientNumber: patientNumber,
-		FirstName: req.FirstName,
-		LastName: req.LastName,
-		Gender: req.Gender,
-		Phone: req.Phone,
-		Email: req.Email,
-		Address: req.Address,
+		FirstName:     req.FirstName,
+		LastName:      req.LastName,
+		Gender:        req.Gender,
+		DateOfBirth:   dob,
+		Phone:         req.Phone,
+		Email:         req.Email,
+		Address:       req.Address,
 
 		EmergencyContactName: req.EmergencyContactName,
 
@@ -56,7 +73,6 @@ func (s *patientService) Create(
 	}
 
 	err := s.patientRepo.Create(&patient)
-
 	if err != nil {
 		return nil, err
 	}

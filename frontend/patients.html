@@ -17,13 +17,13 @@
     <nav class="menu">
 
         <ul>
-            <li><a href="dashboard.html">Dashboard</a></li>
+            <li class="dashboard-menu"><a href="dashboard.html">Dashboard</a></li>
             <li><a href="search.html">Search</a></li>
             <li class="active"><a href="patients.html">Patients</a></li>
-            <li><a href="patient-details.html">Patient Details</a></li>
+            <!--<li><a href="patient-details.html">Patient Details</a></li>-->
             <li><a href="medical-history.html">Medical History</a></li>
             <li><a href="appointments.html">Appointments</a></li>
-            <li><a href="doctor-notes.html">Doctor Notes</a></li>
+            <!-- <li><a href="doctor-notes.html">Doctor Notes</a></li> -->
             <li><a href="settings.html">Settings</a></li>
         </ul>
 
@@ -45,61 +45,134 @@
     </header>
 
     <!-- Registration Form -->
-    <section class="form-card">
+   <!-- Registration Form -->
+<section class="form-card">
 
-        <h2>Register New Patient</h2>
+    <h2>Register New Patient</h2>
 
-        <form class="patient-form">
+    <form id="patientForm" class="patient-form">
 
-            <div class="grid">
+        <div class="grid">
 
-                <div>
-                    <label>Patient ID</label>
-                    <input type="text" placeholder="P001">
-                </div>
-
-                <div>
-                    <label>Full Name</label>
-                    <input type="text" placeholder="John Doe">
-                </div>
-
-                <div>
-                    <label>Date of Birth</label>
-                    <input type="date">
-                </div>
-
-                <div>
-                    <label>Gender</label>
-                    <select>
-                        <option>Male</option>
-                        <option>Female</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label>Phone Number</label>
-                    <input type="tel">
-                </div>
-
-                <div>
-                    <label>Emergency Contact</label>
-                    <input type="tel">
-                </div>
-
+            <div>
+                <label>First Name</label>
+                <input
+                    id="firstName"
+                    type="text"
+                    placeholder="John"
+                    required
+                >
             </div>
 
-            <div class="full-width">
-                <label>Address</label>
-                <textarea rows="4"></textarea>
+            <div>
+                <label>Last Name</label>
+                <input
+                    id="lastName"
+                    type="text"
+                    placeholder="Doe"
+                    required
+                >
             </div>
 
-            <button type="submit" class="primary-btn">
-                Save Patient
-            </button>
+            <div>
+                <label>Date of Birth</label>
+                <input
+                    id="dateOfBirth"
+                    type="date"
+                >
+            </div>
 
-        </form>
+            <div>
+                <label>Gender</label>
+                <select
+                    id="gender"
+                    required
+                >
+                    <option value="">
+                        Select Gender
+                    </option>
+                    <option value="Male">
+                        Male
+                    </option>
+                    <option value="Female">
+                        Female
+                    </option>
+                </select>
+            </div>
 
-    </section>
+            <div>
+                <label>Phone Number</label>
+                <input
+                    id="phone"
+                    type="tel"
+                    placeholder="08012345678"
+                >
+            </div>
+
+            <div>
+                <label>Email</label>
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="john@example.com"
+                >
+            </div>
+
+            <div>
+                <label>Emergency Contact Name</label>
+                <input
+                    id="emergencyName"
+                    type="text"
+                    placeholder="Jane Doe"
+                >
+            </div>
+
+            <div>
+                <label>Emergency Contact Phone</label>
+                <input
+                    id="emergencyPhone"
+                    type="tel"
+                    placeholder="08087654321"
+                >
+            </div>
+
+            <div>
+                <label>Blood Group</label>
+                <select id="bloodGroup">
+                    <option value="">
+                        Select Blood Group
+                    </option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="full-width">
+            <label>Address</label>
+            <textarea
+                id="address"
+                rows="4"
+            ></textarea>
+        </div>
+
+        <button
+            type="submit"
+            class="primary-btn"
+        >
+            Save Patient
+        </button>
+
+    </form>
+
+</section>
 
     <!-- Patient List -->
 
@@ -127,41 +200,21 @@
                 </tr>
             </thead>
 
-            <tbody>
-
-                <tr>
-                    <td>P001</td>
-                    <td>John Doe</td>
-                    <td>Male</td>
-                    <td>08012345678</td>
-                    <td>
-                        <a href="patient-details.html" class="view-btn">
-                            View
-                        </a>                        
-                        <button class="edit-btn">Edit</button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>P002</td>
-                    <td>Jane Smith</td>
-                    <td>Female</td>
-                    <td>08087654321</td>
-                    <td>
-                        <a href="patient-details.html" class="view-btn">
-                            View
-                        </a>                        
-                        <button class="edit-btn">Edit</button>
-                    </td>
-                </tr>
-
-            </tbody>
+           <tbody id="patientsTableBody"></tbody>
 
         </table>
 
     </section>
 
 </main>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/patients.js"></script>
+
+<script>
+    requireAuth();
+</script>
 
 </body>
 </html>
