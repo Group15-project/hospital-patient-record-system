@@ -1,84 +1,46 @@
 name: Build and Deploy Full Stack
-
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
-
 jobs:
   test-backend:
     runs-on: ubuntu-latest
-
     defaults:
       run:
         working-directory: ./backend
-
     steps:
       - uses: actions/checkout@v4
-
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
           go-version: '1.24'
           cache-dependency-path: backend/go.sum
-
       - name: Download dependencies
         run: go mod tidy
-
       - name: Build application
         run: go build -v ./...
-
       - name: Run tests
         run: go test ./...
 
   test-frontend:
     runs-on: ubuntu-latest
-
     defaults:
       run:
         working-directory: ./frontend
-
     steps:
       - uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-
       - name: Install dependencies
         run: npm install
-
       - name: Build frontend
         run: npm run build
 
   deploy:
     needs: [test-backend, test-frontend]
     runs-on: ubuntu-latest
-
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Deploy notification
-        run: echo "Ready to deploy to production"
-
-  deploy-frontend:
-    needs: test-frontend
-    runs-on: ubuntu-latest
-
-    if: github.ref == 'refs/heads/main'
-
-    permissions:
-      contents: write
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./frontend
+    if: github.ref == 'refs/heads/main' &&
