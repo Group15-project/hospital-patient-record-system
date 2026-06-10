@@ -105,10 +105,6 @@
   <script>
     requireAuth();
 
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (!user || (user.role !== "ADMIN" && user.role !== "SUPER_ADMIN")) {
-      window.location.href = "patients.html";
-    }
+   applyRolePermissions();
   </script>
 </html>

@@ -4,29 +4,28 @@ document.addEventListener(
     "DOMContentLoaded",
     async () => {
 
+        const user = getCurrentUser();
+
+        if (!user || user.role !== "DOCTOR") {
+            window.location.href = "patients.html";
+            return;
+        }
+
         const params =
             new URLSearchParams(
                 window.location.search
             );
 
         currentPatientId =
-            params.get(
-                "patientId"
-            );
+            params.get("patientId");
 
         if (!currentPatientId) {
-
-            alert(
-                "Patient ID missing"
-            );
-
+            alert("Patient ID missing");
             return;
         }
 
         await loadPatient();
-
         await loadConsultations();
-
         initializeForm();
     }
 );

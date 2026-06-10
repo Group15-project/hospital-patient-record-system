@@ -1,12 +1,28 @@
 let currentPatientId = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
+
+     const user = getCurrentUser();
+
+  if (user?.role !== "DOCTOR") {
+
+    const formCard = document.querySelector(".form-card");
+
+    if (formCard) {
+
+      formCard.style.display = "none";
+
+    }
+
+  }
+  
   const patientId = new URLSearchParams(window.location.search).get(
     "patientId",
   );
   if (patientId) {
     document.querySelector(".table-header").style.display = "none";
   }
+  
   await loadPatients();
 
   initializeForm();

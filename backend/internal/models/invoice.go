@@ -17,10 +17,10 @@ const (
 type Invoice struct {
 	ID uint `gorm:"primaryKey"`
 
-	PatientID uint    `gorm:"not null;index"`
+	PatientID uint   `gorm:"size:150;index;not null"`
 	Patient   Patient `gorm:"foreignKey:PatientID"`
 
-	InvoiceNumber string `gorm:"uniqueIndex"`
+	InvoiceNumber string `gorm:"size:100;uniqueIndex"`
 
 	TotalAmount float64
 

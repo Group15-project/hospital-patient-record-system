@@ -9,7 +9,7 @@ import (
 type Patient struct {
 	ID uint `gorm:"primaryKey"`
 
-	PatientNumber string `gorm:"uniqueIndex;not null"`
+	PatientNumber string `gorm:"type:varchar(50);uniqueIndex;not null"`
 
 	FirstName string `gorm:"size:100;not null"`
 	LastName  string `gorm:"size:100;not null"`

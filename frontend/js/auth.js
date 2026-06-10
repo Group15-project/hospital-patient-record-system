@@ -102,4 +102,42 @@ const user = getCurrentUser();
                 item.style.display = "none";
             });
     }
+
+   if (
+
+        !user ||
+
+        user.role !== "DOCTOR"
+
+    ) {
+
+        const doctorNotesMenu =
+
+            document.querySelector(
+
+                'a[href="doctor-notes.html"]'
+
+            )?.closest("li");
+
+        if (doctorNotesMenu) {
+
+            doctorNotesMenu.style.display = "none";
+
+        }
+
+        const doctorNotesButton =
+
+            document.getElementById(
+
+                "doctorNotesLink"
+
+            );
+
+        if (doctorNotesButton) {
+
+            doctorNotesButton.style.display = "none";
+
+        }
+
+    }
 }

@@ -9,7 +9,7 @@ import (
 type Medication struct {
 	ID uint `gorm:"primaryKey"`
 
-	Name string `gorm:"uniqueIndex;not null"`
+	Name string `gorm:"size:150;uniqueIndex;not null"`
 
 	GenericName string
 
