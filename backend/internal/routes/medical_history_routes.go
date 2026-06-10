@@ -21,8 +21,7 @@ func RegisterMedicalRecordRoutes(
 		"",
 		middleware.RequireRole(
 			models.RoleDoctor,
-			models.RoleAdmin,
-			models.RoleSuperAdmin,
+			
 		),
 		medicalRecordHandler.Create,
 	)

@@ -1,4 +1,4 @@
-name: Deploy to Render
+name: Deploy Backend to Render
 
 on:
   push:
@@ -6,39 +6,82 @@ on:
       - main
 
 jobs:
-  deploy:
+  test-backend:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./backend
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Go
+      - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.22'
+          go-version: "1.24"
+          cache-dependency-path: backend/go.sum
 
       - name: Download dependencies
-        working-directory: backend
-        run: go mod download
+        run: go mod tidy
+
+      - name: Build application
+        run: go build -v ./...
 
       - name: Run tests
-        working-directory: backend
         run: go test ./...
 
+  deploy-render:
+    needs: test-backend
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Trigger Render Deploy
         run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
+
+      - name: Wait for Render Deployment
+        run: sleep 60
 
       - name: Health Check
         run: |
-          sleep 30
-          curl https://hospital-patient-record-system-1.onrender.com/ || echo "Health check warning - root route not defined"
+          curl --fail https://hospital-patient-record-system-1.onrender.com/health
 
-      - name: Send Email Notification
-        if: always()
+      - name: Send Success Email
+        if: success()
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
           server_port: 465
-          username: ${{ sec
+          secure: true
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "Backend Deployment Successful"
+          to: your-email@gmail.com
+          from: GitHub Actions
+          body: |
+            Backend deployment completed successfully.
+
+            Repository: ${{ github.repository }}
+            Branch: ${{ github.ref_name }}
+            Commit: ${{ github.sha }}
+
+      - name: Send Failure Email
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "Backend Deployment Failed"
+          to: your-email@gmail.com
+          from: GitHub Actions
+          body: |
+            Backend deployment failed.
+
+            Repository: ${{ github.repository }}
+            Branch: ${{ github.ref_name }}
+            Commit: ${{ github.sha }}

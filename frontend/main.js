@@ -1,14 +1,14 @@
 
 
-const menuBtn =
-document.querySelector(".menu-toggle");
+// const menuBtn =
+// document.querySelector(".menu-toggle");
 
-const sidebar =
-document.querySelector(".sidebar");
+// const sidebar =
+// document.querySelector(".sidebar");
 
-menuBtn.addEventListener("click", () => {
+// menuBtn.addEventListener("click", () => {
 
-sidebar.classList.toggle("active");
+// sidebar.classList.toggle("active");
 
-});
+// });
 

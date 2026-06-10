@@ -54,6 +54,11 @@ async function loadAppointments() {
   try {
 
     const user = getCurrentUser();
+    if (user?.role === "DOCTOR") {
+
+    document.querySelector(".form-card").style.display = "none";
+
+}
 
     let endpoint = "/appointments";
 

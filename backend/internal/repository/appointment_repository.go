@@ -72,11 +72,13 @@ func (r *appointmentRepository) GetByPatient(
 	var appointments []models.Appointment
 
 	err := r.db.
-		Preload("Doctor").
-		Where("patient_id = ?", patientID).
-		Order("appointment_date DESC").
-		Find(&appointments).
-		Error
+    Preload("Patient").
+    Preload("Doctor").
+    Preload("Creator").
+    Where("patient_id = ?", patientID).
+    Order("appointment_date DESC").
+    Find(&appointments).
+    Error
 
 	return appointments, err
 }
@@ -88,11 +90,13 @@ func (r *appointmentRepository) GetByDoctor(
 	var appointments []models.Appointment
 
 	err := r.db.
-		Preload("Patient").
-		Where("doctor_id = ?", doctorID).
-		Order("appointment_date DESC").
-		Find(&appointments).
-		Error
+    Preload("Patient").
+    Preload("Doctor").
+    Preload("Creator").
+    Where("doctor_id = ?", doctorID).
+    Order("appointment_date DESC").
+    Find(&appointments).
+    Error
 
 	return appointments, err
 }
