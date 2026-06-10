@@ -1,8 +1,8 @@
 # Hospital Patient Record System
 
-A full-stack healthcare patient record management system built with React and Node.js.
+A full-stack healthcare patient record management system built with HTML/CSS/JavaScript frontend and Golang backend, deployed on Render.
 
-## 🌟 Features
+## Features
 
 ### Frontend
 - Patient management dashboard
@@ -13,36 +13,34 @@ A full-stack healthcare patient record management system built with React and No
 - Dark mode support
 
 ### Backend
-- RESTful API
+- RESTful API (Golang)
 - Authentication & Authorization
 - Patient management endpoints
 - Appointment management
 - Medical records storage
 - Database persistence
 
-## 📁 Project Structure
+## Project Structure
 hospital-patient-record-system/
-├── frontend/              (React app)
+├── frontend/
 │   ├── src/
 │   │   ├── components/
 │   │   ├── pages/
 │   │   ├── services/
-│   │   ├── context/
-│   │   ├── App.jsx
-│   │   └── main.jsx
+│   │   ├── styles/
+│   │   ├── index.html
+│   │   └── main.js
 │   ├── package.json
-│   ├── vite.config.js
-│   └── tailwind.config.js
+│   └── vite.config.js
 │
-├── backend/               (Node.js API)
-│   ├── src/
-│   │   ├── controllers/
-│   │   ├── routes/
-│   │   ├── models/
-│   │   ├── middleware/
-│   │   └── index.js
-│   ├── package.json
-│   └── .env
+├── backend/
+│   ├── main.go
+│   ├── handlers/
+│   ├── models/
+│   ├── routes/
+│   ├── middleware/
+│   ├── go.mod
+│   └── go.sum
 │
 ├── .github/
 │   └── workflows/
@@ -50,126 +48,157 @@ hospital-patient-record-system/
 │
 └── README.md
 
-## 🛠️ Tech Stack
+### Frontend (HTML/CSS/JavaScript)
+- src/ - Source code directory
+- components/ - Reusable UI components
+- pages/ - Page components
+- services/ - API service calls
+- styles/ - CSS stylesheets
+- index.html - Main HTML file
+- main.js - JavaScript entry point
 
-### Frontend
-- **React 18+** - UI framework
-- **Tailwind CSS** - Styling
-- **React Router** - Routing
-- **Axios** - HTTP client
-- **Recharts** - Data visualization
-- **Vite** - Build tool
+### Backend (Golang)
+- main.go - Application entry point
+- handlers/ - Request handlers
+- models/ - Data models
+- routes/ - API route definitions
+- middleware/ - Custom middleware
+- go.mod - Go module file
+- go.sum - Go dependencies lock file
 
-### Backend
-- **Node.js** - Runtime
-- **Express.js** - Web framework
-- **PostgreSQL** - Database
-- **JWT** - Authentication
-- **bcryptjs** - Password hashing
-- **CORS** - Cross-origin support
-
-## 🚀 Quick Start
+### DevOps
+- .github/workflows/ - GitHub Actions workflows
+- deploy.yml - CI/CD pipeline configuration
+  
+## Quick Start
 
 ### Prerequisites
-- Node.js 16+ installed
+- Golang 1.19+ installed
+- Node.js 16+ installed 
 - Git installed
-- (Optional) PostgreSQL 12+ for database
+- PostgreSQL 12+ (optional for local testing)
 
 ### Installation
 
-1. **Clone the repository**
+#### 1. Clone the repository
+
 ```bash
-git clone https://github.com/YOUR-USERNAME/hospital-patient-record-system.git
+git clone https://github.com/Group15-project/hospital-patient-record-system.git
 cd hospital-patient-record-system
 ```
 
-2. **Backend Setup**
+#### 2. Backend Setup (Golang)
+
 ```bash
 cd backend
 
 # Install dependencies
-npm install
+go mod download
 
-# Create .env file and configure
-# Update with your database credentials
-npm run dev
+# Create .env file
+touch .env
 
-# Backend runs on http://localhost:5000
+# Configure environment variables (see below)
+
+# Run the server
+go run main.go
+
+# Backend runs on http://localhost:8080
 ```
 
-3. **Frontend Setup** (in new terminal)
+#### 3. Frontend Setup (HTML/CSS/JavaScript)
+
 ```bash
 cd frontend
 
-# Install dependencies
-npm install
+# If using a simple HTTP server
+python -m http.server 8000
+# OR
+npx http-server
 
-# Start development server
-npm run dev
-
-# Frontend runs on http://localhost:5173
+# Frontend runs on http://localhost:8000
 ```
 
 ### First Test
 
-- Open http://localhost:5173 in browser
+- Open http://localhost:8000 in browser
 - You should see the Patient Dashboard
-- It fetches data from http://localhost:5000/api/patients
-- If you see patient data, everything works! ✅
+- It fetches data from http://localhost:8080/api/patients
+- If you see patient data, everything works!
 
-## 📝 Development Workflow
+## Development Workflow
 
 ### Creating a Feature
 
-1. **Update main branch**
+#### 1. Update main branch
+
 ```bash
 git pull origin main
 ```
 
-2. **Create feature branch**
+#### 2. Create feature branch
+
 ```bash
 git checkout -b feature/your-feature-name
 ```
 
-3. **Make changes**
-- If frontend: `cd frontend && npm run dev`
-- If backend: `cd backend && npm run dev`
+#### 3. Make changes
 
-4. **Commit changes**
+- If frontend: Edit .html, .css, .js files
+- If backend: Edit .go files
+
+#### 4. Test locally
+
+```bash
+# Backend
+cd backend && go run main.go
+
+# Frontend (new terminal)
+cd frontend && python -m http.server 8000
+```
+
+#### 5. Commit changes
+
 ```bash
 git add .
 git commit -m "feat: add patient search functionality"
 ```
 
-5. **Push to GitHub**
+#### 6. Push to GitHub
+
 ```bash
 git push origin feature/your-feature-name
 ```
 
-6. **Create Pull Request**
+#### 7. Create Pull Request
+
 - Go to GitHub
 - Click "Compare & pull request"
 - Describe your changes
 - Submit PR
 
-7. **Review & Merge**
+#### 8. Review & Merge
+
 - Team reviews your code
 - You make fixes if needed
 - Click "Merge pull request"
 - GitHub Actions runs tests automatically
 
-### After Merge
+#### 9. After Merge
+
 - CI/CD pipeline runs tests
 - If all pass, deployment happens
 - Live URL updates with your changes
 
-## 🗄️ Database Setup (Optional)
+## Database Setup
 
-If using PostgreSQL:
+### PostgreSQL
 
 ```sql
+-- Create database
 CREATE DATABASE hospital_records;
 
+-- Users table
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   email VARCHAR(255) UNIQUE NOT NULL,
@@ -178,6 +207,7 @@ CREATE TABLE users (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Patients table
 CREATE TABLE patients (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -187,6 +217,7 @@ CREATE TABLE patients (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Appointments table
 CREATE TABLE appointments (
   id SERIAL PRIMARY KEY,
   patient_id INT REFERENCES patients(id),
@@ -197,7 +228,7 @@ CREATE TABLE appointments (
 );
 ```
 
-## 🔐 Environment Variables
+## Environment Variables
 
 ### Backend (.env)
 DB_HOST=localhost
@@ -205,144 +236,260 @@ DB_PORT=5432
 DB_NAME=hospital_records
 DB_USER=postgres
 DB_PASSWORD=your_password
-PORT=5000
-NODE_ENV=development
-JWT_SECRET=your_secret_key
-FRONTEND_URL=http://localhost:5173
+PORT=8080
+GIN_MODE=debug
+JWT_SECRET=your_super_secret_key_change_this_in_production
+FRONTEND_URL=http://localhost:8000
 
-### Frontend (.env)
-VITE_API_URL=http://localhost:5000/api
-VITE_APP_NAME=Hospital Record System
+### Frontend (in index.html or config.js)
 
-## 📊 API Documentation
+```javascript
+const API_URL = 'http://localhost:8080/api';
+const APP_NAME = 'Hospital Record System';
+```
+
+## API Documentation
+
+### Base URL
+http://localhost:8080/api
 
 ### Patients Endpoints
 
-**Get all patients**
+#### Get all patients
 GET /api/patients
+Response: { patients: [...] }
 
-**Get patient by ID**
+#### Get patient by ID
 GET /api/patients/:id
+Response: { patient: {...} }
 
-**Create patient**
+#### Create patient
 POST /api/patients
 Body: { name, age, phone, condition }
+Response: { patient: {...}, message: "Patient created" }
 
-**Update patient**
+#### Update patient
 PUT /api/patients/:id
 Body: { name, age, phone, condition }
+Response: { patient: {...}, message: "Patient updated" }
 
-**Delete patient**
+#### Delete patient
 DELETE /api/patients/:id
+Response: { message: "Patient deleted" }
 
 ### Appointments Endpoints
 
-**Get all appointments**
+#### Get all appointments
 GET /api/appointments
+Response: { appointments: [...] }
 
-**Create appointment**
+#### Create appointment
 POST /api/appointments
 Body: { patient_id, doctor_id, appointment_date, status }
+Response: { appointment: {...} }
 
-**Update appointment**
+#### Update appointment
 PUT /api/appointments/:id
 Body: { appointment_date, status }
+Response: { appointment: {...} }
 
-## 🧪 Testing
+## Testing
 
-### Frontend Testing
-```bash
-cd frontend
-npm test
-```
+### Backend Testing (Golang)
 
-### Backend Testing
 ```bash
 cd backend
-npm test
+go test ./...
 ```
 
-## 📦 Build for Production
+### Frontend Testing (Manual)
+
+```bash
+# Test API connection
+# Open browser console and run:
+fetch('http://localhost:8080/api/patients')
+  .then(res => res.json())
+  .then(data => console.log(data))
+```
+
+## Build for Production
 
 ### Frontend
+
 ```bash
 cd frontend
+# If using Vite/bundler:
 npm run build
 # Creates optimized build in dist/
+
+# If using plain HTML/CSS/JS:
+# No build needed - files are ready to deploy
 ```
 
 ### Backend
+
 ```bash
 cd backend
-npm run start
-# Runs production server
+# Build Golang binary
+go build -o hospital-backend main.go
+
+# Or let Render handle the build automatically
 ```
 
-## 🚀 Deployment
+## Deployment
+
+### Live Application
+- Frontend URL: https://hospital-frontend.render.com
+- Backend API URL: https://hospital-backend.render.com/api
+- Status: Live & Operational
 
 ### Frontend Deployment
-- Deployed to Render or Vercel
-- Automatic on every push to main
-- Live URL: [Will be set after deployment]
+- Platform: Render
+- Deployment method: GitHub Actions (automatic)
+- Trigger: Every push to main branch
+- Build: HTML/CSS/JavaScript (no build needed)
+- Hosted as: Static site
 
 ### Backend Deployment
-- Deployed to Render or Railway
-- Automatic on every push to main
-- API URL: [Will be set after deployment]
+- Platform: Render
+- Deployment method: GitHub Actions (automatic)
+- Trigger: Every push to main branch
+- Language: Golang
+- Build: Automatic Go build via Render
+- Runtime: Golang server
 
-## 👥 Team Members
+### CI/CD Pipeline
+- Tool: GitHub Actions
+- Workflow: .github/workflows/deploy.yml
+- Tests: Run on every PR
+- Deployment: Automatic on merge to main
 
-| Name | Role | GitHub |
-|------|------|--------|
-| [Your Name] | Frontend Lead | @username |
-| [Team Member 2] | Backend Dev | @username |
-| [Team Member 3] | Feature Dev | @username |
-| [Team Member 4] | DevOps Lead | @username |
+## Team Members & Responsibilities
 
-## 🤝 Contributing
+| Name | Role | Responsibility | Tech Focus | Status |
+|------|------|-----------------|-----------|--------|
+| Team Lead Name | Team Lead & Frontend Dev | Project coordination, frontend development | HTML/CSS/JavaScript | Active |
+| Backend Dev Name | Backend Developer | API design, server logic, database management | Golang, PostgreSQL | Active |
+| Frontend Dev Name | Frontend Developer | UI/UX, JavaScript logic, responsive design | HTML/CSS/JavaScript | Active |
+| DevOps Dev Name | DevOps & Infrastructure | CI/CD setup, deployment, monitoring | GitHub Actions, Render | Active |
 
-1. Create a feature branch
+### Frontend Development (HTML/CSS/JavaScript)
+
+Developed by: [Frontend Dev Name]
+
+Responsible for: User interface, user experience, client-side logic
+
+Handles: Dashboard, patient profiles, appointment calendar
+
+Technologies: Vanilla JavaScript, CSS3, HTML5
+
+### Backend Development (Golang)
+
+Developed by: [Backend Dev Name]
+
+Responsible for: API endpoints, business logic, database
+
+Handles: Patient CRUD, appointments, authentication
+
+Technologies: Golang, Gin Framework, PostgreSQL
+
+### DevOps & Deployment
+
+Handled by: [DevOps Dev Name]
+
+Responsible for: CI/CD pipeline, deployment automation, hosting
+
+Technologies: GitHub Actions, Render, Docker (optional)
+
+## Contributing
+
+1. Create a feature branch: git checkout -b feature/your-feature
 2. Make your changes
-3. Write clear commit messages
-4. Push to your branch
-5. Create a Pull Request
-6. Wait for review and approval
+3. Test locally before pushing
+4. Write clear commit messages
+5. Push to your branch: git push origin feature/your-feature
+6. Create a Pull Request on GitHub
+7. Wait for code review from team
+8. Address feedback if needed
+9. Merge when approved
 
-## 📝 Commit Message Convention
+## Commit Message Convention
 
-- `feat:` - New feature
-- `fix:` - Bug fix
-- `style:` - Styling changes
-- `refactor:` - Code refactoring
-- `docs:` - Documentation
-- `test:` - Tests
+Follow this format for clear commit history:
 
-Example: `git commit -m "feat: add patient search"`
+- feat: New feature (e.g., feat: add appointment scheduling)
+- fix: Bug fix (e.g., fix: resolve patient search issue)
+- style: CSS/styling changes (e.g., style: update dashboard colors)
+- refactor: Code refactoring (e.g., refactor: optimize API response)
+- docs: Documentation (e.g., docs: update README)
+- test: Tests (e.g., test: add patient CRUD tests)
+- chore: Build/tooling (e.g., chore: update dependencies)
 
-## 🐛 Reporting Issues
+### Examples
 
-Found a bug? Create an issue:
-1. Go to Issues tab
-2. Click "New issue"
-3. Describe the problem
-4. Add steps to reproduce
+```bash
+git commit -m "feat: add patient search functionality"
+git commit -m "fix: resolve CORS issue with frontend"
+git commit -m "docs: update API documentation"
+```
 
-## 📚 Documentation
+## Reporting Issues
 
-- [Architecture Diagram](./docs/architecture.md)
-- [API Documentation](./docs/api.md)
-- [Component Library](./docs/components.md)
-- [Database Schema](./docs/database.md)
+Found a bug? Follow these steps:
 
-## 📄 License
+1. Go to Issues tab on GitHub
+2. Click New issue
+3. Provide:
+   - Clear title
+   - Detailed description
+   - Steps to reproduce
+   - Expected vs actual behavior
+   - Screenshots if applicable
+
+## Additional Documentation
+
+- Project Objectives: ./docs/PROJECT_OBJECTIVES.md
+- System Architecture: ./docs/ARCHITECTURE.md
+- Team Members: ./docs/TEAM_MEMBERS.md
+- API Documentation: ./docs/api.md
+- Database Schema: ./docs/database.md
+- Deployment Guide: ./docs/DEPLOYMENT.md
+
+## Security Considerations
+
+- JWT Authentication: Secure token-based auth
+- Password Hashing: bcryptjs/golang-crypto
+- CORS Configuration: Restricted to frontend domain
+- Environment Variables: Sensitive data in .env
+- Role-Based Access: Different permissions per user role
+- HTTPS: Enforced on production (Render)
+
+## Communication
+
+- Daily Standup: [Time & Platform]
+- Weekly Sync: [Time & Platform]
+- Chat Channel: Slack/Discord/Teams
+- Repository Issues: For bug reports
+- GitHub Discussions: For questions & ideas
+
+## License
 
 MIT License - see LICENSE file for details
 
-## 💬 Questions?
+## Questions?
 
-Ask in the team chat or create an issue on GitHub.
+- Ask in the team chat
+- Create an issue on GitHub
+- Contact your team lead
+- Check documentation in /docs folder
 
 ---
 
-**Last updated:** 2024
-**Project Status:** In Development
+## Project Information
+
+- Status: In Development
+- Last Updated: 2026
+- Repository: https://github.com/Group15-project/hospital-patient-record-system
+- Frontend Live: https://hospital-frontend.render.com
+- Backend API: https://hospital-backend.render.com/api
+- Team: Group 15
