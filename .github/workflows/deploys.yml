@@ -1,0 +1,55 @@
+name: Deploy to Render
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        working-directory: backend
+        run: npm install
+
+      - name: Run tests
+        working-directory: backend
+        run: npm test --if-present
+
+      - name: Trigger Render Deploy
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+
+      - name: Health Check
+        run: |
+          sleep 30
+          curl https://hospital-patient-record-system-1.onrender.com/ || echo "Health check warning - root route not defined"
+
+      - name: Send Email Notification
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.GMAIL_USERNAME }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: "Deployment ${{ job.status }} - Hospital Patient Record System"
+          body: |
+            Deployment has completed with status: ${{ job.status }}
+            
+            Repository: ${{ github.repository }}
+            Branch: ${{ github.ref_name }}
+            Commit: ${{ github.sha }}
+            Triggered by: ${{ github.actor }}
+          to: ${{ secrets.GMAIL_USERNAME }}
+          from: ${{ secrets.GMAIL_USERNAME }}

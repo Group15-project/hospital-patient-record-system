@@ -50,7 +50,7 @@ export const MedicalRecords = () => {
         setSuccessMsg('Record deleted successfully');
         setTimeout(() => setSuccessMsg(''), 3000);
       } catch (err) {
-        setError('Failed to delete record', err);
+        setError('Failed to delete record');
       }
     }
   };
