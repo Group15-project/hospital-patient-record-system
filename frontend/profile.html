@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body>
+<button class="menu-toggle">☰</button>
+<aside class="sidebar">
+
+    <div class="logo">
+        <h2>MediCare</h2>
+    </div>
+
+    <nav class="menu">
+
+        <ul>
+            <li><a href="dashboard.html"><i class="fa-solid fa-house"></i>   Dashboard</a></li>
+            <li><a href="search.html"><i class="fa-solid fa-search"></i>   Search</a></li>
+            <li><a href="patients.html"><i class="fa-solid fa-user-injured"></i>   Patients</a></li>
+            <!--<li><a href="patient-details.html"><i class="fa-solid fa-user"></i>   Patient Details</a></li>-->
+            <li><a href="medical-history.html"><i class="fa-solid fa-file-medical"></i>   Medical History</a></li>
+            <li><a href="appointments.html"><i class="fa-solid fa-calendar-check"></i>   Appointments</a></li>
+            <li><a href="doctor-notes.html"><i class="fa-solid fa-stethoscope"></i>   Doctor Notes</a></li>
+            <li class="active"><a href="profile.html"><i class="fa-solid fa-user"></i>   Profile</a></li>
+            <li><a href="settings.html"><i class="fa-solid fa-gear"></i>   Settings</a></li>
+        </ul>
+
+    </nav>
+
+    <div class="logout">
+        <a href="index.html">Logout</a>
+    </div>
+
+</aside>
+
+<main class="main-content">
+
+<header class="topbar">
+    <h1>Profile</h1>
+    <p>Manage your account information</p>
+</header>
+
+    <section class="profile-hero">
+
+        <div class="avatar">
+            AU
+        </div>
+
+        <h2>Angela Umeobi</h2>
+
+        <p>Hospital Administrator</p>
+
+        <a href="edit-profile.html" class="save-btn">
+            Edit Profile
+        </a>
+
+    </section>
+    <section class="info-card">
+
+        <h3>Personal Information</h3>
+
+        <div class="info-row">
+            <span>Email</span>
+            <strong>angela@email.com</strong>
+        </div>
+
+        <div class="info-row">
+            <span>Phone</span>
+            <strong>08012345678</strong>
+        </div>
+
+        <div class="info-row">
+            <span>Department</span>
+            <strong>Administration</strong>
+        </div>
+
+    </section>
+
+    <section class="info-card">
+
+        <h3>Account Information</h3>
+
+        <div class="info-row">
+            <span>Employee ID</span>
+            <strong>EMP-001</strong>
+        </div>
+
+        <div class="info-row">
+            <span>Role</span>
+            <strong>Administrator</strong>
+        </div>
+
+        <div class="info-row">
+            <span>Status</span>
+            <strong class="active-status">
+                Active
+            </strong>
+        </div>
+
+    </section>
+    <section class="info-card">
+
+        <h3>Recent Activity</h3>
+
+        <div class="activity-item">
+            <div class="activity-icon">📝</div>
+
+            <div class="activity-content">
+                <h4>Patient Record Updated</h4>
+                <p>Updated John Doe's medical history.</p>
+            </div>
+
+            <span>10 mins ago</span>
+        </div>
+
+        <div class="activity-item">
+            <div class="activity-icon">📅</div>
+
+            <div class="activity-content">
+                <h4>Appointment Created</h4>
+                <p>Scheduled appointment for Jane Williams.</p>
+            </div>
+
+            <span>1 hour ago</span>
+        </div>
+
+        <div class="activity-item">
+            <div class="activity-icon">📋</div>
+
+            <div class="activity-content">
+                <h4>Doctor Note Added</h4>
+                <p>Added consultation notes for Patient #104.</p>
+            </div>
+
+            <span>Today</span>
+        </div>
+
+        <div class="activity-item">
+            <div class="activity-icon">🔐</div>
+
+            <div class="activity-content">
+                <h4>Logged In</h4>
+                <p>Successful login from Lagos, Nigeria.</p>
+            </div>
+
+            <span>Today</span>
+        </div>
+
+    </section>
+
+</main>
+<script src="main.js"></script>
+
+</body>
+</html>
