@@ -5,34 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital Patient Record System</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
 <body>
-
+    <button class="menu-toggle">☰</button>
     <!-- Sidebar -->
    <aside class="sidebar">
 
-    <div class="logo">
-        <h2>MediCare</h2>
-    </div>
+        <div class="logo">
+            <h2>MediCare</h2>
+        </div>
 
-    <nav class="menu">
+        <nav class="menu">
 
-        <ul>
-            <li class="active"><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="search.html">Search</a></li>
-            <li><a href="patients.html">Patients</a></li>
-            <!--<li><a href="patient-details.html">Patient Details</a></li>-->
-            <li><a href="medical-history.html">Medical History</a></li>
-            <li><a href="appointments.html">Appointments</a></li>
-            <li><a href="doctor-notes.html">Doctor Notes</a></li>
-            <li><a href="settings.html">Settings</a></li>
-        </ul>
+            <ul>
+                <li class="active"><a href="dashboard.html"><i class="fa-solid fa-house"></i>   Dashboard</a></li>
+                <li><a href="search.html"><i class="fa-solid fa-search"></i>   Search</a></li>
+                <li><a href="patients.html"><i class="fa-solid fa-user-injured"></i>   Patients</a></li>
+                <!--<li><a href="patient-details.html">Patient Details</a></li>-->
+                <li><a href="medical-history.html"><i class="fa-solid fa-file-medical"></i>   Medical History</a></li>
+                <li><a href="appointments.html"><i class="fa-solid fa-calendar-check"></i>   Appointments</a></li>
+                <li><a href="doctor-notes.html"><i class="fa-solid fa-stethoscope"></i>   Doctor Notes</a></li>
+                <li><a href="profile.html"><i class="fa-solid fa-user"></i>   Profile</a></li>
+                <li><a href="settings.html"><i class="fa-solid fa-gear"></i>   Settings</a></li>
+            </ul>
 
-    </nav>
+        </nav>
 
-    <div class="logout">
-        <a href="index.html">Logout</a>
-    </div>
+        <div class="logout">
+            <a href="index.html">Logout</a>
+        </div>
 
     </aside>
 
@@ -53,23 +57,35 @@
 
         <!-- KPI Cards -->
         <section class="cards">
-
+            
             <div class="card">
+                <div class="kpi-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
                 <h3>Total Patients</h3>
                 <p>1,250</p>
             </div>
 
             <div class="card">
+                <div class="kpi-icon">
+                    <i class="fa-solid fa-calendar-check"></i>
+                </div>
                 <h3>Appointments Today</h3>
                 <p>85</p>
             </div>
 
             <div class="card">
+                <div class="kpi-icon">
+                    <i class="fa-solid fa-stethoscope"></i>
+                </div>
                 <h3>Doctors Available</h3>
                 <p>42</p>
             </div>
 
             <div class="card">
+                <div class="kpi-icon">
+                    <i class="fa-solid fa-ambulance"></i>
+                </div>
                 <h3>Emergency Cases</h3>
                 <p>12</p>
             </div>
@@ -126,6 +142,6 @@
         </section>
 
     </main>
-
+<script src="main.js"></script>
 </body>
 </html>

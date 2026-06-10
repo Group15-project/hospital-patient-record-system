@@ -1,108 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Edit Patient</title>
-<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Patient</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
 
 <body>
+    <button class="menu-toggle">☰</button>
+    <aside class="sidebar">
 
-<aside class="sidebar">
+        <div class="logo">
+            <h2>MediCare</h2>
+        </div>
 
-    <div class="logo">
-        <h2>MediCare</h2>
-    </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="dashboard.html"><i class="fa-solid fa-house"></i>   Dashboard</a></li>
+                <li><a href="search.html"><i class="fa-solid fa-search"></i>   Search</a></li>
+                <li class="active"><a href="patients.html"><i class="fa-solid fa-user-injured"></i>   Patients</a></li>
+                <li><a href="medical-history.html"><i class="fa-solid fa-file-medical"></i>   Medical History</a></li>
+                <li><a href="appointments.html"><i class="fa-solid fa-calendar-check"></i>   Appointments</a></li>
+                <li><a href="doctor-notes.html"><i class="fa-solid fa-stethoscope"></i>   Doctor Notes</a></li>
+                <li><a href="profile.html"><i class="fa-solid fa-user"></i>   Profile</a></li>
+                <li><a href="settings.html"><i class="fa-solid fa-gear"></i>   Settings</a></li>
+            </ul>
+        </nav>
 
-    <nav class="menu">
-        <ul>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li class="active"><a href="patients.html">Patients</a></li>
-            <li><a href="medical-history.html">Medical History</a></li>
-            <li><a href="appointments.html">Appointments</a></li>
-            <li><a href="doctor-notes.html">Doctor Notes</a></li>
-            <li><a href="search.html">Search</a></li>
-            <li><a href="settings.html">Settings</a></li>
-        </ul>
-    </nav>
+        <div class="logout">
+            <a href="index.html">Logout</a>
+        </div>
 
-    <div class="logout">
-        <a href="index.html">Logout</a>
-    </div>
+    </aside>
 
-</aside>
+    <main class="main-content">
 
-<main class="main-content">
+        <header class="topbar">
+            <h1>Edit Patient</h1>
+            <p>Update patient information</p>
+        </header>
 
-<header class="topbar">
-    <h1>Edit Patient</h1>
-    <p>Update patient information</p>
-</header>
+        <section class="form-card">
 
-<section class="form-card">
+            <form>
 
-<form>
+            <div class="grid">
 
-<div class="grid">
+                <div>
+                    <label>First Name</label>
+                    <input type="text" value="John">
+                </div>
 
-    <div>
-        <label>First Name</label>
-        <input type="text" value="John">
-    </div>
+                <div>
+                    <label>Last Name</label>
+                    <input type="text" value="Doe">
+                </div>
 
-    <div>
-        <label>Last Name</label>
-        <input type="text" value="Doe">
-    </div>
+                <div>
+                    <label>Gender</label>
+                    <select>
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </div>
 
-    <div>
-        <label>Gender</label>
-        <select>
-            <option>Male</option>
-            <option>Female</option>
-        </select>
-    </div>
+                <div>
+                    <label>Date of Birth</label>
+                    <input type="date" value="1995-06-12">
+                </div>
 
-    <div>
-        <label>Date of Birth</label>
-        <input type="date" value="1995-06-12">
-    </div>
+                <div>
+                    <label>Phone Number</label>
+                    <input type="tel" value="08012345678">
+                </div>
 
-    <div>
-        <label>Phone Number</label>
-        <input type="tel" value="08012345678">
-    </div>
+                <div>
+                    <label>Email Address</label>
+                    <input type="email" value="johndoe@email.com">
+                </div>
 
-    <div>
-        <label>Email Address</label>
-        <input type="email" value="johndoe@email.com">
-    </div>
+            </div>
 
-</div>
+            <label>Home Address</label>
+            <textarea rows="4">
+            23 Allen Avenue, Lagos
+            </textarea>
 
-<label>Home Address</label>
-<textarea rows="4">
-23 Allen Avenue, Lagos
-</textarea>
+            <div class="action-buttons">
 
-<div class="action-buttons">
+                <a href="patient-details.html" class="cancel-btn">
+                    Cancel
+                </a>
 
-    <a href="patient-details.html" class="cancel-btn">
-        Cancel
-    </a>
+                <button type="submit" class="save-btn">
+                    Save Changes
+                </button>
 
-    <button type="submit" class="save-btn">
-        Save Changes
-    </button>
+            </div>
 
-</div>
+        </form>
 
-</form>
+    </section>
 
-</section>
-
-</main>
+    </main>
+    <script src="main.js"></script>
 
 </body>
 </html>
