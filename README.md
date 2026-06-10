@@ -21,18 +21,18 @@ A full-stack healthcare patient record management system built with HTML/CSS/Jav
 - Database persistence
 
 ## Project Structure
+```
 hospital-patient-record-system/
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
 │   │   ├── pages/
 │   │   ├── services/
-│   │   ├── styles/
-│   │   ├── index.html
-│   │   └── main.js
+│   │   └── styles/
+│   ├── index.html
+│   ├── main.js
 │   ├── package.json
 │   └── vite.config.js
-│
 ├── backend/
 │   ├── main.go
 │   ├── handlers/
@@ -41,12 +41,11 @@ hospital-patient-record-system/
 │   ├── middleware/
 │   ├── go.mod
 │   └── go.sum
-│
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml
-│
 └── README.md
+```
 
 ### Frontend (HTML/CSS/JavaScript)
 - src/ - Source code directory
