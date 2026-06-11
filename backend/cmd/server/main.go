@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 	"time"
 
 	_ "hospital-backend/docs"
@@ -9,6 +10,7 @@ import (
 	"hospital-backend/internal/config"
 	"hospital-backend/internal/database"
 	"hospital-backend/internal/handler"
+	"hospital-backend/internal/models"
 	"hospital-backend/internal/repository"
 	"hospital-backend/internal/routes"
 	"hospital-backend/internal/service"
@@ -38,6 +40,39 @@ func main() {
 		log.Fatalf("failed to connect database: %v", err)
 	}
 
+if os.Getenv("RUN_MIGRATION") == "true" {
+
+	err = db.AutoMigrate(
+		&models.Role{},
+		&models.Permission{},
+		&models.RolePermission{},
+		&models.User{},
+		&models.RefreshToken{},
+		&models.AuditLog{},
+		&models.Patient{},
+		&models.Vital{},
+		&models.Consultation{},
+		&models.Diagnosis{},
+		&models.LabRequest{},
+		&models.LabResult{},
+		&models.Prescription{},
+		&models.PrescriptionItem{},
+		&models.Appointment{},
+		&models.MedicalDocument{},
+		&models.Invoice{},
+		&models.InvoiceItem{},
+		&models.Payment{},
+		&models.MedicalRecord{},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	database.SeedRolesAndPermissions(db)
+	log.Println("Migration and seeding completed")
+
+	return
+
+}
 	validate := validator.New()
 
 	// Repositories
