@@ -159,32 +159,30 @@ func main() {
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
-		AllowOrigins: []string{
-			"http://127.0.0.1:5500",
-			"http://127.0.0.1:5501",
-			"http://localhost:5500",
-			"http://localhost:5173",
-
-			// Production frontend
+    AllowOrigins: []string{
+        "http://127.0.0.1:5500",
+        "http://127.0.0.1:5501",
+        "http://localhost:5500",
+        "http://localhost:5173",
 
         "https://hospital-patient-record-system-1-omgx.onrender.com",
-		},
-		AllowMethods: []string{
-			"GET",
-			"POST",
-			"PUT",
-			"PATCH",
-			"DELETE",
-			"OPTIONS",
-		},
-		AllowHeaders: []string{
-			"Origin",
-			"Content-Type",
-			"Authorization",
-		},
-		AllowCredentials: true,
-		MaxAge:           12 * time.Hour,
-	}))
+    },
+    AllowMethods: []string{
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE",
+        "OPTIONS",
+    },
+    AllowHeaders: []string{
+        "Origin",
+        "Content-Type",
+        "Authorization",
+    },
+    AllowCredentials: true,
+    MaxAge: 12 * time.Hour,
+}))
 
 	// Swagger
 	router.GET(
