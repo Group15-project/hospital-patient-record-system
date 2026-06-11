@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'backend/**'
 
 jobs:
   test-backend:
@@ -37,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger Render Deploy
+      - name: Trigger Backend Render Deploy
         run: |
           curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
 
@@ -46,7 +48,7 @@ jobs:
 
       - name: Health Check
         run: |
-          curl --fail https://hospital-patient-record-system-1.onrender.com/health
+          curl --fail https://hospital-patient-record-system-7hcj.onrender.com/health
 
       - name: Send Success Email
         if: success()
