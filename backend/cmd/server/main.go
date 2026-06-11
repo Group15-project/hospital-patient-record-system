@@ -164,6 +164,10 @@ func main() {
 			"http://127.0.0.1:5501",
 			"http://localhost:5500",
 			"http://localhost:5173",
+
+			// Production frontend
+
+        "https://hospital-patient-record-system-1-omgx.onrender.com",
 		},
 		AllowMethods: []string{
 			"GET",

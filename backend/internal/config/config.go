@@ -22,20 +22,23 @@ type Config struct {
 	RefreshTokenExpiration time.Duration
 }
 
+
 func LoadConfig() (*Config, error) {
 	viper.SetConfigFile(".env")
 	viper.AutomaticEnv()
 
-	if err := viper.ReadInConfig(); err != nil {
-		return nil, err
-	}
+	// Try to load .env for local development.
+	// Ignore the error in production.
+	_ = viper.ReadInConfig()
 
 	access, _ := time.ParseDuration(
 		viper.GetString("ACCESS_TOKEN_DURATION"),
 	)
+
 	refresh, _ := time.ParseDuration(
 		viper.GetString("REFRESH_TOKEN_DURATION"),
 	)
+
 	return &Config{
 		AppName: viper.GetString("APP_NAME"),
 		Port:    viper.GetString("PORT"),
