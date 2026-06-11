@@ -2,6 +2,8 @@ package database
 
 import (
 	"fmt"
+	"log"
+	"time"
 
 	"hospital-backend/internal/config"
 	//"hospital-backend/internal/models"
@@ -12,19 +14,41 @@ import (
 
 func ConnectMySQL(cfg *config.Config) (*gorm.DB, error) {
 
-dsn := fmt.Sprintf(
-    "%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
-    cfg.DBUser,
-    cfg.DBPassword,
-    cfg.DBHost,
-    cfg.DBPort,
-    cfg.DBName,
-)
+	dsn := fmt.Sprintf(
+		"%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+		cfg.DBUser,
+		cfg.DBPassword,
+		cfg.DBHost,
+		cfg.DBPort,
+		cfg.DBName,
+	)
+db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+if err != nil {
+	return nil, err
+}
 
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	if err != nil {
-		return nil, err
-	}
+sqlDB, err := db.DB()
+if err != nil {
+	return nil, err
+}
+
+// Connection pool
+sqlDB.SetMaxOpenConns(25)
+sqlDB.SetMaxIdleConns(10)
+sqlDB.SetConnMaxLifetime(30 * time.Minute)
+sqlDB.SetConnMaxIdleTime(10 * time.Minute)
+
+// Ping test
+start := time.Now()
+
+err = sqlDB.Ping()
+if err != nil {
+	return nil, err
+}
+
+log.Printf("DB ping took %v", time.Since(start))
+
+return db, nil
 
 	// err = db.AutoMigrate(
 	// 	&models.Role{},
