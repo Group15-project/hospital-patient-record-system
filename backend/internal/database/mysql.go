@@ -83,5 +83,5 @@ return db, nil
 
 	//SeedRolesAndPermissions(db)
 
-	return db, nil
+	
 }
