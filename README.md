@@ -10,7 +10,6 @@ A full-stack healthcare patient record management system built with HTML/CSS/Jav
 - Medical records viewing
 - Role-based access control
 - Responsive design
-- Dark mode support
 
 ### Backend
 - RESTful API (Golang)
