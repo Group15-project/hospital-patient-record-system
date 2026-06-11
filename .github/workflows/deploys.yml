@@ -41,6 +41,7 @@ jobs:
         run: go test ./...
 
   deploy-render:
+    if: github.event_name == 'push'
     needs: test-backend
     runs-on: ubuntu-latest
 
@@ -55,41 +56,3 @@ jobs:
       - name: Health Check
         run: |
           curl --fail https://hospital-patient-record-system-7hcj.onrender.com/health
-
-      - name: Send Success Email
-        if: success()
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          secure: true
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: "Backend Deployment Successful"
-          to: your-email@gmail.com
-          from: GitHub Actions
-          body: |
-            Backend deployment completed successfully.
-
-            Repository: ${{ github.repository }}
-            Branch: ${{ github.ref_name }}
-            Commit: ${{ github.sha }}
-
-      - name: Send Failure Email
-        if: failure()
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          secure: true
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: "Backend Deployment Failed"
-          to: your-email@gmail.com
-          from: GitHub Actions
-          body: |
-            Backend deployment failed.
-
-            Repository: ${{ github.repository }}
-            Branch: ${{ github.ref_name }}
-            Commit: ${{ github.sha }}
