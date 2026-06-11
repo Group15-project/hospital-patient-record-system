@@ -7,6 +7,12 @@ on:
     paths:
       - 'backend/**'
 
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+
 jobs:
   test-backend:
     runs-on: ubuntu-latest
