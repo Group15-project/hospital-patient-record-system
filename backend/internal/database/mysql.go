@@ -17,7 +17,7 @@ func ConnectPostgres(cfg *config.Config) (*gorm.DB, error) {
 
 	if cfg.DBPassword == "" {
 		dsn = fmt.Sprintf(
-			"postgres://%s@%s:%s/%s?sslmode=disable",
+			"postgres://%s@%s:%s/%s?sslmode=require",
 			cfg.DBUser,
 			cfg.DBHost,
 			cfg.DBPort,
@@ -25,7 +25,7 @@ func ConnectPostgres(cfg *config.Config) (*gorm.DB, error) {
 		)
 	} else {
 		dsn = fmt.Sprintf(
-			"postgres://%s:%s@%s:%s/%s?sslmode=disable",
+			"postgres://%s:%s@%s:%s/%s?sslmode=require",
 			cfg.DBUser,
 			cfg.DBPassword,
 			cfg.DBHost,
