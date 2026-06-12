@@ -15,6 +15,9 @@ type AuthRepository interface {
 	ExistsByEmail(email string) (bool, error)
 	GetDoctors() ([]models.User, error)
 	FindByID(userID uint) (*models.User, error)
+	GetStaff() ([]models.User, error)
+	GetRoles() ([]models.Role, error)
+	GetByEmailIncludingDeleted(email string) (*models.User, error)
 }
 
 type authRepository struct {
@@ -67,8 +70,14 @@ func (r *authRepository) GetByEmail(email string) (*models.User, error) {
 	return &user, nil
 }
 
-func (r *authRepository) Update(user *models.User) error {
-	return r.db.Save(user).Error
+func (r *authRepository) Update(
+	user *models.User,
+) error {
+
+	return r.db.
+		Unscoped().
+		Save(user).
+		Error
 }
 
 func (r *authRepository) Delete(id uint) error {
@@ -122,6 +131,54 @@ func (r *authRepository) FindByID(
 	err := r.db.
 		Preload("Role").
 		First(&user, userID).
+		Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}
+func (r *authRepository) GetStaff() (
+    []models.User,
+    error,
+) {
+
+    var users []models.User
+
+    err := r.db.
+        Preload("Role").
+        Find(&users).
+        Error
+
+    return users, err
+}
+
+func (r *authRepository) GetRoles() (
+	[]models.Role,
+	error,
+) {
+
+	var roles []models.Role
+
+	err := r.db.
+		Order("name ASC").
+		Find(&roles).
+		Error
+
+	return roles, err
+}
+func (r *authRepository) GetByEmailIncludingDeleted(
+	email string,
+) (*models.User, error) {
+
+	var user models.User
+
+	err := r.db.
+		Unscoped().
+		Preload("Role").
+		Where("email = ?", email).
+		First(&user).
 		Error
 
 	if err != nil {

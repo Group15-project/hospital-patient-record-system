@@ -1298,6 +1298,129 @@ textarea{
 
 }
 
+.status-scheduled {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status-completed {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-cancelled {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.status-no-show {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.appointment-actions{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.appointment-actions button{
+    margin:0;
+}
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+
+    display:none;
+    justify-content:center;
+    align-items:center;
+
+    z-index:9999;
+}
+
+.modal-overlay.show{
+    display:flex;
+}
+
+.appointment-modal{
+    width:450px;
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:16px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+}
+
+.appointment-modal h3{
+    margin-bottom:20px;
+}
+
+.modal-form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.modal-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:25px;
+}
+
+.cancel-btn{
+    background:#e5e7eb;
+    color:#111827;
+}
+
+.status{
+    font-weight:600;
+}
+.danger-btn{
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.danger-btn:hover{
+    background:#b91c1c;
+}
+
+.appointment-modal p{
+    margin-top:10px;
+    color:#64748b;
+    line-height:1.6;
+}
+.suggestions {
+    background: #fff;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.suggestion-item {
+    padding: 12px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #E2E8F0;
+    transition: background 0.2s ease;
+}
+
+.suggestion-item:hover {
+    background: #F8FAFC;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
 /* ===== SHARED STYLES (all pages) ===== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 .landing-body, .help-body, .reports-body { display: block !important; font-family: 'Segoe UI', sans-serif; background: #f8faff; color: #1a1a2e; }

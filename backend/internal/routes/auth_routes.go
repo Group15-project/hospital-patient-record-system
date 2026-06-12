@@ -16,26 +16,41 @@ func RegisterAuthRoutes(
 ) {
 	authGroup := router.Group("/auth")
 
-	authGroup.POST(
-		"/login",
-		authHandler.Login,
-	)
-	authGroup.POST(
+	authGroup.POST("/login", authHandler.Login)
 
+	protected := authGroup.Group("")
+	protected.Use(middleware.AuthMiddleware(cfg))
+
+	protected.POST(
 		"/users",
-		middleware.RequireRole(
-			models.RoleReceptionist,
-			models.RoleAdmin,
-		),
+		middleware.RequireRole(models.RoleSuperAdmin),
 		authHandler.RegisterUser,
 	)
-	authGroup.GET(
-	"/doctors",
-	authHandler.GetDoctors,
-)
-authGroup.GET(
-	"/profile",
 
-	authHandler.Profile,
+	protected.GET(
+		"/roles",
+		middleware.RequireRole(models.RoleSuperAdmin),
+		authHandler.GetRoles,
+	)
+
+	protected.DELETE(
+		"/users/:id",
+		middleware.RequireRole(models.RoleSuperAdmin),
+		authHandler.DeleteUser,
+	)
+
+	protected.GET(
+		"/profile",
+		authHandler.Profile,
+	)
+
+	protected.GET(
+		"/doctors",
+		authHandler.GetDoctors,
+	)
+	protected.GET(
+    "/users",
+    middleware.RequireRole(models.RoleSuperAdmin),
+    authHandler.GetStaff,
 )
 }

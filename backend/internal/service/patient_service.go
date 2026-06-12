@@ -1,6 +1,7 @@
 package service
 
 import (
+	"encoding/json"
 	"fmt"
 	"time"
 
@@ -13,6 +14,7 @@ type PatientService interface {
 	Create(req dto.CreatePatientRequest, userID uint) (*models.Patient, error)
 	GetByID(id uint) (*models.Patient, error)
 	List(page, limit int) ([]models.Patient, error)
+	Delete(id uint) error
 }
 
 type patientService struct {
@@ -52,6 +54,7 @@ func (s *patientService) Create(
 
 		dob = &parsedDOB
 	}
+	allergiesJSON, _ := json.Marshal(req.Allergies)
 
 	patient := models.Patient{
 		PatientNumber: patientNumber,
@@ -62,6 +65,7 @@ func (s *patientService) Create(
 		Phone:         req.Phone,
 		Email:         req.Email,
 		Address:       req.Address,
+		Allergies: allergiesJSON,
 
 		EmergencyContactName: req.EmergencyContactName,
 
@@ -98,4 +102,17 @@ func (s *patientService) List(
 		offset,
 		limit,
 	)
+}
+
+func (s *patientService) Delete(
+	id uint,
+) error {
+
+	_, err := s.patientRepo.GetByID(id)
+
+	if err != nil {
+		return err
+	}
+
+	return s.patientRepo.Delete(id)
 }

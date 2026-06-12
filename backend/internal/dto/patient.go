@@ -19,6 +19,7 @@ type CreatePatientRequest struct {
 	EmergencyContactPhone string `json:"emergency_contact_phone"`
 
 	BloodGroup string `json:"blood_group"`
+	Allergies []string `json:"allergies"`
 }
 
 type UpdatePatientRequest struct {

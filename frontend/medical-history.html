@@ -22,7 +22,6 @@
 
       <nav class="menu">
         <ul>
-          
           <li class="dashboard-menu">
             <a href="dashboard.html">
               <i class="fa-solid fa-house"></i> Dashboard
@@ -59,8 +58,17 @@
             </a>
           </li>
           <li>
-    <a href="profile.html">
-        <i class="fa-solid fa-user"></i> Profile
+            <a href="profile.html">
+              <i class="fa-solid fa-user"></i> Profile
+            </a>
+          </li>
+          <li
+    id="staffMenu"
+    style="display:none;"
+>
+    <a href="staff-management.html">
+        <i class="fa-solid fa-users"></i>
+        Staff Management
     </a>
 </li>
         </ul>
@@ -81,30 +89,22 @@
 
       <!-- Patient Selector -->
 
-         <section class="search-card">
+      <section class="search-card" id="searchCard">
+        <h2>Search Patients</h2>
 
-            <h2>Search Patients</h2>
+        <div class="search-wrapper">
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Search by Patient ID, Name or Phone Number"
+            class="global-search"
+          />
 
-            <div class="search-wrapper">
+          <button id="searchBtn" class="primary-btn">Search</button>
+        </div>
 
-                <input
-                    id="searchInput"
-                    type="text"
-                    placeholder="Search by Patient ID, Name or Phone Number"
-                    class="global-search"
-                />
-
-                <button
-                    id="searchBtn"
-                    class="primary-btn"
-                >
-                    Search
-                </button>
-
-            </div>
-
-        </section>
-
+        <div id="patientSuggestions" class="suggestions"></div>
+      </section>
       <!-- Patient Summary -->
 
       <section class="patient-card">
@@ -188,7 +188,7 @@
 
     <script>
       requireAuth();
-        applyRolePermissions();
+      applyRolePermissions();
     </script>
   </body>
 </html>

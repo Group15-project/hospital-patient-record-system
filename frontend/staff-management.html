@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Settings</title>
+    <title>Doctor Notes</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
     <link
@@ -51,6 +51,12 @@
           </li>
 
           <li class="active">
+            <a href="doctor-notes.html">
+              <i class="fa-solid fa-stethoscope"></i> Doctor Notes
+            </a>
+          </li>
+
+          <li>
             <a href="settings.html">
               <i class="fa-solid fa-gear"></i> Settings
             </a>
@@ -73,121 +79,124 @@
         <a href="index.html">Logout</a>
       </div>
     </aside>
-
     <main class="main-content">
       <header class="topbar">
         <div>
-          <h1>Settings</h1>
-          <p>Manage your account and preferences</p>
+          <h1>Staff Management</h1>
+          <p>Create and manage doctors, receptionists and administrators</p>
         </div>
       </header>
 
-      <!-- PROFILE SETTINGS -->
-
       <section class="form-card">
-        <h2>Profile Information</h2>
+        <h2>Create Staff Account</h2>
 
-        <form>
+        <form id="staffForm">
           <div class="grid">
             <div>
-              <label>Full Name</label>
-              <input type="text" id="fullName" />
+              <label for="firstName"> First Name </label>
+
+              <input id="firstName" type="text" required />
             </div>
 
             <div>
-              <label>Email Address</label>
-              <input type="email" id="email" />
+              <label for="lastName"> Last Name </label>
+
+              <input id="lastName" type="text" required />
             </div>
 
             <div>
-              <label>Phone Number</label>
-              <input type="tel" id="phone" />
+              <label for="email"> Email </label>
+
+              <input id="email" type="email" required />
             </div>
 
             <div>
-              <label>Role</label>
-              <input type="text" id="role" readonly />
+              <label for="phone"> Phone Number </label>
+
+              <input id="phone" type="tel" />
+            </div>
+
+            <div>
+              <label for="password"> Password </label>
+
+             <input
+    id="password"
+    type="password"
+    autocomplete="new-password"
+    required
+/>
+            </div>
+
+            <div>
+              <label for="roleSelect"> Role </label>
+
+              <select id="roleSelect" required>
+                <option value="">Select Role</option>
+              </select>
             </div>
           </div>
+
+          <button type="submit" class="save-btn">Create Staff Account</button>
         </form>
       </section>
 
-      <!-- PASSWORD -->
+      <section class="table-section">
+        <div class="table-header">
+          <h2>Staff Accounts</h2>
 
-      <section class="form-card">
-        <h2>Security</h2>
-
-        <form>
-          <div class="grid">
-            <div>
-              <label>Current Password</label>
-              <input type="password" />
-            </div>
-
-            <div>
-              <label>New Password</label>
-              <input type="password" />
-            </div>
-          </div>
-        </form>
-      </section>
-
-      <!-- NOTIFICATIONS -->
-
-      <section class="form-card">
-        <h2>Notifications</h2>
-
-        <div class="setting-option">
-          <div>
-            <h4>Appointment Alerts</h4>
-            <p>Receive notifications for upcoming appointments</p>
-          </div>
-
-          <label class="switch">
-            <input type="checkbox" checked />
-            <span class="slider"></span>
-          </label>
+          <input
+            type="search"
+            id="staffSearch"
+            class="search-input"
+            placeholder="Search staff..."
+          />
         </div>
 
-        <div class="setting-option">
-          <div>
-            <h4>New Patient Registrations</h4>
-            <p>Receive notifications when patients are added</p>
-          </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
 
-          <label class="switch">
-            <input type="checkbox" checked />
-            <span class="slider"></span>
-          </label>
-        </div>
-
-        <div class="setting-option">
-          <div>
-            <h4>System Notifications</h4>
-            <p>Receive updates and system alerts</p>
-          </div>
-
-          <label class="switch">
-            <input type="checkbox" />
-            <span class="slider"></span>
-          </label>
-        </div>
+          <tbody id="staffTableBody"></tbody>
+        </table>
       </section>
 
-      <!-- SAVE -->
+      <div id="deleteStaffModal" class="modal-overlay">
+        <div class="modal">
+          <div class="warning-icon">⚠️</div>
 
-      <section class="save-section">
-        <button class="save-btn">Save Changes</button>
-      </section>
+          <h2>Delete Staff Account</h2>
+
+          <p>
+            Are you sure you want to delete this staff account? This action
+            cannot be undone.
+          </p>
+
+          <div class="modal-actions">
+            <button class="cancel-modal" onclick="closeDeleteStaffModal()">
+              Cancel
+            </button>
+
+            <button class="confirm-delete" onclick="confirmDeleteStaff()">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
     </main>
-
     <script src="js/api.js"></script>
     <script src="js/auth.js"></script>
-
-    <script src="js/settings.js"></script>
-
+    <script src="js/staff-management.js"></script>
     <script>
       requireAuth();
+
       applyRolePermissions();
     </script>
   </body>
