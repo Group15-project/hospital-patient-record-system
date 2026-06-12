@@ -25,7 +25,7 @@ type Prescription struct {
 	DoctorID uint `gorm:"not null"`
 	Doctor   User `gorm:"foreignKey:DoctorID"`
 
-	Status PrescriptionStatus `gorm:"default:PENDING"`
+	Status PrescriptionStatus `gorm:"type:varchar(20);default:'PENDING';not null"`
 
 	Notes string `gorm:"type:text"`
 

@@ -22,26 +22,25 @@ type Config struct {
 	RefreshTokenExpiration time.Duration
 }
 
-
 func LoadConfig() (*Config, error) {
 	viper.SetConfigFile(".env")
 	viper.AutomaticEnv()
 
 	// Try to load .env for local development.
-	// Ignore the error in production.
+	// Ignore errors in production.
 	_ = viper.ReadInConfig()
 
 	access, _ := time.ParseDuration(
-		viper.GetString("ACCESS_TOKEN_DURATION"),
+		viper.GetString("JWT_ACCESS_EXPIRY"),
 	)
 
 	refresh, _ := time.ParseDuration(
-		viper.GetString("REFRESH_TOKEN_DURATION"),
+		viper.GetString("JWT_REFRESH_EXPIRY"),
 	)
 
 	return &Config{
 		AppName: viper.GetString("APP_NAME"),
-		Port:    viper.GetString("PORT"),
+		Port:    viper.GetString("APP_PORT"),
 
 		DBHost:     viper.GetString("DB_HOST"),
 		DBPort:     viper.GetString("DB_PORT"),
@@ -49,7 +48,7 @@ func LoadConfig() (*Config, error) {
 		DBPassword: viper.GetString("DB_PASSWORD"),
 		DBName:     viper.GetString("DB_NAME"),
 
-		JWTSecretKey: viper.GetString("JWT_SECRET_KEY"),
+		JWTSecretKey: viper.GetString("JWT_SECRET"),
 
 		AccessTokenExpiration:  access,
 		RefreshTokenExpiration: refresh,

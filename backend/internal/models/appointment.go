@@ -14,12 +14,10 @@ const (
 	AppointmentCompleted AppointmentStatus = "COMPLETED"
 	AppointmentCancelled AppointmentStatus = "CANCELLED"
 	AppointmentNoShow    AppointmentStatus = "NO_SHOW"
-	AppointmentNormal    AppointmentPriority = "NORMAL"
 
+	AppointmentNormal    AppointmentPriority = "NORMAL"
 	AppointmentUrgent    AppointmentPriority = "URGENT"
 	AppointmentEmergency AppointmentPriority = "EMERGENCY"
-
-
 )
 
 type Appointment struct {
@@ -34,9 +32,10 @@ type Appointment struct {
 	AppointmentDate time.Time `gorm:"not null"`
 
 	Reason string `gorm:"type:text"`
-	Priority AppointmentPriority `gorm:"default:NORMAL"`
 
-	Status AppointmentStatus `gorm:"default:SCHEDULED"`
+	Priority AppointmentPriority `gorm:"type:varchar(20);default:'NORMAL';not null"`
+
+	Status AppointmentStatus `gorm:"type:varchar(20);default:'SCHEDULED';not null"`
 
 	CreatedBy uint
 	Creator   User `gorm:"foreignKey:CreatedBy"`
