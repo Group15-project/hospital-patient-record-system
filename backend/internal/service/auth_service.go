@@ -9,6 +9,8 @@ import (
 	"hospital-backend/internal/utils"
 
 	"time"
+
+	"gorm.io/gorm"
 )
 
 type AuthService interface {
@@ -25,6 +27,9 @@ type AuthService interface {
 	) error
 	GetDoctors() ([]models.User, error)
 	GetProfile(userID uint) (*models.User, error)
+	GetStaff() ([]models.User, error)
+	DeleteUser(id uint) error
+	GetRoles() ([]models.Role, error)
 }
 
 type authService struct {
@@ -142,42 +147,87 @@ func (s *authService) RegisterUser(
 	req dto.RegisterUserRequest,
 	auditCtx utils.AuditContext,
 ) error {
-	exists, err := s.authRepo.ExistsByEmail(
-		req.Email,
-	)
+
+	existingUser, err :=
+		s.authRepo.GetByEmailIncludingDeleted(
+			req.Email,
+		)
+
+	if err == nil {
+
+		if existingUser.DeletedAt.Valid {
+
+			hashedPassword, err :=
+				utils.HashPassword(
+					req.Password,
+				)
+
+			if err != nil {
+				return err
+			}
+
+			existingUser.FirstName =
+				req.FirstName
+
+			existingUser.LastName =
+				req.LastName
+
+			existingUser.Phone =
+				req.Phone
+
+			existingUser.RoleID =
+				req.RoleID
+
+			existingUser.HashedPassword =
+				hashedPassword
+
+			existingUser.IsActive =
+				true
+
+			existingUser.DeletedAt =
+				gorm.DeletedAt{}
+
+			return s.authRepo.Update(
+				existingUser,
+			)
+		}
+
+		return errors.New(
+			"email already exists",
+		)
+	}
+
+	hashedPassword, err :=
+		utils.HashPassword(
+			req.Password,
+		)
 
 	if err != nil {
 		return err
 	}
 
-	if exists {
-		return errors.New("email already exists")
-	}
-	hashedPassword, err := utils.HashPassword(
-		req.Password,
-	)
-
-	if err != nil {
-		return err
-	}
 	user := models.User{
 		FirstName: req.FirstName,
 		LastName:  req.LastName,
+		Email:     req.Email,
+		Phone:     req.Phone,
 
-		Email: req.Email,
-		Phone: req.Phone,
+		HashedPassword:
+			hashedPassword,
 
-		HashedPassword: hashedPassword,
+		RoleID:
+			req.RoleID,
 
-		RoleID: req.RoleID,
-
-		IsActive: true,
+		IsActive:
+			true,
 	}
+
 	if err := s.authRepo.Create(
 		&user,
 	); err != nil {
 		return err
 	}
+
 	s.auditService.Log(
 		auditCtx,
 		"CREATE",
@@ -185,6 +235,7 @@ func (s *authService) RegisterUser(
 		"",
 		"staff account created",
 	)
+
 	return nil
 }
 
@@ -201,3 +252,27 @@ func (s *authService) GetProfile(
 
 	return s.authRepo.GetByID(userID)
 }
+
+func (s *authService) GetStaff() (
+    []models.User,
+    error,
+) {
+
+    return s.authRepo.GetStaff()
+}
+
+func (s *authService) DeleteUser(
+    id uint,
+) error {
+
+    return s.authRepo.Delete(id)
+}
+
+func (s *authService) GetRoles() (
+	[]models.Role,
+	error,
+) {
+
+	return s.authRepo.GetRoles()
+}
+

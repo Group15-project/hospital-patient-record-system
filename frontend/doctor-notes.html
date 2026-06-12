@@ -1,194 +1,170 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Doctor Notes</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-</head>
-<body>
-<button class="menu-toggle">☰</button>
-<aside class="sidebar">
-
-    <div class="logo">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <button class="menu-toggle">☰</button>
+    <aside class="sidebar">
+      <div class="logo">
         <h2>MediCare</h2>
-    </div>
+      </div>
 
-    <nav class="menu">
+      <nav class="menu">
+        <ul>
+          <li class="dashboard-menu">
+            <a href="dashboard.html">
+              <i class="fa-solid fa-house"></i> Dashboard
+            </a>
+          </li>
 
-   <ul>
-    <li class="dashboard-menu">
-        <a href="dashboard.html">
-            <i class="fa-solid fa-house"></i> Dashboard
-        </a>
-    </li>
+          <li>
+            <a href="search.html">
+              <i class="fa-solid fa-search"></i> Search
+            </a>
+          </li>
 
-    <li>
-        <a href="search.html">
-            <i class="fa-solid fa-search"></i> Search
-        </a>
-    </li>
+          <li>
+            <a href="patients.html">
+              <i class="fa-solid fa-user-injured"></i> Patients
+            </a>
+          </li>
 
-    <li>
-        <a href="patients.html">
-            <i class="fa-solid fa-user-injured"></i> Patients
-        </a>
-    </li>
+          <li>
+            <a href="medical-history.html">
+              <i class="fa-solid fa-file-medical"></i> Medical History
+            </a>
+          </li>
 
-    <li>
-        <a href="medical-history.html">
-            <i class="fa-solid fa-file-medical"></i> Medical History
-        </a>
-    </li>
+          <li>
+            <a href="appointments.html">
+              <i class="fa-solid fa-calendar-check"></i> Appointments
+            </a>
+          </li>
 
-    <li>
-        <a href="appointments.html">
-            <i class="fa-solid fa-calendar-check"></i> Appointments
-        </a>
-    </li>
+          <li class="active">
+            <a href="doctor-notes.html">
+              <i class="fa-solid fa-stethoscope"></i> Doctor Notes
+            </a>
+          </li>
 
-    <li class="active">
-        <a href="doctor-notes.html">
-            <i class="fa-solid fa-stethoscope"></i> Doctor Notes
-        </a>
-    </li>
-
-    <li>
-        <a href="settings.html">
-            <i class="fa-solid fa-gear"></i> Settings
-        </a>
-    </li>
-    <li>
-    <a href="profile.html">
-        <i class="fa-solid fa-user"></i> Profile
+          <li>
+            <a href="settings.html">
+              <i class="fa-solid fa-gear"></i> Settings
+            </a>
+          </li>
+          <li>
+            <a href="profile.html">
+              <i class="fa-solid fa-user"></i> Profile
+            </a>
+          </li>
+          <li
+    id="staffMenu"
+    style="display:none;"
+>
+    <a href="staff-management.html">
+        <i class="fa-solid fa-users"></i>
+        Staff Management
     </a>
 </li>
-</ul>
+        </ul>
+      </nav>
 
-    </nav>
-
-    <div class="logout">
+      <div class="logout">
         <a href="index.html">Logout</a>
-    </div>
+      </div>
+    </aside>
 
-</aside>
-
-<main class="main-content">
-
-    <header class="topbar">
+    <main class="main-content">
+      <header class="topbar">
         <div>
-            <h1>Doctor Notes</h1>
-            <p>Clinical observations and treatment records</p>
+          <h1>Doctor Notes</h1>
+          <p>Clinical observations and treatment records</p>
         </div>
-    </header>
+      </header>
 
-    <!-- Patient Card -->
+      <!-- Patient Card -->
 
-  <section class="patient-card">
+      <section class="patient-card">
+        <div>
+          <span>Patient ID</span>
+          <h3 id="patientNumber">--</h3>
+        </div>
 
-    <div>
-        <span>Patient ID</span>
-        <h3 id="patientNumber">--</h3>
-    </div>
+        <div>
+          <span>Patient Name</span>
+          <h3 id="patientName">--</h3>
+        </div>
 
-    <div>
-        <span>Patient Name</span>
-        <h3 id="patientName">--</h3>
-    </div>
+        <div>
+          <span>Age</span>
+          <h3 id="patientAge">--</h3>
+        </div>
 
-    <div>
-        <span>Age</span>
-        <h3 id="patientAge">--</h3>
-    </div>
+        <div>
+          <span>Gender</span>
+          <h3 id="patientGender">--</h3>
+        </div>
+      </section>
 
-    <div>
-        <span>Gender</span>
-        <h3 id="patientGender">--</h3>
-    </div>
+      <!-- Notes Form -->
 
-</section>
-
-    <!-- Notes Form -->
-
-    <section class="form-card">
-
+      <section class="form-card">
         <h2>Add Clinical Notes</h2>
 
-     <form id="doctorNotesForm">
+        <form id="doctorNotesForm">
+          <div class="full-width">
+            <label>Chief Complaint</label>
+            <textarea id="chiefComplaint" rows="3"></textarea>
+          </div>
 
-    <div class="full-width">
-        <label>Chief Complaint</label>
-        <textarea
-            id="chiefComplaint"
-            rows="3"
-        ></textarea>
-    </div>
+          <div class="full-width">
+            <label>Diagnosis</label>
+            <textarea id="diagnosis" rows="4"></textarea>
+          </div>
 
-    <div class="full-width">
-        <label>Diagnosis</label>
-        <textarea
-            id="diagnosis"
-            rows="4"
-        ></textarea>
-    </div>
+          <div class="full-width">
+            <label>Prescription</label>
+            <textarea id="prescription" rows="4"></textarea>
+          </div>
 
-    <div class="full-width">
-        <label>Prescription</label>
-        <textarea
-            id="prescription"
-            rows="4"
-        ></textarea>
-    </div>
+          <div class="full-width">
+            <label>Treatment Plan</label>
+            <textarea id="treatmentPlan" rows="4"></textarea>
+          </div>
 
-    <div class="full-width">
-        <label>Treatment Plan</label>
-        <textarea
-            id="treatmentPlan"
-            rows="4"
-        ></textarea>
-    </div>
+          <div class="full-width">
+            <label>Follow-up Recommendations</label>
+            <textarea id="notes" rows="4"></textarea>
+          </div>
 
-    <div class="full-width">
-        <label>Follow-up Recommendations</label>
-        <textarea
-            id="notes"
-            rows="4"
-        ></textarea>
-    </div>
+          <button type="submit" class="primary-btn">Save Notes</button>
+        </form>
+      </section>
 
-    <button
-        type="submit"
-        class="primary-btn"
-    >
-        Save Notes
-    </button>
+      <!-- Notes History -->
 
-</form>
+      <section class="notes-history">
+        <h2>Clinical History</h2>
 
-    </section>
+        <div id="notesHistory"></div>
+      </section>
+    </main>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/doctor-notes.js"></script>
 
-    <!-- Notes History -->
-
-   <section class="notes-history">
-
-    <h2>Clinical History</h2>
-
-    <div id="notesHistory">
-    </div>
-
-</section>
-
-</main>
-<script src="js/api.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/doctor-notes.js"></script>
-
-<script>
-    requireAuth();
-    applyRolePermissions();
-</script>
-</body>
+    <script>
+      requireAuth();
+      applyRolePermissions();
+    </script>
+  </body>
 </html>

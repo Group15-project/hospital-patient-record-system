@@ -1,7 +1,16 @@
+let allPatients = [];
+let selectedPatientId = null;
+let allergies = [];
+
+
 document.addEventListener("DOMContentLoaded", () => {
   loadPatients();
   initializePatientForm();
+    initializeSearch();
 });
+
+document.querySelector(".add-allergy-btn")
+  ?.addEventListener("click", addAllergy);
 
 async function loadPatients() {
   try {
@@ -11,9 +20,10 @@ async function loadPatients() {
 
     console.log(response.data);
 
-    const patients = response.data || [];
+  allPatients = response.data || [];
 
-    renderPatients(patients);
+renderPatients(allPatients);
+   
   } catch (error) {
     console.error("Failed to load patients:", error);
 
@@ -24,6 +34,7 @@ async function loadPatients() {
 }
 
 function renderPatients(patients) {
+  const user = getCurrentUser();
   const tbody = document.getElementById("patientsTableBody");
 
   if (!tbody) return;
@@ -31,6 +42,7 @@ function renderPatients(patients) {
   tbody.innerHTML = "";
 
   patients.forEach((patient) => {
+    
     tbody.innerHTML += `
             <tr>
                 <td>${patient.PatientNumber}</td>
@@ -38,16 +50,33 @@ function renderPatients(patients) {
                 <td>${patient.Gender}</td>
                 <td>${patient.Phone || "-"}</td>
                 <td>
-                    <a
-                        href="patient-details.html?id=${patient.ID}"
-                        class="view-btn"
-                    >
-                        View
-                    </a>
-                </td>
+    <a
+        href="patient-details.html?id=${patient.ID}"
+        class="view-btn"
+    >
+        View
+    </a>
+
+    ${
+      
+      user?.role === "SUPER_ADMIN"
+      
+        ? `
+        <button
+          class="danger-btn"
+          onclick="openDeletePatientModal(${patient.ID})"
+        >
+          Delete
+        </button>
+      `
+        : ""
+    }
+</td>
             </tr>
         `;
   });
+console.log("Current User:", user);
+console.log("Role:", user?.role);
 }
 
 function initializePatientForm() {
@@ -75,11 +104,12 @@ function initializePatientForm() {
         address: document.getElementById("address").value,
 
         emergency_contact_name: document.getElementById("emergencyName").value,
-
+        
         emergency_contact_phone:
           document.getElementById("emergencyPhone").value,
 
         blood_group: document.getElementById("bloodGroup").value,
+        allergies: allergies
       };
       console.log(payload);
       await apiRequest(
@@ -89,7 +119,6 @@ function initializePatientForm() {
 
         payload,
       );
-    
 
       alert("Patient created successfully");
 
@@ -103,3 +132,147 @@ function initializePatientForm() {
     }
   });
 }
+
+async function confirmDeletePatient() {
+
+  if (!selectedPatientId) {
+    return;
+  }
+
+  try {
+
+    await apiRequest(
+      `/patients/${selectedPatientId}`,
+      "DELETE"
+    );
+
+    closeDeletePatientModal();
+
+    alert(
+      "Patient deleted successfully"
+    );
+
+    await loadPatients();
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      error?.message ||
+      "Failed to delete patient"
+    );
+  }
+}
+
+
+function initializeSearch() {
+  const searchInput =
+    document.querySelector(".search-input");
+
+  if (!searchInput) return;
+
+  searchInput.addEventListener("input", () => {
+
+    const keyword =
+      searchInput.value
+      .trim()
+      .toLowerCase();
+
+    if (!keyword) {
+      renderPatients(allPatients);
+      return;
+    }
+
+    const filtered =
+      allPatients.filter((patient) => {
+
+        return (
+          patient.PatientNumber
+            ?.toLowerCase()
+            .includes(keyword) ||
+
+          patient.FirstName
+            ?.toLowerCase()
+            .includes(keyword) ||
+
+          patient.LastName
+            ?.toLowerCase()
+            .includes(keyword) ||
+
+          `${patient.FirstName} ${patient.LastName}`
+            .toLowerCase()
+            .includes(keyword) ||
+
+          patient.Phone
+            ?.toLowerCase()
+            .includes(keyword)
+        );
+      });
+
+    renderPatients(filtered);
+  });
+}
+
+
+function openDeletePatientModal(id) {
+
+  selectedPatientId = id;
+
+  document
+    .getElementById("deletePatientModal")
+    .classList
+    .add("show");
+}
+
+function closeDeletePatientModal() {
+
+  selectedPatientId = null;
+
+  document
+    .getElementById("deletePatientModal")
+    .classList
+    .remove("show");
+}
+
+function addAllergy() {
+  const input = document.getElementById("allergyInput");
+
+  const value = input.value.trim();
+
+  if (!value) return;
+
+  allergies.push(value);
+
+  renderAllergies();
+
+  input.value = "";
+}
+
+function renderAllergies() {
+  const container =
+    document.getElementById("allergyList");
+
+  container.innerHTML = allergies
+    .map(
+      (allergy, index) => `
+        <span class="medical-tag">
+          ${allergy}
+          <button
+            type="button"
+            onclick="removeAllergy(${index})"
+          >
+            ×
+          </button>
+        </span>
+      `
+    )
+    .join("");
+}
+
+function removeAllergy(index) {
+  allergies.splice(index, 1);
+  renderAllergies();
+}
+
+window.removeAllergy = removeAllergy;

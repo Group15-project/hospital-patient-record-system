@@ -46,4 +46,13 @@ func RegisterAppointmentRoutes(
 	appointmentHandler.List,
 )
 
+appointmentGroup.PUT(
+    "/:id",
+    middleware.RequireRole(
+        models.RoleReceptionist,
+        models.RoleAdmin,
+    ),
+    appointmentHandler.Reschedule,
+)
+
 }

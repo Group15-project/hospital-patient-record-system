@@ -123,3 +123,48 @@ func (h *PatientHandler) List(c *gin.Context) {
 		patients,
 	)
 }
+
+func (h *PatientHandler) Delete(
+	c *gin.Context,
+) {
+
+	id, err := strconv.ParseUint(
+		c.Param("id"),
+		10,
+		64,
+	)
+
+	if err != nil {
+		c.JSON(
+			http.StatusBadRequest,
+			gin.H{
+				"success": false,
+				"message": "invalid patient id",
+			},
+		)
+		return
+	}
+
+	err = h.service.Delete(
+		uint(id),
+	)
+
+	if err != nil {
+		c.JSON(
+			http.StatusBadRequest,
+			gin.H{
+				"success": false,
+				"message": err.Error(),
+			},
+		)
+		return
+	}
+
+	c.JSON(
+		http.StatusOK,
+		gin.H{
+			"success": true,
+			"message": "patient deleted successfully",
+		},
+	)
+}

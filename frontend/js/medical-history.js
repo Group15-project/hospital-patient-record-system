@@ -1,86 +1,49 @@
 let currentPatientId = null;
+let allPatients = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
-
-     const user = getCurrentUser();
+  const user = getCurrentUser();
 
   if (user?.role !== "DOCTOR") {
-
     const formCard = document.querySelector(".form-card");
 
     if (formCard) {
-
       formCard.style.display = "none";
-
     }
+  }
 
-  }
-  
-  const patientId = new URLSearchParams(window.location.search).get(
-    "patientId",
-  );
-  if (patientId) {
-    document.querySelector(".table-header").style.display = "none";
-  }
-  
   await loadPatients();
 
   initializeForm();
 
+  initializeSearch();
+
+  const patientId = new URLSearchParams(window.location.search).get(
+    "patientId",
+  );
+
   if (patientId) {
-    currentPatientId = patientId;
+    currentPatientId = Number(patientId);
 
-    document.getElementById("patientSelect").value = patientId;
+    const searchCard = document.getElementById("searchCard");
 
-    await loadPatient(patientId);
+    if (searchCard) {
+      searchCard.style.display = "none";
+    }
 
-    await loadMedicalHistory(patientId);
+    await loadPatient(currentPatientId);
+
+    await loadMedicalHistory(currentPatientId);
   }
-
-  document
-    .getElementById("patientSelect")
-    .addEventListener("change", async function () {
-      const id = this.value;
-
-      if (!id) {
-        clearPatientInfo();
-        return;
-      }
-
-      currentPatientId = id;
-
-      await loadPatient(id);
-
-      await loadMedicalHistory(id);
-    });
 });
 
 async function loadPatients() {
   try {
     const response = await apiRequest("/patients");
 
-    console.log("Response:", response);
+    allPatients = response.data || [];
 
-    const patients = response.data || [];
-
-    console.log("Patients:", patients);
-
-    const select = document.getElementById("patientSelect");
-
-    console.log("Select:", select);
-
-    patients.forEach((patient) => {
-      console.log(patient);
-
-      select.innerHTML += `
-                <option value="${patient.ID}">
-                    ${patient.PatientNumber}
-                    -
-                    ${patient.FirstName}
-                    ${patient.LastName}
-                </option>
-            `;
-    });
+    console.log("Patients:", allPatients);
   } catch (error) {
     console.error(error);
   }
@@ -107,6 +70,125 @@ async function loadPatient(patientId) {
   } catch (error) {
     console.error(error);
   }
+}
+
+function initializeSearch() {
+  const searchBtn = document.getElementById("searchBtn");
+
+  const searchInput = document.getElementById("searchInput");
+
+  const suggestions = document.getElementById("patientSuggestions");
+
+  if (!searchBtn || !searchInput || !suggestions) {
+    return;
+  }
+
+  searchInput.addEventListener("input", () => {
+    const keyword = searchInput.value.trim().toLowerCase();
+
+    if (!keyword) {
+      suggestions.innerHTML = "";
+
+      return;
+    }
+
+    const matches = allPatients.filter((patient) => {
+      return (
+        patient.PatientNumber?.toLowerCase().includes(keyword) ||
+        patient.FirstName?.toLowerCase().includes(keyword) ||
+        patient.LastName?.toLowerCase().includes(keyword) ||
+        `${patient.FirstName} ${patient.LastName}`
+          .toLowerCase()
+          .includes(keyword) ||
+        patient.Phone?.toLowerCase().includes(keyword)
+      );
+    });
+
+    suggestions.innerHTML = matches
+      .slice(0, 5)
+      .map(
+        (patient) => `
+              <div
+                class="suggestion-item"
+                onclick="selectPatient(${patient.ID})"
+              >
+                ${patient.PatientNumber}
+                -
+                ${patient.FirstName}
+                ${patient.LastName}
+              </div>
+            `,
+      )
+      .join("");
+  });
+
+  searchBtn.addEventListener("click", searchPatient);
+
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+
+      searchPatient();
+    }
+  });
+}
+
+async function selectPatient(id) {
+  const patient = allPatients.find((p) => p.ID === id);
+
+  if (!patient) {
+    return;
+  }
+
+  currentPatientId = id;
+
+  document.getElementById("searchInput").value =
+    `${patient.FirstName} ${patient.LastName}`;
+
+  document.getElementById("patientSuggestions").innerHTML = "";
+
+  await loadPatient(id);
+
+  await loadMedicalHistory(id);
+}
+
+window.selectPatient = selectPatient;
+
+async function searchPatient() {
+  const keyword = document
+    .getElementById("searchInput")
+    .value.trim()
+    .toLowerCase();
+
+  if (!keyword) {
+    clearPatientInfo();
+
+    return;
+  }
+
+  const patient = allPatients.find((p) => {
+    return (
+      p.PatientNumber?.toLowerCase().includes(keyword) ||
+      p.FirstName?.toLowerCase().includes(keyword) ||
+      p.LastName?.toLowerCase().includes(keyword) ||
+      `${p.FirstName} ${p.LastName}`.toLowerCase().includes(keyword) ||
+      p.Phone?.toLowerCase().includes(keyword)
+    );
+  });
+
+  if (!patient) {
+    alert("Patient not found");
+
+    clearPatientInfo();
+
+    return;
+  }
+
+  currentPatientId = patient.ID;
+
+  await loadPatient(patient.ID);
+
+  await loadMedicalHistory(patient.ID);
 }
 
 async function loadMedicalHistory(patientId) {
@@ -289,3 +371,8 @@ function calculateAge(date) {
 
   return age;
 }
+searchInput.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") {
+    searchPatient();
+  }
+});

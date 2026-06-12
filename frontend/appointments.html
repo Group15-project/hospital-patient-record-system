@@ -1,214 +1,246 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Appointments</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/png" href="public/favicon.svg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-</head>
-<body>
-<button class="menu-toggle">☰</button>
-<aside class="sidebar">
-
-    <div class="logo">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/png" href="public/favicon.svg" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <button class="menu-toggle">☰</button>
+    <aside class="sidebar">
+      <div class="logo">
         <h2>MediCare</h2>
-    </div>
+      </div>
 
-    <nav class="menu">
-
+      <nav class="menu">
         <ul>
-    <li class="dashboard-menu">
-        <a href="dashboard.html">
-            <i class="fa-solid fa-house"></i> Dashboard
-        </a>
-    </li>
+          <li class="dashboard-menu">
+            <a href="dashboard.html">
+              <i class="fa-solid fa-house"></i> Dashboard
+            </a>
+          </li>
 
-    <li>
-        <a href="search.html">
-            <i class="fa-solid fa-search"></i> Search
-        </a>
-    </li>
+          <li>
+            <a href="search.html">
+              <i class="fa-solid fa-search"></i> Search
+            </a>
+          </li>
 
-    <li>
-        <a href="patients.html">
-            <i class="fa-solid fa-user-injured"></i> Patients
-        </a>
-    </li>
+          <li>
+            <a href="patients.html">
+              <i class="fa-solid fa-user-injured"></i> Patients
+            </a>
+          </li>
 
-    <li>
-        <a href="medical-history.html">
-            <i class="fa-solid fa-file-medical"></i> Medical History
-        </a>
-    </li>
+          <li>
+            <a href="medical-history.html">
+              <i class="fa-solid fa-file-medical"></i> Medical History
+            </a>
+          </li>
 
-    <li class="active">
-        <a href="appointments.html">
-            <i class="fa-solid fa-calendar-check"></i> Appointments
-        </a>
-    </li>
+          <li class="active">
+            <a href="appointments.html">
+              <i class="fa-solid fa-calendar-check"></i> Appointments
+            </a>
+          </li>
 
-    <li>
-        <a href="settings.html">
-            <i class="fa-solid fa-gear"></i> Settings
-        </a>
-    </li>
-    <li>
-    <a href="profile.html">
-        <i class="fa-solid fa-user"></i> Profile
+          <li>
+            <a href="settings.html">
+              <i class="fa-solid fa-gear"></i> Settings
+            </a>
+          </li>
+          <li>
+            <a href="profile.html">
+              <i class="fa-solid fa-user"></i> Profile
+            </a>
+          </li>
+          <li
+    id="staffMenu"
+    style="display:none;"
+>
+    <a href="staff-management.html">
+        <i class="fa-solid fa-users"></i>
+        Staff Management
     </a>
 </li>
-</ul>
+        </ul>
+      </nav>
 
-    </nav>
-
-    <div class="logout">
+      <div class="logout">
         <a href="index.html">Logout</a>
-    </div>
+      </div>
+    </aside>
 
-</aside>
-
-<main class="main-content">
-
-    <header class="topbar">
+    <main class="main-content">
+      <header class="topbar">
         <div>
-            <h1>Appointments</h1>
-            <p>Manage patient appointments and schedules</p>
+          <h1>Appointments</h1>
+          <p>Manage patient appointments and schedules</p>
         </div>
-    </header>
+      </header>
 
-    <!-- Schedule Appointment -->
+      <!-- Schedule Appointment -->
 
-   <section class="form-card">
+      <section class="form-card">
+        <h2>Schedule Appointment</h2>
 
-    <h2>Schedule Appointment</h2>
-
-    <form id="appointmentForm">
-
-        <div class="grid">
-
+        <form id="appointmentForm">
+          <div class="grid">
             <div>
-                <label>Patient</label>
+              <label>Patient</label>
 
-                <select id="patientSelect" required>
-                    <option value="">
-                        Select Patient
-                    </option>
-                </select>
+              <select id="patientSelect" required>
+                <option value="">Select Patient</option>
+              </select>
             </div>
 
             <div>
-                <label>Doctor</label>
+              <label>Doctor</label>
 
-                <select id="doctorSelect" required>
-                    <option value="">
-                        Select Doctor
-                    </option>
-                </select>
+              <select id="doctorSelect" required>
+                <option value="">Select Doctor</option>
+              </select>
             </div>
 
             <div>
-                <label>Date</label>
+              <label>Date</label>
 
-                <input
-                    id="appointmentDate"
-                    type="date"
-                    required
-                >
+              <input id="appointmentDate" type="date" required />
             </div>
 
             <div>
-                <label>Time</label>
+              <label>Time</label>
 
-                <input
-                    id="appointmentTime"
-                    type="time"
-                    required
-                >
+              <input id="appointmentTime" type="time" required />
             </div>
 
             <div>
-                <label>Priority</label>
+              <label>Priority</label>
 
-                <select id="priority">
-                    <option value="NORMAL">
-                        Normal
-                    </option>
+              <select id="priority">
+                <option value="NORMAL">Normal</option>
 
-                    <option value="URGENT">
-                        Urgent
-                    </option>
+                <option value="URGENT">Urgent</option>
 
-                    <option value="EMERGENCY">
-                        Emergency
-                    </option>
-                </select>
+                <option value="EMERGENCY">Emergency</option>
+              </select>
             </div>
+          </div>
 
-        </div>
-
-        <div style="margin-top:20px;">
-
+          <div style="margin-top: 20px">
             <label>Reason</label>
 
             <textarea
-                id="appointmentReason"
-                rows="4"
-                placeholder="Enter appointment reason..."
+              id="appointmentReason"
+              rows="4"
+              placeholder="Enter appointment reason..."
             ></textarea>
+          </div>
 
-        </div>
-
-        <button
-            type="submit"
-            class="primary-btn"
-            style="margin-top:20px;"
-        >
+          <button type="submit" class="primary-btn" style="margin-top: 20px">
             Schedule Appointment
-        </button>
+          </button>
+        </form>
+      </section>
 
-    </form>
+      <!-- Upcoming Appointments -->
 
-</section>
-
-    <!-- Upcoming Appointments -->
-
-    <section class="table-section">
-
+      <section class="table-section">
         <div class="table-header">
-            <h2>Upcoming Appointments</h2>
+          <h2>Upcoming Appointments</h2>
         </div>
 
         <table>
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Doctor</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Priority</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
 
-            <thead>
-                <tr>
-                    <th>Patient</th>
-                    <th>Doctor</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Priority</th>
-                    <th>Reschedule</th>
-                    <th>Cancel</th>
-                </tr>
-            </thead>
-
-     <tbody id="appointmentsTableBody">
-        </tbody>
+          <tbody id="appointmentsTableBody"></tbody>
         </table>
+      </section>
 
-    </section>
+      <div id="rescheduleModal" class="modal-overlay">
+        <div class="appointment-modal">
+          <h3>Reschedule Appointment</h3>
 
-</main>
-<script src="js/api.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/appointments.js"></script>
+          <div class="modal-form">
+            <div>
+              <label>New Date</label>
 
-<script>
-    requireAuth();
-    applyRolePermissions();
-</script>
-</body>
+              <input type="date" id="rescheduleDate" />
+            </div>
+
+            <div>
+              <label>New Time</label>
+
+              <input type="time" id="rescheduleTime" />
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button class="primary-btn" onclick="saveReschedule()">Save</button>
+
+            <button class="cancel-btn" onclick="closeRescheduleModal()">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="cancelModal" class="modal-overlay">
+
+    <div class="appointment-modal">
+
+        <h3>Cancel Appointment</h3>
+
+        <p>
+            Are you sure you want to cancel this appointment?
+        </p>
+
+        <div class="modal-actions">
+
+            <button
+                class="danger-btn"
+                onclick="confirmCancelAppointment()"
+            >
+                Yes, Cancel
+            </button>
+
+            <button
+                class="cancel-btn"
+                onclick="closeCancelModal()"
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/appointments.js"></script>
+
+    <script>
+      requireAuth();
+      applyRolePermissions();
+    </script>
+  </body>
 </html>

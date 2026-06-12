@@ -1,9 +1,11 @@
 package service
 
 import (
+	"errors"
 	"hospital-backend/internal/dto"
 	"hospital-backend/internal/models"
 	"hospital-backend/internal/repository"
+	"time"
 )
 
 type AppointmentService interface {
@@ -25,6 +27,11 @@ type AppointmentService interface {
 		status models.AppointmentStatus,
 	) error
 	List() ([]models.Appointment, error)
+
+	Reschedule(
+		appointmentID uint,
+		appointmentDate string,
+	) error
 }
 
 type appointmentService struct {
@@ -112,4 +119,38 @@ func (s *appointmentService) UpdateStatus(
 
 func (s *appointmentService) List() ([]models.Appointment, error) {
 	return s.repo.List()
+}
+
+func (s *appointmentService) Reschedule(
+	appointmentID uint,
+	appointmentDate string,
+) error {
+
+	appointment, err := s.repo.GetByID(
+		appointmentID,
+	)
+
+	if err != nil {
+		return err
+	}
+
+	parsedDate, err := time.Parse(
+		time.RFC3339,
+		appointmentDate,
+	)
+
+	if err != nil {
+		return err
+	}
+if appointment.Status == models.AppointmentCompleted ||
+   appointment.Status == models.AppointmentCancelled {
+	return errors.New(
+		"cannot reschedule completed or cancelled appointments",
+	)
+}
+	appointment.AppointmentDate = parsedDate
+
+	return s.repo.Update(
+		appointment,
+	)
 }

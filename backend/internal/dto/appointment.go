@@ -17,3 +17,7 @@ type CreateAppointmentRequest struct {
 type UpdateAppointmentStatusRequest struct {
 	Status string `json:"status" validate:"required"`
 }
+
+type RescheduleAppointmentRequest struct {
+	AppointmentDate string `json:"appointment_date" binding:"required"`
+}

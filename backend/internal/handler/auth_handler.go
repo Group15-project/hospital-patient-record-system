@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 
 	"hospital-backend/internal/dto"
 	"hospital-backend/internal/service"
@@ -208,4 +209,113 @@ utils.SuccessResponse(
 	"profile retrieved successfully",
 	profile,
 )
+}
+
+func (h *AuthHandler) GetStaff(
+    c *gin.Context,
+) {
+
+    users, err :=
+        h.authService.GetStaff()
+
+    if err != nil {
+
+        c.JSON(
+            http.StatusInternalServerError,
+            gin.H{
+                "success": false,
+                "message": err.Error(),
+            },
+        )
+
+        return
+    }
+
+    c.JSON(
+        http.StatusOK,
+        gin.H{
+            "success": true,
+            "data": users,
+        },
+    )
+}
+
+func (h *AuthHandler) DeleteUser(
+    c *gin.Context,
+) {
+
+    id, err :=
+        strconv.ParseUint(
+            c.Param("id"),
+            10,
+            64,
+        )
+
+    if err != nil {
+
+        c.JSON(
+            http.StatusBadRequest,
+            gin.H{
+                "success": false,
+                "message": "invalid id",
+            },
+        )
+
+        return
+    }
+
+    err =
+        h.authService.DeleteUser(
+            uint(id),
+        )
+
+    if err != nil {
+
+        c.JSON(
+            http.StatusInternalServerError,
+            gin.H{
+                "success": false,
+                "message": err.Error(),
+            },
+        )
+
+        return
+    }
+
+    c.JSON(
+        http.StatusOK,
+        gin.H{
+            "success": true,
+            "message": "user deleted",
+        },
+    )
+}
+
+func (h *AuthHandler) GetRoles(
+	c *gin.Context,
+) {
+
+	roles, err :=
+		h.authService.GetRoles()
+
+	if err != nil {
+
+		c.JSON(
+			http.StatusInternalServerError,
+			gin.H{
+				"success": false,
+				"message": err.Error(),
+			},
+		)
+
+		return
+	}
+
+	c.JSON(
+		http.StatusOK,
+		gin.H{
+			"success": true,
+			"data": roles,
+		},
+	)
 }

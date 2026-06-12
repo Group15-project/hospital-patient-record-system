@@ -1,3 +1,4 @@
+let selectedAppointmentId = null;
 document.addEventListener("DOMContentLoaded", async () => {
   await loadPatients();
 
@@ -52,37 +53,22 @@ async function loadDoctors() {
 }
 async function loadAppointments() {
   try {
-
     const user = getCurrentUser();
     if (user?.role === "DOCTOR") {
-
-    document.querySelector(".form-card").style.display = "none";
-
-}
+      document.querySelector(".form-card").style.display = "none";
+    }
 
     let endpoint = "/appointments";
 
-    if (
-      user &&
-      user.role === "DOCTOR"
-    ) {
-      endpoint =
-        `/appointments/doctor/${user.id}`;
+    if (user && user.role === "DOCTOR") {
+      endpoint = `/appointments/doctor/${user.id}`;
     }
 
-    const response =
-      await apiRequest(endpoint);
+    const response = await apiRequest(endpoint);
 
-    renderAppointments(
-      response.data || []
-    );
-
+    renderAppointments(response.data || []);
   } catch (error) {
-
-    console.error(
-      "Failed to load appointments",
-      error
-    );
+    console.error("Failed to load appointments", error);
   }
 }
 function renderAppointments(appointments) {
@@ -90,10 +76,26 @@ function renderAppointments(appointments) {
 
   if (!tbody) return;
 
+  const user = getCurrentUser();
+
   tbody.innerHTML = "";
 
   appointments.forEach((appointment) => {
     const date = new Date(appointment.AppointmentDate);
+
+    let statusClass = "status-scheduled";
+
+    if (appointment.Status === "COMPLETED") {
+      statusClass = "status-completed";
+    }
+
+    if (appointment.Status === "CANCELLED") {
+      statusClass = "status-cancelled";
+    }
+
+    if (appointment.Status === "NO_SHOW") {
+      statusClass = "status-no-show";
+    }
 
     let priorityClass = "priority-normal";
 
@@ -105,38 +107,81 @@ function renderAppointments(appointments) {
       priorityClass = "priority-emergency";
     }
 
+    const canManage =
+      user?.role === "RECEPTIONIST" ||
+      user?.role === "ADMIN" ||
+      user?.role === "SUPER_ADMIN";
+
+    const canModify = appointment.Status === "SCHEDULED";
     tbody.innerHTML += `
-        <tr>
+      <tr>
 
-            <td>
-                ${appointment.Patient?.FirstName || ""}
-                ${appointment.Patient?.LastName || ""}
-            </td>
+        <td>
+          ${appointment.Patient?.FirstName || ""}
+          ${appointment.Patient?.LastName || ""}
+        </td>
 
-            <td>
-                Dr.
-                ${appointment.Doctor?.FirstName || ""}
-                ${appointment.Doctor?.LastName || ""}
-            </td>
+        <td>
+          Dr.
+          ${appointment.Doctor?.FirstName || ""}
+          ${appointment.Doctor?.LastName || ""}
+        </td>
 
-            <td>
-                ${date.toLocaleDateString()}
-            </td>
+        <td>
+          ${date.toLocaleDateString()}
+        </td>
 
-            <td>
-                ${date.toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-            </td>
+        <td>
+          ${date.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </td>
 
-            <td>
-                <span class="priority ${priorityClass}">
-                    ${appointment.Priority}
-                </span>
-            </td>
+        <td>
+          <span class="priority ${priorityClass}">
+            ${appointment.Priority}
+          </span>
+        </td>
+        <td>
 
-        </tr>
+    <span class="status ${statusClass}">
+
+        ${appointment.Status}
+
+    </span>
+
+</td>
+
+<td>
+
+    ${
+      canManage && canModify
+        ? `
+        <div class="appointment-actions">
+
+            <button
+                class="reschedule-btn"
+                onclick="openRescheduleModal(${appointment.ID})"
+            >
+                Reschedule
+            </button>
+
+            <button
+                class="cancel-btn"
+                onclick="openCancelModal(${appointment.ID})"
+            >
+                Cancel
+            </button>
+
+        </div>
+        `
+        : "-"
+    }
+
+</td>
+
+      </tr>
     `;
   });
 }
@@ -178,4 +223,142 @@ function initializeForm() {
       alert("Failed to schedule appointment");
     }
   });
+}
+async function saveReschedule() {
+
+  const date =
+    document.getElementById("rescheduleDate").value;
+
+  const time =
+    document.getElementById("rescheduleTime").value;
+
+  if (!date || !time) {
+
+    alert("Please select date and time");
+
+    return;
+  }
+
+  try {
+
+    await apiRequest(
+      `/appointments/${selectedAppointmentId}`,
+      "PUT",
+      {
+        appointment_date:
+          `${date}T${time}:00Z`,
+      }
+    );
+
+    alert(
+      "Appointment rescheduled successfully"
+    );
+
+    closeRescheduleModal();
+
+    await loadAppointments();
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      error?.message ||
+      "Failed to reschedule appointment"
+    );
+  }
+}
+async function confirmCancelAppointment() {
+
+    try {
+
+        await apiRequest(
+            `/appointments/${selectedAppointmentId}/status`,
+            "PATCH",
+            {
+                status: "CANCELLED",
+            }
+        );
+
+        closeCancelModal();
+
+        alert(
+            "Appointment cancelled successfully"
+        );
+
+        await loadAppointments();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            error?.message ||
+            "Failed to cancel appointment"
+        );
+    }
+}
+
+function openRescheduleModal(id) {
+  selectedAppointmentId = id;
+
+  document.getElementById("rescheduleModal").classList.add("show");
+}
+
+function closeRescheduleModal() {
+  selectedAppointmentId = null;
+
+  document.getElementById("rescheduleModal").classList.remove("show");
+
+  document.getElementById("rescheduleDate").value = "";
+
+  document.getElementById("rescheduleTime").value = "";
+}
+
+async function saveReschedule() {
+  const date = document.getElementById("rescheduleDate").value;
+
+  const time = document.getElementById("rescheduleTime").value;
+
+  if (!date || !time) {
+    alert("Please select date and time");
+    return;
+  }
+
+  try {
+    await apiRequest(`/appointments/${selectedAppointmentId}`, "PUT", {
+      appointment_date: `${date}T${time}:00Z`,
+    });
+
+    closeRescheduleModal();
+
+    alert("Appointment rescheduled successfully");
+
+    await loadAppointments();
+  } catch (error) {
+    console.error(error);
+
+    alert(error?.message || "Failed to reschedule appointment");
+  }
+}
+
+
+function openCancelModal(id) {
+
+    selectedAppointmentId = id;
+
+    document
+        .getElementById("cancelModal")
+        .classList
+        .add("show");
+}
+
+function closeCancelModal() {
+
+    selectedAppointmentId = null;
+
+    document
+        .getElementById("cancelModal")
+        .classList
+        .remove("show");
 }

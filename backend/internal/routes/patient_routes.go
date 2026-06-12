@@ -2,6 +2,8 @@ package routes
 
 import (
 	"hospital-backend/internal/handler"
+	"hospital-backend/internal/middleware"
+	"hospital-backend/internal/models"
 
 	"github.com/gin-gonic/gin"
 )
@@ -25,5 +27,13 @@ func RegisterPatientRoutes(
 	patients.GET(
 		"/:id",
 		patientHandler.GetByID,
+	)
+	patients.DELETE(
+		"/:id",
+		middleware.RequireRole(
+			models.RoleAdmin,
+			models.RoleSuperAdmin,
+		),
+		patientHandler.Delete,
 	)
 }
