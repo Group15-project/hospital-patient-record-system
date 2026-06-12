@@ -55,13 +55,11 @@ func SeedRolesAndPermissions(db *gorm.DB) {
 	}
 
 	seedRoles(db)
-seedSuperAdmin(db)
-seedDoctor(db)
-seedReceptionist(db)
+	seedSuperAdmin(db)
+	seedDoctor(db)
+	seedReceptionist(db)
 
-log.Println("roles, permissions and admin seeded")
-
-	log.Println("roles and permissions seeded")
+	log.Println("roles, permissions and admin seeded")
 }
 
 func seedRoles(db *gorm.DB) {
@@ -155,6 +153,7 @@ func seedRoles(db *gorm.DB) {
 			Replace(&permissions)
 	}
 }
+
 func seedSuperAdmin(db *gorm.DB) {
 
 	var existing models.User

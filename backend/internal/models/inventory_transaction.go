@@ -9,8 +9,8 @@ import (
 type InventoryTransactionType string
 
 const (
-	InventoryStockIn  InventoryTransactionType = "STOCK_IN"
-	InventoryStockOut InventoryTransactionType = "STOCK_OUT"
+	InventoryStockIn    InventoryTransactionType = "STOCK_IN"
+	InventoryStockOut   InventoryTransactionType = "STOCK_OUT"
 	InventoryAdjustment InventoryTransactionType = "ADJUSTMENT"
 )
 
@@ -20,7 +20,7 @@ type InventoryTransaction struct {
 	MedicationID uint       `gorm:"not null"`
 	Medication   Medication `gorm:"foreignKey:MedicationID"`
 
-	Type InventoryTransactionType
+	Type InventoryTransactionType `gorm:"type:varchar(30);not null"`
 
 	Quantity int
 

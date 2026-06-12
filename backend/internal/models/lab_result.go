@@ -12,7 +12,7 @@ type LabResult struct {
 	LabRequestID uint       `gorm:"not null;uniqueIndex"`
 	LabRequest   LabRequest `gorm:"foreignKey:LabRequestID"`
 
-	Result string `gorm:"type:longtext"`
+	Result string `gorm:"type:text"`
 
 	Remarks string `gorm:"type:text"`
 

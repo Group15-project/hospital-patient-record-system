@@ -17,7 +17,7 @@ const (
 type Invoice struct {
 	ID uint `gorm:"primaryKey"`
 
-	PatientID uint   `gorm:"size:150;index;not null"`
+	PatientID uint    `gorm:"index;not null"`
 	Patient   Patient `gorm:"foreignKey:PatientID"`
 
 	InvoiceNumber string `gorm:"size:100;uniqueIndex"`
@@ -28,7 +28,7 @@ type Invoice struct {
 
 	Balance float64
 
-	Status InvoiceStatus `gorm:"default:PENDING"`
+	Status InvoiceStatus `gorm:"type:varchar(20);default:'PENDING';not null"`
 
 	Items []InvoiceItem
 

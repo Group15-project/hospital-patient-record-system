@@ -30,7 +30,7 @@ type MedicalDocument struct {
 
 	Title string `gorm:"size:255"`
 
-	DocumentType MedicalDocumentType
+	DocumentType MedicalDocumentType `gorm:"type:varchar(50);not null"`
 
 	FileName string
 

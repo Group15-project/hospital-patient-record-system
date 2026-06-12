@@ -13,7 +13,7 @@ type Vital struct {
 	Patient   Patient `gorm:"foreignKey:PatientID"`
 
 	ConsultationID *uint
-	Consultation Consultation `gorm:"foreignKey:ConsultationID"`
+	Consultation   *Consultation `gorm:"foreignKey:ConsultationID"`
 
 	Temperature      float64
 	Weight           float64

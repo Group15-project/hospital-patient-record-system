@@ -35,7 +35,7 @@ func main() {
 	}
 
 	// Connect database
-	db, err := database.ConnectMySQL(cfg)
+	db, err := database.ConnectPostgres(cfg)
 	if err != nil {
 		log.Fatalf("failed to connect database: %v", err)
 	}

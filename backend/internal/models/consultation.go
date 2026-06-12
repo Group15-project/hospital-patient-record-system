@@ -24,7 +24,7 @@ type Consultation struct {
 
 	ChiefComplaint string `gorm:"type:text"`
 
-	Status ConsultationStatus `gorm:"default:OPEN"`
+	Status ConsultationStatus `gorm:"type:varchar(20);default:'OPEN';not null"`
 
 	CreatedAt time.Time
 	UpdatedAt time.Time

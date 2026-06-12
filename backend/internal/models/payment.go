@@ -22,7 +22,7 @@ type Payment struct {
 
 	Amount float64
 
-	Method PaymentMethod
+	Method PaymentMethod `gorm:"type:varchar(20);not null"`
 
 	Reference string
 
