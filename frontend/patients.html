@@ -143,14 +143,40 @@
                 <option value="O-">O-</option>
               </select>
             </div>
-          </div>
+            <div>
+              <label for="allergyInput">
+                  Allergies
+              </label>
 
+              <div class="allergy-wrapper">
+                <input
+                    type="text"
+                    id="allergyInput"
+                    placeholder="Enter allergy">
+
+                <button
+                    type="button"
+                    class="add-allergy-btn">
+                    Add
+                </button>
+
+              </div>
+
+              <div id="allergyList"></div>
+
+            </div>
           <div class="full-width">
             <label for="address">Address</label>
             <textarea id="address" rows="4"></textarea>
           </div>
 
-          <button type="submit" class="primary-btn">Save Patient</button>
+          <div class="grid">
+              
+          </div>
+
+          <button type="submit" class="save-btn">
+              Save Patient
+          </button>        
         </form>
       </section>
 

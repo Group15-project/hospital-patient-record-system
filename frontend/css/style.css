@@ -261,6 +261,30 @@ textarea{
     background:#1D4ED8;
 }
 
+.add-allergy-btn{
+    background:#2563EB;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.add-allergy-btn:hover{
+    background:#1D4ED8;
+}
+
+.allergy-wrapper{
+    display:flex;
+    gap:10px;
+    margin-top:8px;
+}
+
+.allergy-wrapper input{
+    flex:1;
+}
+
 .search-input{
     width:250px;
     font-size:15px;
@@ -493,16 +517,31 @@ textarea{
     color:#166534;
 }
 
-.cancelled{
-    background:#FEE2E2;
-    color:#991B1B;
+.cancel-btn{
+    background:#DC2626;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:6px;
+    cursor:pointer;
 }
 
-.rescheduled{
-    background:#ffffd3;
-    color:#d6c800;
+.cancel-btn:hover{
+    opacity:.9;
 }
 
+.reschedule-btn{
+    background:#2563EB;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.reschedule-btn:hover{
+    opacity:.9;
+}
 /* doctor-note.html*/
 
 /* DOCTOR NOTES */

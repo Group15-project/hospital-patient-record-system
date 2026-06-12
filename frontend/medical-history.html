@@ -81,15 +81,29 @@
 
       <!-- Patient Selector -->
 
-      <section class="table-section">
-        <div class="table-header">
-          <h2>Select Patient</h2>
+         <section class="search-card">
 
-          <select id="patientSelect" class="search-input">
-            <option value="">Select Patient</option>
-          </select>
-        </div>
-      </section>
+            <h2>Search Patients</h2>
+
+            <div class="search-wrapper">
+
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="Search by Patient ID, Name or Phone Number"
+                    class="global-search"
+                />
+
+                <button
+                    id="searchBtn"
+                    class="primary-btn"
+                >
+                    Search
+                </button>
+
+            </div>
+
+        </section>
 
       <!-- Patient Summary -->
 
