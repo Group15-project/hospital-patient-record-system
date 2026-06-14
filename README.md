@@ -1,7 +1,7 @@
 # Hospital Patient Record System
 
 A full-stack healthcare patient record management system built with HTML/CSS/JavaScript frontend and Golang backend, deployed on Render.
-Live Link: https://hospital-patient-record-system-1-omgx.onrender.com/index.html
+- Live Link: https://hospital-patient-record-system-1-omgx.onrender.com/index.html
 ## Features
 
 ### Frontend
