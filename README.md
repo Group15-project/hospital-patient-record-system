@@ -376,6 +376,7 @@ go build -o hospital-backend main.go
 | Uche Miracle | Presentation/Documentation | Detailed Project Documentation, Slides Designing | Google Docs, Google Slides | Active |
 | Adejuwon Oluwaferanmi Emmanuel | Documentation | Detailed Project  Documentation | Google Docs | Active |
 | Ogbu Stanley | Architectural Diagram | Architectural Diagram Designer | Canva | Active |
+| Ejovwoke Marayen | Architectural Diagram | Architectural Diagram Designer | Canva | Active |
 
 ### Frontend Development (HTML/CSS/JavaScript)
 
