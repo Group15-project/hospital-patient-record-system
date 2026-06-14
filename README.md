@@ -1,7 +1,7 @@
 # Hospital Patient Record System
 
 A full-stack healthcare patient record management system built with HTML/CSS/JavaScript frontend and Golang backend, deployed on Render.
-
+Live Link: https://hospital-patient-record-system-1-omgx.onrender.com/index.html
 ## Features
 
 ### Frontend
@@ -366,14 +366,20 @@ go build -o hospital-backend main.go
 
 | Name | Role | Responsibility | Tech Focus | Status |
 |------|------|-----------------|-----------|--------|
-| Team Lead Name | Team Lead & Frontend Dev | Project coordination, frontend development | HTML/CSS/JavaScript | Active |
-| Backend Dev Name | Backend Developer | API design, server logic, database management | Golang, PostgreSQL | Active |
-| Frontend Dev Name | Frontend Developer | UI/UX, JavaScript logic, responsive design | HTML/CSS/JavaScript | Active |
-| DevOps Dev Name | DevOps & Infrastructure | CI/CD setup, deployment, monitoring | GitHub Actions, Render | Active |
+| Sanni Oluwadarasimi Peter | Team Lead & Devops Lead | Project coordination, DevOps | GitHub, Git Bash, GitHub Actions, VS Code | Active |
+| Umeobi Chinwendu | Assistant Lead & Frontend Developer | UI/UX, JavaScript logic, responsive design | HTML/CSS/JavaScript | Active |
+| Eminola Daniels | Frontend Developer | UI/UX, JavaScript logic, responsive design | HTML/CSS/JavaScript | Active |
+| Ifeoma Chukwudum | Frontend Developer | UI/UX, JavaScript logic, responsive design | HTML/CSS/JavaScript | Active |
+| Chidi Stanley | Backend Developer | API design, server logic, database management | Golang, PostgreSQL | Active |
+| Adeniji Adetomiwa Precious | DevOps & Infrastructure | CI/CD setup, deployment, monitoring | GitHub Actions, Render | Active |
+| Pelumi Olaosebikan | Presentation/Documentation | Detailed Project Documentation, Slides Designing | Google Docs, Google Slides | Active |
+| Uche Miracle | Presentation/Documentation | Detailed Project Documentation, Slides Designing | Google Docs, Google Slides | Active |
+| Adejuwon Oluwaferanmi Emmanuel | Documentation | Detailed Project  Documentation | Google Docs | Active |
+| Ogbu Stanley | Architectural Diagram | Architectural Diagram Designer | Canva | Active |
 
 ### Frontend Development (HTML/CSS/JavaScript)
 
-Developed by: [Frontend Dev Name]
+Developed by: Umeobi Chinwendu, Eminola Daniels, Ifeoma Chukwudum
 
 Responsible for: User interface, user experience, client-side logic
 
@@ -383,7 +389,7 @@ Technologies: Vanilla JavaScript, CSS3, HTML5
 
 ### Backend Development (Golang)
 
-Developed by: [Backend Dev Name]
+Developed by: Chidi Stanley
 
 Responsible for: API endpoints, business logic, database
 
@@ -393,11 +399,11 @@ Technologies: Golang, Gin Framework, PostgreSQL
 
 ### DevOps & Deployment
 
-Handled by: [DevOps Dev Name]
+Handled by: Sanni Oluwadarasimi Peter, Adeniji Adetomiwa Precious
 
 Responsible for: CI/CD pipeline, deployment automation, hosting
 
-Technologies: GitHub Actions, Render, Docker (optional)
+Technologies: GitHub Actions, Render, 
 
 ## Contributing
 
@@ -490,4 +496,5 @@ MIT License - see LICENSE file for details
 - Repository: https://github.com/Group15-project/hospital-patient-record-system
 - Frontend Live: https://hospital-frontend.render.com
 - Backend API: https://hospital-backend.render.com/api
+- Live Link: https://hospital-patient-record-system-1-omgx.onrender.com/index.html
 - Team: Group 15
